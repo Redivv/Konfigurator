@@ -1,0 +1,349 @@
+@media (max-width: 1054px){
+  .mac_form, .iroN{
+    display: none;
+  }
+  .mac_form_mobile, .iroN_mobile{
+    display: block !important;
+  }
+  button{
+    font-size: 2.8vw !important;
+  }
+  .title{
+    font-size: 3.5vw !important;
+  }
+  label{
+    font-size: 2vw !important;
+    padding: 0.5em 0.4em !important;
+    width: 100% !important;
+    margin-bottom: 0.5em !important;
+  }
+  .price{
+    font-size: 2.7vw !important;
+  }
+  select{
+    font-family: 'Roboto';
+    font-size: 2.2vw !important;
+    font-weight: bold !important;
+  }
+  h2{
+    font-size: 2vw !important;
+  }
+}
+.config{
+  overflow: hidden;
+}
+input{
+  display:none;
+}
+#chart_div{
+  display: block;
+  width: 100vw;
+}
+button{
+      text-decoration: none;
+			font-family:".LucidaGrandeUI", "Lucida Grande", "Lucida sans unicode";
+			color: black;
+			font-size: 1.1vw;
+			padding: 0.15em 0.87em;
+			border:1px solid #9C9C9C;
+			margin: 0.15em 0.15em;
+			display: inline-block;
+			background-image: -webkit-linear-gradient(
+			#ffffff 0%, #F6F6F6 	30%,
+			#F3F3F3 45%, #EDEDED 	60%,
+			#eeeeee 100%);
+			border-radius: 2.5px;
+      cursor:pointer;
+			box-shadow: 0px 0px 1px rgba(0,0,0,0.20);
+}
+#admin_btn{
+  font-size: 0.8vw;
+}
+.active_btn {
+		 	border-color:#705ebb;
+			background-image:-webkit-linear-gradient(
+			#acc5e9 0%, 		#a3c0f2 18%,
+			#61a0ed 39%,		#55a3f2 70%,
+			#82c2f1 91.72%, 	#9AD2F2 100%);
+			box-shadow: 0px 0px 1px rgba(0,0,0,0.65);
+}
+select{
+  display: block;
+  margin-top: 10px;
+}
+fieldset{
+  border: 0;
+  text-align: left;
+}
+.tabs{
+  text-align: center;
+}
+h2{
+  font-size: 1.4vw;
+}
+
+.title{
+  text-align:center;
+  font-size:2vw;
+}
+.price{
+  font-size: 1.40vw;
+  width:      100%;
+  text-align: center;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+h2,h3,label{
+  font-family: 'Roboto';
+}
+.container{
+  width: 50%;
+  margin-top: 2%;
+  float: left;
+  .mac_form_mobile{
+    display: none;
+  }
+  .iroN_mobile{
+    display: none;
+  }
+  .container_top{
+    float: right;
+    width: 50%;
+    height: 100%;
+    margin-top: 15px;
+    .img_i{
+      margin-top: 9%;
+    }
+    .img_M{
+      margin-top: 11%;
+    }
+    .container_img{
+      display: block;
+      position: relative;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+    }.image{
+      position: absolute;
+    }
+    #iroN_cube{
+      width:  30%;
+      height: 99%;
+    }
+    #Mac_thumb{
+      width:  20%;
+      height: 84%;
+      z-index: 10;
+    }
+    #iMac_thumb{
+      width:  66%;
+      height: 99%;
+      z-index: 10;
+    }
+    #Mac-mini_thumb{
+      width:  40%;
+      height: 100%;
+      z-index: 10;
+      margin-top: 15%;
+    }
+    .music_card{
+      left:   20%;
+      top:    72%;
+      width:  40%;
+      height: 50%;
+      z-index: 71;
+      display: none;
+    }
+    .MiM{
+      left:   20%;
+      top:    73%;
+      width:  50%;
+      height: 38%;
+      z-index: 71;
+      display: none;
+    }
+    .MMm{
+        left:   15%;
+        top:    64%;
+        width:  50%;
+        height: 60%;
+        z-index: 71;
+        display: none;
+    }
+    .hard_drive{
+      left:   56%;
+      top:    65%;
+      width:  25%;
+      height: 50%;
+      z-index: 20;
+    }
+    .drive_2{
+      top: 67%;
+      z-index: 30;
+    }
+    .drive_3{
+      top: 59%;
+      z-index: 40;
+    }
+    .drive_4{
+      top: 50%;
+      z-index: 50;
+    }
+    .DiM{
+      left:   62%;
+      top:    70%;
+      width:  25%;
+      height: 40%;
+      z-index: 20;
+    }
+    .DMm{
+      left:   56%;
+      top:    50%;
+      width:  35%;
+      height: 70%;
+      z-index: 20;
+    }
+    .g-drive{
+      left:   50%;
+      top:    49%;
+      width:  36%;
+      height: 21%;
+      z-index: 60;
+    }
+    .giM{
+      left:   60%;
+      top:    61%;
+      width:  30%;
+      height: 16%;
+      z-index: 60;
+    }
+    .gMm{
+      left:   44%;
+      top:    25%;
+      width:  55%;
+      height: 29%;
+      z-index: 60;
+    }
+    .rx580{
+      left:   20%;
+      top:    -15%;
+      width:  33%;
+      height: 110%;
+      z-index: 70;
+    }
+    .iMrx{
+      left:   6%;
+      top:    33%;
+      width:  35%;
+      height: 65%;
+      z-index: 70;
+    }
+    .Mmrx{
+      left:   3%;
+      top:    -31%;
+      width:  45%;
+      height: 140%;
+      z-index: 70;
+    }
+    .kable{
+      width: 50%;
+      height: 80%;
+      z-index: 5;
+      top:40%;
+      left: 45%;
+    }
+    .kable_2{
+      left: 5%;
+    }
+    .kiM{
+      width: 59%;
+      height: 70%;
+      z-index: 5;
+      top:40%;
+      left: 40%;
+    }
+    .k2iM{
+      width: 59%;
+      height: 70%;
+      z-index: 5;
+      top:40%;
+      left: -5%;
+    }
+    .kMm{
+      width: 60%;
+      height: 75%;
+      z-index: 5;
+      top:40%;
+      left: 40%;
+    }
+    .k2Mm{
+      width: 50%;
+      height: 80%;
+      z-index: 5;
+      top:40%;
+      left: 9%;
+    }
+  }
+  .container_form{
+    float: left;
+    width: 50%;
+    height: 100%;
+    .form_separator{
+      width: 100%;
+      height: 100%;
+      clear: both;
+    }
+  }
+  label{
+    letter-spacing: 1.5px;
+    display: block;
+    margin-top: 0.6em;
+    margin-bottom: 2em;
+    font-size: 0.85vw;
+    font-weight: bold;
+    text-align: center;
+    padding: 1em 1em;
+    width: 14em;
+    border: 2px solid rgb(215, 224, 239);
+    -webkit-border-radius: 20px;
+    border-radius: 20px;
+    &:hover{
+      border: 2px solid rgb(142, 149, 160);
+    }
+    &:visited{
+      border: 2px solid rgb(84, 137, 221);
+    }
+  }
+  .placeholder{
+    color:transparent;
+    border:2px solid transparent;
+    &:hover{
+      border:2px solid transparent;
+    }
+  }
+  input[type=radio]:checked + label, input[type=checkbox]:checked + label{
+      border: 2px solid rgb(84, 137, 221)
+  }
+  .thumbnail_box{
+    position: absolute;
+    margin-left: 22%;
+    width:100%;
+  }
+  .container_img{
+    text-align: center;
+    width:    100%;
+    position: relative;
+  }
+}
+.hide{
+  display:none;
+}
+
+.fixed{
+  position: fixed;
+  top: 0;
+}
+
+.clearfix{
+  clear:both;
+}
