@@ -1,3 +1,3 @@
 <?php
-  $pass = ""; // hasło do panelu
+  $pass = "admin"; // hasło do panelu
 ?>

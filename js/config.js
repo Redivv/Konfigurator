@@ -2,15 +2,16 @@ var check_counter = 0;
 var check_counterM = 0;
 var check_counteriM = 0;
 var check_counterMm = 0;
+var priceiroN = [0,0,0,0];
 var priceM = [0,0,0,0];
 var priceiM = [0,0,0,0];
 var priceMm = [0,0,0,0];
-var org_priceM = 14300;
-var org_priceiM = 7460;
-var org_priceMm = 4960;
+var org_priceiroN = $('#mac_priceiroN').data('price');
+var org_priceM = $('#mac_priceM').data('price');
+var org_priceiM = $('#mac_priceiM').data('price');
+var org_priceMm = $('#mac_priceMm').data('price');
 $(document).ready(function(){
   main();
-  //calc_price();
 })
 
 function main() {
@@ -25,15 +26,23 @@ function main() {
   $('input[name=Optional_mac]').change(function(){
     draw_mac(active_tab, this);
   });
-  draw_iroN();
-  change_iMac();
-  change_iMac_mobile();
-
+  $('.iroN input[type=radio]').on('click',function(){
+    calc_price('iroN',this);
+  });
+  $('.iroN input[type=checkbox]').on('click',function(){
+    calc_price('iroN',this);
+  });
   $('.mac_form input[type=radio]').on('click',function(){
     calc_price(active_tab,this);
   });
-  $('.select_mobile').change(function(){
+  $('.mac_form input[type=checkbox]').on('click',function(){
     calc_price(active_tab,this);
+  });
+  $('.mac_form_mobile .select_mobile').change(function(){
+    calc_price(active_tab,this);
+  });
+  $('.iroN_mobile .select_mobile').change(function(){
+    calc_price('iroN',this);
   });
   var imageoffset = $('.container_top').scrollTop();
   var stop = $('.form_i').height();
@@ -62,16 +71,10 @@ function chart() {
       $('.iroN input[name=Procesor] + label').on('click',function(){
          iroN_proc [0] = $(this).html();
          iroN_proc [1] = $(this).data('score');
-         console.log(iroN_proc);
          drawChart();
       });
       var mac_proc = [$('label[for=1-1]').html(),$('label[for=1-1]').data('score')];
       $('.mac_form input[name=Procesor] + label').on('click',function(){
-         mac_proc [0] = $(this).html();
-         mac_proc [1] = $(this).data('score');
-         drawChart();
-      });
-      $('.mac_form input[name=ProcesoriM] + label').on('click',function(){
          mac_proc [0] = $(this).html();
          mac_proc [1] = $(this).data('score');
          drawChart();
@@ -82,11 +85,6 @@ function chart() {
         drawChart();
       })
       $('.mac_form_mobile select[name=Procesor]').change(function(){
-        mac_proc[0] = $(this).find(':selected').html();
-        mac_proc[1] = $(this).find(':selected').data('score');
-        drawChart();
-      })
-      $('.mac_form_mobile select[name=ProcesoriM]').change(function(){
         mac_proc[0] = $(this).find(':selected').html();
         mac_proc[1] = $(this).find(':selected').data('score');
         drawChart();
@@ -160,62 +158,12 @@ function tabs(active,clicked) {
   return name;
 }
 
-function draw_iroN() {
-  $('input[id=5-2i]').change(function(){
-    if($('#5-2i').is(':checked')){
-      $('#iroN_select').show();
-    }else {
-      $('#iroN_select').hide();
-      $('#iroN_select').val('1');
-    }
-  });
-}
-
-function change_iMac() {
-  $('input[name=ProcesoriM]').on('click',function(){
-    var proc_id = $(this).attr('id');
-    if((proc_id == '1-2iM') || (proc_id == '1-3iM')){
-      $('label[for=2-1iM]').html('Radeon Pro 560 4 GB');
-      $('#2-1iM').val('40');
-      $('#2-1iM').click();
-      $('#3-3_box_iM').show();
-    }else{
-      $('label[for=2-1iM]').html('Radeon Pro 555 2 GB');
-      $('#2-1iM').val('0');
-      $('#2-1iM').click();
-      $('#3-3_box_iM').hide();
-      $('#3-1iM').click();
-    }
-  });
-}
-
-function change_iMac_mobile() {
-  $('select[name=ProcesoriM]').change(function(){
-    var proc_val = $(this).val();
-    if((proc_val == 480) || (proc_val == 1440)){
-      $('#2-1iM_m').html('Radeon Pro 560 4 GB');
-      $('#2-1iM_m').val('40');
-      $('#2-1iM_m').change();
-      $('#3-3iM_m').show();
-    }else{
-      $('#2-1iM_m').html('Radeon Pro 555 2 GB');
-      $('#2-1iM_m').val('0');
-      $('#2-1iM_m').change();
-      $('#3-3iM_m').hide();
-      $('#3-1iM_m').change();
-    }
-  });
-}
-
 function calc_price(form_name,selected) {
   var name = $(selected).attr('name');
   var value = $(selected).val();
   switch (name) {
     case 'Procesor':
     eval('price'+form_name+'[0]='+value);
-      break;
-    case 'ProcesoriM':
-      priceiM[0]=parseInt(value,10);
       break;
     case 'Grafika':
       eval('price'+form_name+'[1]='+value);
@@ -227,6 +175,7 @@ function calc_price(form_name,selected) {
       eval('price'+form_name+'[3]='+value);
       break;
   }
+  console.log(priceiroN);
   eval('var new_price = org_price'+form_name+'+price'+form_name+'[0]+price'+form_name+'[1]+price'+form_name+'[2]+price'+form_name+'[3]');
   eval('$(mac_price'+form_name+').html('+new_price+'+" zł")');
 }

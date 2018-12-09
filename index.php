@@ -4,12 +4,17 @@
   $query = "SELECT * FROM parts";
   $result = mysqli_query($conn,$query);
   $temp = array();
-  $id = 0;
   while($row = mysqli_fetch_assoc($result)){
-    $temp[$row['fieldset_id']][$row['type_id']][$id]['name'] = $row['name'];
-    $temp[$row['fieldset_id']][$row['type_id']][$id]['price'] = $row['price'];
-    $temp[$row['fieldset_id']][$row['type_id']][$id]['score'] = $row['score'];
-    $id++;
+    $temp[$row['fieldset_id']][$row['type_id']][$row['id']]['name'] = $row['name'];
+    $temp[$row['fieldset_id']][$row['type_id']][$row['id']]['price'] = $row['price'];
+    $temp[$row['fieldset_id']][$row['type_id']][$row['id']]['score'] = $row['score'];
+  }
+  $query = "SELECT * FROM forms";
+  $result = mysqli_query($conn,$query);
+  while($row = mysqli_fetch_assoc($result)){
+    $temp2[$row['field']][$row['id']]['name'] = $row['name'];
+    $temp2[$row['field']][$row['id']]['org_price'] = $row['org_price'];
+    $temp2[$row['field']][$row['id']]['image'] = $row['image'];
   }
   ?>
 <html lang="pl" dir="ltr">
@@ -21,26 +26,26 @@
   </head>
   <body>
     <section class="tabs">
-      <button id="btn_M" class="active_btn" type="button" name="M">Mac Pro</button>
-      <button id="btn_iM" type="button" name="iM">iMac</button>
-      <button id="btn_Mm" type="button" name="Mm">Mac Mini</button>
+      <button id="btn_M" class="active_btn" type="button" name="M"><?php echo $temp2[2][2]['name']; ?></button>
+      <button id="btn_iM" type="button" name="iM"><?php echo $temp2[2][3]['name']; ?></button>
+      <button id="btn_Mm" type="button" name="Mm"><?php echo $temp2[2][4]['name']; ?></button>
     </section>
     <section class="config">
     <!-- START iroN config -->
       <div class="container" id="iroN">
-        <div class="title"><h2 class="title">iroN</h2></div>
+        <div class="title"><h2 class="title"><?php echo $temp2[1][1]['name']; ?></h2></div>
           <div class="container_top i" id="iroN_thumb">
               <div class="container_img img_i">
-                <img class="" id="iroN_cube" src="img/iroN.png" alt="">
+                <img class="" id="iroN_cube" src="img/<?php echo $temp2[1][1]['image'];?>" alt="">
               </div>
-            <h3 class="price"></h3>
+            <h3 class="price" data-price="<?php echo $temp2[1][1]['org_price']; ?>" id="mac_priceiroN"><?php echo $temp2[1][1]['org_price']; ?> zł</h3>
           </div>
         <div class="container_form form_i i">
           <form class="iroN" method="post">
             <!-- PROCESORY -->
             <fieldset id="PROCESORY">
               <div><legend><h2>Procesor</h2></legend></div>
-              <?php $i = 1; foreach ($temp[1][1] as $k => $v) {?>
+              <?php $i = 1; if(isset($temp[1][1])){ foreach ($temp[1][1] as $k => $v) {?>
                 <div>
                   <input type="radio" id="<?php echo '1-'.$i.'i';?>" name="Procesor" value="<?php echo $v['price']; ?>" <?php if($i == 1){echo 'checked';}?>>
                   <label for="<?php echo '1-'.$i.'i';?>" data-score="<?php echo $v['score'];?>"><?php echo $v['name'];?></label>
@@ -87,12 +92,13 @@
                   <?php
                 }
               }
+            }
               ?>
             </fieldset>
             <!-- KARTY GRAFICZNE -->
             <fieldset id="Grafika">
               <div><legend><h2>Karta Graficzna</h2></legend></div>
-              <?php $i = 1; foreach ($temp[1][2] as $k => $v) {?>
+              <?php $i = 1; if(isset($temp[1][2])){foreach ($temp[1][2] as $k => $v) {?>
                 <div>
                   <input type="radio" id="<?php echo '2-'.$i.'i';?>" name="Grafika" value="<?php echo $v['price']; ?>" <?php if($i == 1){echo 'checked';}?>>
                   <label for="<?php echo '2-'.$i.'i';?>" data-score="<?php echo $v['score'];?>"><?php echo $v['name'];?></label>
@@ -135,12 +141,13 @@
                   <?php
                 }
               }
+            }
               ?>
             </fieldset>
             <!-- RAM -->
             <fieldset id="RAM">
               <div><legend><h2>Pamięc RAM</h2></legend></div>
-              <?php $i = 1; foreach ($temp[1][3] as $k => $v) {?>
+              <?php $i = 1; if(isset($temp[1][3])){foreach ($temp[1][3] as $k => $v) {?>
                 <div>
                   <input type="radio" id="<?php echo '3-'.$i.'i';?>" name="RAM" value="<?php echo $v['price']; ?>" <?php if($i == 1){echo 'checked';}?>>
                   <label for="<?php echo '3-'.$i.'i';?>" data-score="<?php echo $v['score'];?>"><?php echo $v['name'];?></label>
@@ -183,12 +190,13 @@
                   <?php
                 }
               }
+            }
               ?>
             </fieldset>
               <!-- Pamięc masowa -->
               <fieldset id="Pamiec">
                 <div><legend><h2>Pamięc masowa</h2></legend></div>
-                <?php $i = 1; foreach ($temp[1][4] as $k => $v) {?>
+                <?php $i = 1;if(isset($temp[1][4])){ foreach ($temp[1][4] as $k => $v) {?>
                   <div>
                     <input type="radio" id="<?php echo '4-'.$i.'i';?>" name="Pamiec" value="<?php echo $v['price']; ?>" <?php if($i == 1){echo 'checked';}?>>
                     <label for="<?php echo '4-'.$i.'i';?>" data-score="<?php echo $v['score'];?>"><?php echo $v['name'];?></label>
@@ -239,6 +247,7 @@
                     <?php
                   }
                 }
+              }
                 ?>
               </fieldset>
               <!-- Dodatki -->
@@ -271,18 +280,18 @@
               <fieldset id="PROCESORY_mobile">
                 <div><legend><h2>Procesor</h2></legend></div>
                 <select class="select_mobile" name="Procesor">
-                  <?php foreach ($temp[1][1] as $k => $v) {?>
+                  <?php if(isset($temp[1][1])){foreach ($temp[1][1] as $k => $v) {?>
                     <option data-score="<?php echo $v['score'];?>" value="<?php echo $v['price'];?>"><?php echo $v['name'];?></option>
-                  <?php }?>
+                  <?php }}?>
                 </select>
               </fieldset>
               <!-- KARTY GRAFICZNE -->
               <fieldset id="Grafika">
                 <div><legend><h2>Karta Graficzna</h2></legend></div>
                 <select class="select_mobile" name="Grafika">
-                  <?php foreach ($temp[1][2] as $k => $v) {?>
+                  <?php if(isset($temp[1][2])){foreach ($temp[1][2] as $k => $v) {?>
                     <option data-score="<?php echo $v['score'];?>" value="<?php echo $v['price'];?>"><?php echo $v['name'];?></option>
-                  <?php }?>
+                  <?php }}?>
                 </select>
               </fieldset>
               <div id="separator_i_m_1" style="margin-top:31.4%;"></div>
@@ -290,18 +299,18 @@
               <fieldset id="RAM">
                 <div><legend><h2>Pamięc RAM</h2></legend></div>
                 <select class="select_mobile" name="RAM">
-                  <?php foreach ($temp[1][3] as $k => $v) {?>
+                  <?php if(isset($temp[1][3])){foreach ($temp[1][3] as $k => $v) {?>
                     <option data-score="<?php echo $v['score'];?>" value="<?php echo $v['price'];?>"><?php echo $v['name'];?></option>
-                  <?php }?>
+                  <?php }}?>
                 </select>
               </fieldset>
               <!-- Pamięc masowa -->
               <fieldset id="Pamiec">
                 <div><legend><h2>Pamięc masowa</h2></legend></div>
                 <select class="select_mobile" name="Pamiec">
-                  <?php foreach ($temp[1][4] as $k => $v) {?>
+                  <?php if(isset($temp[1][4])){foreach ($temp[1][4] as $k => $v) {?>
                     <option data-score="<?php echo $v['score'];?>" value="<?php echo $v['price'];?>"><?php echo $v['name'];?></option>
-                  <?php }?>
+                  <?php }}?>
                 </select>
                 <div>
                   <input class="mobile_check" type="checkbox" id="5-2i_m" name="Optional" value="320">
@@ -336,10 +345,10 @@
 
       <!-- START Mac Pro config -->
         <div class="container" id="Mac_Pro">
-          <div class="title"><h2 class="title">Mac Pro</h2></div>
+          <div class="title"><h2 class="title"><?php echo $temp2[2][2]['name']; ?></h2></div>
           <div id="mac_cont" class="container_top M">
             <div class="container_img img_M">
-              <img class="" id="Mac_thumb" src="img/mac.png" alt="">
+              <img class="" id="Mac_thumb" src="img/<?php echo $temp2[2][2]['image']; ?>" alt="">
               <img class="image hide music_card M" src="img/karta_muzyczna.png" alt="">
               <img class="image hard_drive hide drive_1 M" src="img/dysk.png" alt="">
               <img class="image hard_drive hide drive_2 M" src="img/dysk.png" alt="">
@@ -350,7 +359,7 @@
               <img class="image kable hide kable_1 M" src="img/kable.png" alt="">
               <img class="image kable hide kable_2 M" src="img/Kable.png" alt="">
             </div>
-            <h3 class="price" id="mac_priceM">14300 zł</h3>
+            <h3 class="price" data-price="14300" id="mac_priceM"><?php echo $temp2[2][2]['org_price']; ?> zł</h3>
           </div>
           <div class="container_form M">
             <form class="mac_form" method="post">
@@ -358,7 +367,7 @@
               <div class="form_level" style="margin-bottom:17.94%;">
                 <fieldset id="Procesor_mac">
                   <div><legend><h2>Procesor</h2></legend></div>
-                  <?php $i = 1; foreach ($temp[2][1] as $k => $v) {?>
+                  <?php $i = 1; if(isset($temp[2][1])){foreach ($temp[2][1] as $k => $v) {?>
                     <div>
                       <input type="radio" id="<?php echo '1-'.$i;?>" name="Procesor" value="<?php echo $v['price']; ?>" <?php if($i == 1){echo 'checked';}?>>
                       <label for="<?php echo '1-'.$i;?>" data-score="<?php echo $v['score'];?>"><?php echo $v['name'];?></label>
@@ -378,12 +387,12 @@
                         <label class="placeholder">a</label>
                       </div>
                       <?php
-                    }?>
+                    }}?>
                 </fieldset>
                 <!-- KARTY GRAFICZNE -->
                 <fieldset id="Grafika_mac">
                   <div><legend><h2>Karta Graficzna</h2></legend></div>
-                  <?php $i = 1; foreach ($temp[2][2] as $k => $v) {?>
+                  <?php $i = 1; if(isset($temp[2][2])){foreach ($temp[2][2] as $k => $v) {?>
                     <div>
                       <input type="radio" id="<?php echo '2-'.$i;?>" name="Grafika" value="<?php echo $v['price']; ?>" <?php if($i == 1){echo 'checked';}?>>
                       <label for="<?php echo '2-'.$i;?>" data-score="<?php echo $v['score'];?>"><?php echo $v['name'];?></label>
@@ -403,12 +412,12 @@
                         <label class="placeholder">a</label>
                       </div>
                       <?php
-                    }?>
+                    }}?>
                 </fieldset>
                 <!-- RAM -->
                 <fieldset id="RAM_mac">
                   <div><legend><h2>Pamięć RAM</h2></legend></div>
-                  <?php $i = 1; foreach ($temp[2][3] as $k => $v) {?>
+                  <?php $i = 1; if(isset($temp[2][3])){foreach ($temp[2][3] as $k => $v) {?>
                     <div>
                       <input type="radio" id="<?php echo '3-'.$i;?>" name="RAM" value="<?php echo $v['price']; ?>" <?php if($i == 1){echo 'checked';}?>>
                       <label for="<?php echo '3-'.$i;?>" data-score="<?php echo $v['score'];?>"><?php echo $v['name'];?></label>
@@ -428,12 +437,12 @@
                         <label class="placeholder">a</label>
                       </div>
                       <?php
-                    }?>
+                    }}?>
                 </fieldset>
               <!-- Pamięc masowa -->
                 <fieldset id="Pamiec_mac">
                   <div><legend><h2>Pamięć masowa</h2></legend></div>
-                  <?php $i = 1; foreach ($temp[2][4] as $k => $v) {?>
+                  <?php $i = 1; if(isset($temp[2][4])){foreach ($temp[2][4] as $k => $v) {?>
                     <div>
                       <input type="radio" id="<?php echo '4-'.$i;?>" name="Pamiec" value="<?php echo $v['price']; ?>" <?php if($i == 1){echo 'checked';}?>>
                       <label for="<?php echo '4-'.$i;?>" data-score="<?php echo $v['score'];?>"><?php echo $v['name'];?></label>
@@ -469,7 +478,7 @@
                         <label class="placeholder">a</label>
                       </div>
                       <?php
-                    }?>
+                    }}?>
                 </fieldset>
                 <!-- Dodatki -->
                 <fieldset id="Optional_mac">
@@ -486,18 +495,18 @@
                 <fieldset id="PROCESORY_mobile">
                   <div><legend><h2>Procesor</h2></legend></div>
                   <select class="select_mobile" name="Procesor">
-                    <?php foreach ($temp[2][1] as $k => $v) {?>
+                    <?php if(isset($temp[2][1])){foreach ($temp[2][1] as $k => $v) {?>
                       <option data-score="<?php echo $v['score'];?>" value="<?php echo $v['price'];?>"><?php echo $v['name'];?></option>
-                    <?php }?>
+                    <?php }}?>
                   </select>
                 </fieldset>
                 <!-- KARTY GRAFICZNE -->
                 <fieldset id="Grafika_mobile">
                   <div><legend><h2>Karta Graficzna</h2></legend></div>
                   <select class="select_mobile" name="Grafika">
-                    <?php foreach ($temp[2][2] as $k => $v) {?>
+                    <?php if(isset($temp[2][2])){foreach ($temp[2][2] as $k => $v) {?>
                       <option data-score="<?php echo $v['score'];?>" value="<?php echo $v['price'];?>"><?php echo $v['name'];?></option>
-                    <?php }?>
+                    <?php }}?>
                   </select>
                   <input class="mobile_check" type="checkbox" id="5-4M_m" name="Optional_mac" value="5890">
                   <label class="mobile_label hide" for="5-4M_m">eGPU RX580</label>
@@ -506,18 +515,18 @@
                 <fieldset id="RAM_mobile">
                   <div><legend><h2>Pamięc RAM</h2></legend></div>
                   <select class="select_mobile" name="RAM">
-                    <?php foreach ($temp[2][3] as $k => $v) {?>
+                    <?php if(isset($temp[2][3])){foreach ($temp[2][3] as $k => $v) {?>
                       <option data-score="<?php echo $v['score'];?>" value="<?php echo $v['price'];?>"><?php echo $v['name'];?></option>
-                    <?php }?>
+                    <?php }}?>
                   </select>
                 </fieldset>
                 <!-- Pamięc masowa -->
                 <fieldset id="Pamiec_mobile">
                   <div><legend><h2>Pamięc masowa</h2></legend></div>
                   <select class="select_mobile" name="Pamiec">
-                    <?php foreach ($temp[2][4] as $k => $v) {?>
+                    <?php if(isset($temp[2][4])){foreach ($temp[2][4] as $k => $v) {?>
                       <option data-score="<?php echo $v['score'];?>" value="<?php echo $v['price'];?>"><?php echo $v['name'];?></option>
-                    <?php }?>
+                    <?php }}?>
                   </select>
                   <div>
                     <input type="checkbox" id="5-2M_m" name="Optional_mac" value="320">
@@ -562,10 +571,10 @@
         <!-- END Mac Pro config -->
         <!-- START iMac config -->
           <div class="container hide" id="iMac">
-            <div class="title"><h2 class="title">iMac</h2></div>
+            <div class="title"><h2 class="title"><?php echo $temp2[2][3]['name']; ?></h2></div>
             <div class="container_top">
               <div class="container_img">
-                <img class="" id="iMac_thumb" src="img/iMac.png" alt="">
+                <img class="" id="iMac_thumb" src="img/<?php echo $temp2[2][3]['image']; ?>" alt="">
                 <img class="image hide music_card MiM iM" src="img/karta_muzyczna.png" alt="">
                 <img class="image hard_drive hide drive_1 DiM iM" src="img/dysk.png" alt="">
                 <img class="image hard_drive hide drive_2 iM" src="img/dysk.png" alt="">
@@ -576,14 +585,14 @@
                 <img class="image kable hide kable_1 kiM iM" src="img/kable.png" alt="">
                 <img class="image kable hide kable_2 k2iM iM" src="img/Kable.png" alt="">
               </div>
-              <h3 class="price" id="mac_priceiM">7460 zł</h3>
+              <h3 class="price" data-price="7460" id="mac_priceiM"><?php echo $temp2[2][3]['org_price']; ?> zł</h3>
             </div>
             <div class="container_form">
               <form class="mac_form" method="post">
                 <!-- PROCESORY -->
                   <fieldset id="Procesor_mac iM">
                     <div><legend><h2>Procesor</h2></legend></div>
-                    <?php $i = 1; foreach ($temp[3][1] as $k => $v) {?>
+                    <?php $i = 1; if(isset($temp[3][1])){foreach ($temp[3][1] as $k => $v) {?>
                       <div>
                         <input type="radio" id="<?php echo '1-'.$i.'iM';?>" name="Procesor" value="<?php echo $v['price']; ?>" <?php if($i == 1){echo 'checked';}?>>
                         <label for="<?php echo '1-'.$i.'iM';?>" data-score="<?php echo $v['score'];?>"><?php echo $v['name'];?></label>
@@ -603,12 +612,12 @@
                           <label class="placeholder">a</label>
                         </div>
                         <?php
-                      }?>
+                      }}?>
                   </fieldset>
                   <!-- KARTY GRAFICZNE -->
                   <fieldset id="Grafika_mac">
                     <div><legend><h2>Karta Graficzna</h2></legend></div>
-                    <?php $i = 1; foreach ($temp[3][2] as $k => $v) {?>
+                    <?php $i = 1; if(isset($temp[3][2])){foreach ($temp[3][2] as $k => $v) {?>
                       <div>
                         <input type="radio" id="<?php echo '2-'.$i.'iM';?>" name="Grafika" value="<?php echo $v['price']; ?>" <?php if($i == 1){echo 'checked';}?>>
                         <label for="<?php echo '2-'.$i.'iM';?>" data-score="<?php echo $v['score'];?>"><?php echo $v['name'];?></label>
@@ -628,12 +637,12 @@
                           <label class="placeholder">a</label>
                         </div>
                         <?php
-                      }?>
+                      }}?>
                   </fieldset>
                   <!-- RAM -->
                   <fieldset id="RAM_mac">
                     <div><legend><h2>Pamięc RAM</h2></legend></div>
-                    <?php $i = 1; foreach ($temp[3][3] as $k => $v) {?>
+                    <?php $i = 1; if(isset($temp[3][3])){foreach ($temp[3][3] as $k => $v) {?>
                       <div>
                         <input type="radio" id="<?php echo '3-'.$i.'iM';?>" name="RAM" value="<?php echo $v['price']; ?>" <?php if($i == 1){echo 'checked';}?>>
                         <label for="<?php echo '3-'.$i.'iM';?>" data-score="<?php echo $v['score'];?>"><?php echo $v['name'];?></label>
@@ -653,7 +662,7 @@
                           <label class="placeholder">a</label>
                         </div>
                         <?php
-                      }?>
+                      }}?>
                   </fieldset>
                 <!-- Pamięc masowa -->
                   <fieldset id="Pamiec_mac">
@@ -666,7 +675,7 @@
                       <input type="radio" id="4-2iM" name="Pamiec" value="480">
                       <label for="4-2iM">1 TB Fusion Drive</label>
                     </div>-->
-                    <?php $i = 1; foreach ($temp[3][4] as $k => $v) {?>
+                    <?php $i = 1; if(isset($temp[3][4])){foreach ($temp[3][4] as $k => $v) {?>
                       <div>
                         <input type="radio" id="<?php echo '4-'.$i.'iM';?>" name="Pamiec" value="<?php echo $v['price']; ?>" <?php if($i == 1){echo 'checked';}?>>
                         <label for="<?php echo '4-'.$i.'iM';?>" data-score="<?php echo $v['score'];?>"><?php echo $v['name'];?></label>
@@ -700,7 +709,7 @@
                           <label class="placeholder">a</label>
                         </div>
                         <?php
-                      }?>
+                      }}?>
                   </fieldset>
                   <!-- Dodatki -->
                   <fieldset id="Optional_mac">
@@ -716,18 +725,18 @@
                   <fieldset id="PROCESORY_mobile">
                     <div><legend><h2>Procesor</h2></legend></div>
                     <select class="select_mobile" name="ProcesoriM">
-                      <?php foreach ($temp[3][1] as $k => $v) {?>
+                      <?php if(isset($temp[3][1])){foreach ($temp[3][1] as $k => $v) {?>
                         <option data-score="<?php echo $v['score'];?>" value="<?php echo $v['price'];?>"><?php echo $v['name'];?></option>
-                      <?php }?>
+                      <?php }}?>
                     </select>
                   </fieldset>
                   <!-- KARTY GRAFICZNE -->
                   <fieldset id="Grafika_mobile">
                     <div><legend><h2>Karta Graficzna</h2></legend></div>
                     <select class="select_mobile" name="Grafika">
-                      <?php foreach ($temp[3][2] as $k => $v) {?>
+                      <?php if(isset($temp[3][2])){foreach ($temp[3][2] as $k => $v) {?>
                         <option data-score="<?php echo $v['score'];?>" value="<?php echo $v['price'];?>"><?php echo $v['name'];?></option>
-                      <?php }?>
+                      <?php }}?>
                     </select>
                     <input class="mobile_check" type="checkbox" id="5-4iM_m" name="Optional_mac" value="5890">
                     <label class="mobile_label" for="5-4iM_m">eGPU RX580</label>
@@ -736,18 +745,18 @@
                   <fieldset id="RAM_mobile">
                     <div><legend><h2>Pamięc RAM</h2></legend></div>
                     <select class="select_mobile" name="RAM">
-                      <?php foreach ($temp[3][3] as $k => $v) {?>
+                      <?php if(isset($temp[3][3])){foreach ($temp[3][3] as $k => $v) {?>
                         <option data-score="<?php echo $v['score'];?>" value="<?php echo $v['price'];?>"><?php echo $v['name'];?></option>
-                      <?php }?>
+                      <?php }}?>
                     </select>
                   </fieldset>
                   <!-- Pamięc masowa -->
                   <fieldset id="Pamiec_mobile">
                     <div><legend><h2>Pamięc masowa</h2></legend></div>
                     <select class="select_mobile" name="Pamiec">
-                      <?php foreach ($temp[3][4] as $k => $v) {?>
+                      <?php if(isset($temp[3][4])){foreach ($temp[3][4] as $k => $v) {?>
                         <option data-score="<?php echo $v['score'];?>" value="<?php echo $v['price'];?>"><?php echo $v['name'];?></option>
-                      <?php }?>
+                      <?php }}?>
                     </select>
                     <div>
                       <input type="checkbox" id="5-2iM_m" name="Optional_mac" value="320">
@@ -793,10 +802,10 @@
         <!-- END iMac config -->
         <!-- START Mac mini config -->
           <div class="container hide" id="Mac_mini">
-            <div class="title"><h2 class="title">Mac Mini</h2></div>
+            <div class="title"><h2 class="title"><?php echo $temp2[2][4]['name']; ?></h2></div>
             <div class="container_top">
               <div class="container_img">
-                <img class="" id="Mac-mini_thumb" src="img/mac_mini.png" alt="">
+                <img class="" id="Mac-mini_thumb" src="img/<?php echo $temp2[2][4]['image']; ?>" alt="">
                 <img class="image hide music_card MMm Mm" src="img/karta_muzyczna.png" alt="">
                 <img class="image hard_drive hide drive_1 DMm Mm" src="img/dysk.png" alt="">
                 <img class="image hard_drive hide drive_2 Mm" src="img/dysk.png" alt="">
@@ -807,14 +816,14 @@
                 <img class="image kable hide kable_1 kMm Mm" src="img/kable.png" alt="">
                 <img class="image kable hide kable_2 k2Mm Mm" src="img/Kable.png" alt="">
               </div>
-              <h3 class="price" id="mac_priceMm">4950 zł</h3>
+              <h3 class="price" data-price="4950" id="mac_priceMm"><?php echo $temp2[2][4]['org_price']; ?> zł</h3>
             </div>
             <div class="container_form">
               <form class="mac_form" method="post">
                 <!-- PROCESORY -->
                 <fieldset id="Procesor_mac Mm">
                   <div><legend><h2>Procesor</h2></legend></div>
-                  <?php $i = 1; foreach ($temp[4][1] as $k => $v) {?>
+                  <?php $i = 1; if(isset($temp[4][1])){foreach ($temp[4][1] as $k => $v) {?>
                     <div>
                       <input type="radio" id="<?php echo '1-'.$i.'Mm';?>" name="Procesor" value="<?php echo $v['price']; ?>" <?php if($i == 1){echo 'checked';}?>>
                       <label for="<?php echo '1-'.$i.'Mm';?>" data-score="<?php echo $v['score'];?>"><?php echo $v['name'];?></label>
@@ -834,12 +843,12 @@
                         <label class="placeholder">a</label>
                       </div>
                       <?php
-                    }?>
+                    }}?>
                 </fieldset>
                 <!-- KARTY GRAFICZNE -->
                 <fieldset id="Grafika_mac Mm">
                   <div><legend><h2>Karta Graficzna</h2></legend></div>
-                  <?php $i = 1; foreach ($temp[4][2] as $k => $v) {?>
+                  <?php $i = 1; if(isset($temp[4][2])){foreach ($temp[4][2] as $k => $v) {?>
                     <div>
                       <input type="radio" id="<?php echo '2-'.$i.'Mm';?>" name="Grafika" value="<?php echo $v['price']; ?>" <?php if($i == 1){echo 'checked';}?>>
                       <label for="<?php echo '2-'.$i.'Mm';?>" data-score="<?php echo $v['score'];?>"><?php echo $v['name'];?></label>
@@ -859,12 +868,12 @@
                         <label class="placeholder">a</label>
                       </div>
                       <?php
-                    }?>
+                    }}?>
                 </fieldset>
                 <!-- RAM -->
                 <fieldset id="RAM_mac">
                   <div><legend><h2>Pamięc RAM</h2></legend></div>
-                  <?php $i = 1; foreach ($temp[4][3] as $k => $v) {?>
+                  <?php $i = 1; if(isset($temp[4][3])){foreach ($temp[4][3] as $k => $v) {?>
                     <div>
                       <input type="radio" id="<?php echo '3-'.$i.'Mm';?>" name="RAM" value="<?php echo $v['price']; ?>" <?php if($i == 1){echo 'checked';}?>>
                       <label for="<?php echo '3-'.$i.'Mm';?>" data-score="<?php echo $v['score'];?>"><?php echo $v['name'];?></label>
@@ -884,12 +893,12 @@
                         <label class="placeholder">a</label>
                       </div>
                       <?php
-                    }?>
+                    }}?>
                 </fieldset>
                 <!-- Pamięc masowa -->
                 <fieldset id="Pamiec_mac">
                   <div><legend><h2>Pamięc masowa</h2></legend></div>
-                  <?php $i = 1; foreach ($temp[4][4] as $k => $v) {?>
+                  <?php $i = 1; if(isset($temp[4][4])){foreach ($temp[4][4] as $k => $v) {?>
                     <div>
                       <input type="radio" id="<?php echo '4-'.$i.'Mm';?>" name="Pamiec" value="<?php echo $v['price']; ?>" <?php if($i == 1){echo 'checked';}?>>
                       <label for="<?php echo '4-'.$i.'Mm';?>" data-score="<?php echo $v['score'];?>"><?php echo $v['name'];?></label>
@@ -925,7 +934,7 @@
                         <label class="placeholder">a</label>
                       </div>
                       <?php
-                    }?>
+                    }}?>
                 </fieldset>
                 <!-- Dodatki -->
                 <fieldset id="Optional_mac">
@@ -942,18 +951,18 @@
                     <fieldset id="PROCESORY_mobile">
                       <div><legend><h2>Procesor</h2></legend></div>
                       <select class="select_mobile" name="Procesor">
-                        <?php foreach ($temp[4][1] as $k => $v) {?>
+                        <?php if(isset($temp[4][1])){foreach ($temp[4][1] as $k => $v) {?>
                           <option data-score="<?php echo $v['score'];?>" value="<?php echo $v['price'];?>"><?php echo $v['name'];?></option>
-                        <?php }?>
+                        <?php }}?>
                       </select>
                     </fieldset>
                     <!-- KARTY GRAFICZNE -->
                     <fieldset id="Grafika_mobile">
                       <div><legend><h2>Karta Graficzna</h2></legend></div>
                       <select class="select_mobile" name="Grafika">
-                        <?php foreach ($temp[4][2] as $k => $v) {?>
+                        <?php if(isset($temp[4][2])){foreach ($temp[4][2] as $k => $v) {?>
                           <option data-score="<?php echo $v['score'];?>" value="<?php echo $v['price'];?>"><?php echo $v['name'];?></option>
-                        <?php }?>
+                        <?php }}?>
                       </select>
                       <input class="mobile_check" type="checkbox" id="5-4Mm_m" name="Optional_mac" value="5890">
                       <label class="mobile_label" for="5-4Mm_m">eGPU RX580</label>
@@ -962,9 +971,9 @@
                     <fieldset id="RAM_mobile">
                       <div><legend><h2>Pamięc RAM</h2></legend></div>
                       <select class="select_mobile" name="RAM">
-                        <?php foreach ($temp[4][3] as $k => $v) {?>
+                        <?php if(isset($temp[4][3])){foreach ($temp[4][3] as $k => $v) {?>
                           <option data-score="<?php echo $v['score'];?>" value="<?php echo $v['price'];?>"><?php echo $v['name'];?></option>
-                        <?php }?>
+                        <?php }}?>
                       </select>
                     </fieldset>
                   </div>
@@ -973,9 +982,9 @@
                     <fieldset id="Pamiec_mobile">
                       <div><legend><h2>Pamięc masowa</h2></legend></div>
                       <select class="select_mobile" name="Pamiec">
-                        <?php foreach ($temp[4][4] as $k => $v) {?>
+                        <?php if(isset($temp[1][1])){foreach ($temp[4][4] as $k => $v) {?>
                           <option data-score="<?php echo $v['score'];?>" value="<?php echo $v['price'];?>"><?php echo $v['name'];?></option>
-                        <?php }?>
+                        <?php }}?>
                       </select>
                       <div>
                         <input type="checkbox" id="5-2Mm_m" name="Optional_mac" value="320">
