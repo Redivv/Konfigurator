@@ -27,6 +27,13 @@
 
   h2 {
     font-size: 2vw !important; } }
+.note {
+  text-align: center;
+  color: grey;
+  font-size: 1.1vw;
+  font-weight: bold;
+  margin-bottom: 0.5%; }
+
 .config {
   overflow: hidden; }
 
@@ -68,7 +75,9 @@ fieldset {
   text-align: left; }
 
 .tabs {
-  text-align: center; }
+  text-align: center;
+  margin-top: 0.5%;
+  margin-bottom: 0.5%; }
 
 h2 {
   font-size: 1.4vw; }
@@ -120,6 +129,10 @@ h2, h3, label {
       height: 84%;
       z-index: 10; }
     .container .container_top #iMac_thumb {
+      width: 66%;
+      height: 99%;
+      z-index: 10; }
+    .container .container_top #iMac_pro_thumb {
       width: 66%;
       height: 99%;
       z-index: 10; }
@@ -295,4 +308,4 @@ h2, h3, label {
 .clearfix {
   clear: both; }
 
-/*# sourceMappingURL=main.css.map */
+/*# sourceMappingURL=config.css.map */

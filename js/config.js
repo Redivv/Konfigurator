@@ -1,12 +1,16 @@
 var check_counter = 0;
 var check_counterM = 0;
 var check_counteriM = 0;
+var check_counteriMP = 0;
 var check_counterMm = 0;
-var priceiroN = [0,0,0,0];
-var priceM = [0,0,0,0];
-var priceiM = [0,0,0,0];
-var priceMm = [0,0,0,0];
+var priceiroN = [0,0,0,0,0];
+var priceiroNt = [0,0,0,0,0];
+var priceM = [0,0,0,0,0];
+var priceiM = [0,0,0,0,0];
+var priceiMP = [0,0,0,0,0];
+var priceMm = [0,0,0,0,0];
 var org_priceiroN = $('#mac_priceiroN').data('price');
+var org_priceiroNt = $('#mac_priceiroNt').data('price');
 var org_priceM = $('#mac_priceM').data('price');
 var org_priceiM = $('#mac_priceiM').data('price');
 var org_priceMm = $('#mac_priceMm').data('price');
@@ -17,11 +21,14 @@ $(document).ready(function(){
 function main() {
   $('label[for=1-1]').click();
   var active_tab = "M";
-  $('button').on('click',function(){
+  $('.mac_btn').on('click',function(){
     if(active_tab != tabs(this)){
       check_counter = 0;
     }
     active_tab = tabs(active_tab,this);
+  });
+  $('.iroN_btn').on('click',function(){
+    tabs_i(this);
   });
   $('input[name=Optional_mac]').change(function(){
     draw_mac(active_tab, this);
@@ -31,6 +38,12 @@ function main() {
   });
   $('.iroN input[type=checkbox]').on('click',function(){
     calc_price('iroN',this);
+  });
+  $('#iroNt input[type=radio]').on('click',function(){
+    calc_price('iroNt',this);
+  });
+  $('#iroNt input[type=checkbox]').on('click',function(){
+    calc_price('iroNt',this);
   });
   $('.mac_form input[type=radio]').on('click',function(){
     calc_price(active_tab,this);
@@ -135,6 +148,7 @@ function tabs(active,clicked) {
       $('label[for=1-1]').click();
       eval('$(btn_'+active+').removeClass("active_btn")');
       $('#btn_M').addClass('active_btn');
+      $('#iMac_Pro').hide();
       $('#iMac').hide();
       $('#Mac_mini').hide();
       break;
@@ -143,7 +157,17 @@ function tabs(active,clicked) {
       eval('$(btn_'+active+').removeClass("active_btn")');
       $('#btn_iM').addClass('active_btn');
       $('#iMac').show();
+      $('#iMac_Pro').hide();
       $('label[for=1-1iM]').click();
+      $('#Mac_mini').hide();
+      break;
+    case 'iMP':
+      $('#Mac_Pro').hide();
+      eval('$(btn_'+active+').removeClass("active_btn")');
+      $('#btn_iMP').addClass('active_btn');
+      $('#iMac_Pro').show();
+      $('label[for=1-1iMP]').click();
+      $('#iMac').hide();
       $('#Mac_mini').hide();
       break;
     case 'Mm':
@@ -151,11 +175,31 @@ function tabs(active,clicked) {
       eval('$(btn_'+active+').removeClass("active_btn")');
       $('#btn_Mm').addClass('active_btn');
       $('#iMac').hide();
+      $('#iMac_Pro').hide();
       $('#Mac_mini').show();
       $('label[for=1-1Mm]').click();
     default:
   }
   return name;
+}
+function tabs_i(clicked) {
+  var name = $(clicked).attr('name');
+  switch (name) {
+    case 'i':
+      $('#iroNt').hide();
+      eval('$(btn_it).removeClass("active_btn")');
+      $('#btn_i').addClass('active_btn');
+      $('#iroN').show();
+      $('label[for=1-1i]').click();
+      break;
+    case 'it':
+      $('#iroN').hide();
+      eval('$(btn_i).removeClass("active_btn")');
+      $('#btn_it').addClass('active_btn');
+      $('#iroNt').show();
+      $('label[for=1-1it]').click();
+      break;
+    }
 }
 
 function calc_price(form_name,selected) {
@@ -174,9 +218,23 @@ function calc_price(form_name,selected) {
     case 'Pamiec':
       eval('price'+form_name+'[3]='+value);
       break;
+    case 'Optional':
+      if(selected.checked == true){
+        eval('price'+form_name+'[4]+='+value);
+      }else{
+        eval('price'+form_name+'[4]-='+value);
+      }
+      break;
+    case 'Optional_mac':
+      if(selected.checked == true){
+        eval('price'+form_name+'[4]+='+value);
+      }else{
+        eval('price'+form_name+'[4]-='+value);
+      }
+      break;
   }
   console.log(priceiroN);
-  eval('var new_price = org_price'+form_name+'+price'+form_name+'[0]+price'+form_name+'[1]+price'+form_name+'[2]+price'+form_name+'[3]');
+  eval('var new_price = org_price'+form_name+'+price'+form_name+'[0]+price'+form_name+'[1]+price'+form_name+'[2]+price'+form_name+'[3]+price'+form_name+'[4]');
   eval('$(mac_price'+form_name+').html('+new_price+'+" zł")');
 }
 
@@ -190,6 +248,10 @@ function draw_mac(form_name, changed) {
         case 'iM':
           check_counteriM++;
           check_counter = check_counteriM;
+          break;
+        case 'iMP':
+          check_counteriMP++;
+          check_counter = check_counteriMP;
           break;
         case 'Mm':
           check_counterMm++;
@@ -283,6 +345,10 @@ function draw_mac(form_name, changed) {
       case 'iM':
         check_counteriM--;
         check_counter = check_counteriM;
+        break;
+      case 'iMP':
+        check_counteriMP--;
+        check_counter = check_counteriMP;
         break;
       case 'Mm':
         check_counterMm--;
