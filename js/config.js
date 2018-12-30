@@ -1,19 +1,25 @@
+var last_val = 0;
 var check_counter = 0;
 var check_counterM = 0;
 var check_counteriM = 0;
 var check_counteriMP = 0;
 var check_counterMm = 0;
-var priceiroN = [0,0,0,0,0];
-var priceiroNt = [0,0,0,0,0];
-var priceM = [0,0,0,0,0];
-var priceiM = [0,0,0,0,0];
-var priceiMP = [0,0,0,0,0];
-var priceMm = [0,0,0,0,0];
+var check_counterMc = 0;
+var check_counteriMc = 0;
+var check_counteriMPc = 0;
+var check_counterMmc = 0;
+var priceiroN = [0,0,0,0,0,0];
+var priceiroNt = [0,0,0,0,0,0];
+var priceM = [0,0,0,0,0,0];
+var priceiM = [0,0,0,0,0,0];
+var priceiMP = [0,0,0,0,0,0];
+var priceMm = [0,0,0,0,0,0];
 var org_priceiroN = $('#mac_priceiroN').data('price');
 var org_priceiroNt = $('#mac_priceiroNt').data('price');
 var org_priceM = $('#mac_priceM').data('price');
 var org_priceiM = $('#mac_priceiM').data('price');
 var org_priceMm = $('#mac_priceMm').data('price');
+var org_priceiMP = $('#mac_priceiMP').data('price');
 $(document).ready(function(){
   main();
 })
@@ -27,11 +33,14 @@ function main() {
     }
     active_tab = tabs(active_tab,this);
   });
-  $('.iroN_btn').on('click',function(){
-    tabs_i(this);
-  });
   $('input[name=Optional_mac]').change(function(){
     draw_mac(active_tab, this);
+  });
+  $('input[name=Grafika]').change(function(){
+    draw_mac_gpu(active_tab, this);
+  });
+  $('select[name=Grafika]').change(function(){
+    draw_mac_gpu_mobile(active_tab, this);
   });
   $('.iroN input[type=radio]').on('click',function(){
     calc_price('iroN',this);
@@ -39,11 +48,14 @@ function main() {
   $('.iroN input[type=checkbox]').on('click',function(){
     calc_price('iroN',this);
   });
+  $('.iroN_mobile input[type=checkbox]').on('click',function(){
+    calc_price('iroN',this);
+  });
   $('#iroNt input[type=radio]').on('click',function(){
-    calc_price('iroNt',this);
+    calc_price('iroN',this);
   });
   $('#iroNt input[type=checkbox]').on('click',function(){
-    calc_price('iroNt',this);
+    calc_price('iroN',this);
   });
   $('.mac_form input[type=radio]').on('click',function(){
     calc_price(active_tab,this);
@@ -59,7 +71,8 @@ function main() {
   });
   var imageoffset = $('.container_top').scrollTop();
   var stop = $('.form_i').height();
-  stop *= 8/10;
+  if($(window).width()<=1054){stop *= 65/100};
+  stop *= 80/100;
     $(window).scroll(function(){
       var scrollpos = $(window).scrollTop();
       if(scrollpos >= imageoffset){
@@ -81,6 +94,7 @@ function chart() {
       // instantiates the pie chart, passes in the data and
       // draws it.
       var iroN_proc = [$('label[for=1-1i]').html(),$('label[for=1-1i]').data('score')];
+      if(!iroN_proc[0]){iroN_proc = [$('label[for=1-1it]').html(),$('label[for=1-1it]').data('score')]}
       $('.iroN input[name=Procesor] + label').on('click',function(){
          iroN_proc [0] = $(this).html();
          iroN_proc [1] = $(this).data('score');
@@ -205,6 +219,20 @@ function tabs_i(clicked) {
 function calc_price(form_name,selected) {
   var name = $(selected).attr('name');
   var value = $(selected).val();
+  if(name == "Pamiec2"){
+    last_val = value;
+  }
+  if((document.getElementById('control').checked) == true){
+    var control = 1;
+  }else{
+    var control = 0;
+  };
+  if((document.getElementById('control_mobile').checked) == true){
+    var control_m = 1;
+  }else{
+    var control_m = 0;
+  };
+  if($(window).width()<=1054){control = 1;}
   switch (name) {
     case 'Procesor':
     eval('price'+form_name+'[0]='+value);
@@ -217,6 +245,20 @@ function calc_price(form_name,selected) {
       break;
     case 'Pamiec':
       eval('price'+form_name+'[3]='+value);
+      break;
+    case 'Pamiec2':
+      if(control == 0){
+        eval('price'+form_name+'[5]=0');
+      }else{
+        eval('price'+form_name+'[5]='+value);
+      }
+      break;
+    case "Pamiec_M2":
+      if(control == 0){
+        eval('price'+form_name+'[5]=0');
+      }else{
+        eval('price'+form_name+'[5]='+last_val);
+      }
       break;
     case 'Optional':
       if(selected.checked == true){
@@ -233,8 +275,7 @@ function calc_price(form_name,selected) {
       }
       break;
   }
-  console.log(priceiroN);
-  eval('var new_price = org_price'+form_name+'+price'+form_name+'[0]+price'+form_name+'[1]+price'+form_name+'[2]+price'+form_name+'[3]+price'+form_name+'[4]');
+  eval('var new_price = org_price'+form_name+'+price'+form_name+'[0]+price'+form_name+'[1]+price'+form_name+'[2]+price'+form_name+'[3]+price'+form_name+'[4]+price'+form_name+'[5]');
   eval('$(mac_price'+form_name+').html('+new_price+'+" zł")');
 }
 
@@ -327,12 +368,6 @@ function draw_mac(form_name, changed) {
         case '5-3'+form_name+'_m':
           $('.g-drive.'+form_name).show();
           break;
-        case '5-4'+form_name:
-          $('.rx580.'+form_name).show();
-          break;
-        case '5-4'+form_name+'_m':
-          $('.rx580.'+form_name).show();
-          break;
         default:
 
       }
@@ -388,13 +423,135 @@ function draw_mac(form_name, changed) {
         case '5-3'+form_name+'_m':
           $('.g-drive.'+form_name).hide();
           break;
-        case '5-4'+form_name:
-          $('.rx580.'+form_name).hide();
-          break;
-        case '5-4'+form_name+'_m':
-          $('.rx580.'+form_name).hide();
-          break;
-        default:
       }
   }
 }
+function draw_mac_gpu(form_name, changed) {
+      if (check_counter == 2) {
+        $('.kable_1.'+form_name).show();
+      }else if(check_counter == 4){
+        $('.kable_2.'+form_name).show();
+      }
+      var id = $(changed).data('name');
+      if(id == "RX Vega 56" || id == "RX580" || id == "RX 580"){
+          $('.rx580.'+form_name).show();
+          switch (form_name) {
+            case 'M':
+              check_counterMc++;
+              if(check_counterMc>1){
+                check_counterMc = 1
+              }else{
+                check_counterM++;
+              }
+              check_counter = check_counterM;
+              break;
+            case 'iM':
+            check_counteriMc++;
+            if(check_counteriMc>1){
+              check_counteriMc = 1
+            }else{
+              check_counteriM++;
+            }
+            check_counter = check_counteriM;
+              break;
+            case 'iMP':
+            check_counteriMPc++;
+            if(check_counteriMPc>1){
+              check_counteriMPc = 1
+            }else{
+              check_counteriMP++;
+            }
+            check_counter = check_counteriMP;
+              break;
+            case 'Mm':
+            check_counteriMc++;
+            if(check_counterMmc>1){
+              check_counterMmc = 1
+            }else{
+              check_counterMm++;
+            }
+            check_counter = check_counterMm;
+              break;
+          }
+        }else{
+          $('.rx580.'+form_name).hide();
+          switch (form_name) {
+            case 'M':
+              check_counterM--;
+              check_counter = check_counterM;
+              break;
+            case 'iM':
+              check_counteriM--;
+              check_counter = check_counteriM;
+              break;
+            case 'iMP':
+              check_counteriMP--;
+              check_counter = check_counteriMP;
+              break;
+            case 'Mm':
+              check_counterMm--;
+              check_counter = check_counterMm;
+              break;
+          }
+        }
+      if(check_counter == 3){
+        $('.kable_2.'+form_name).hide();
+      }else if(check_counter == 1){
+        $('.kable_1.'+form_name).hide();
+      }
+  }
+  function draw_mac_gpu_mobile(form_name, changed) {
+        if (check_counter == 2) {
+          $('.kable_1.'+form_name).show();
+        }else if(check_counter == 4){
+          $('.kable_2.'+form_name).show();
+        }
+        var selected = $(changed).find('option:selected');
+        var id = selected.data('name');
+        if(id == "RX Vega 56" || id == "RX580" || id == "RX 580"){
+            $('.rx580.'+form_name).show();
+            switch (form_name) {
+              case 'M':
+                check_counterM++;
+                check_counter = check_counterM;
+                break;
+              case 'iM':
+                check_counteriM++;
+                check_counter = check_counteriM;
+                break;
+              case 'iMP':
+                check_counteriMP++;
+                check_counter = check_counteriMP;
+                break;
+              case 'Mm':
+                check_counterMm++;
+                check_counter = check_counterMm;
+                break;
+            }
+          }else{
+            $('.rx580.'+form_name).hide();
+            switch (form_name) {
+              case 'M':
+                check_counterM--;
+                check_counter = check_counterM;
+                break;
+              case 'iM':
+                check_counteriM--;
+                check_counter = check_counteriM;
+                break;
+              case 'iMP':
+                check_counteriMP--;
+                check_counter = check_counteriMP;
+                break;
+              case 'Mm':
+                check_counterMm--;
+                check_counter = check_counterMm;
+                break;
+            }
+          }
+        if(check_counter == 3){
+          $('.kable_2.'+form_name).hide();
+        }else if(check_counter == 1){
+          $('.kable_1.'+form_name).hide();
+        }
+    }

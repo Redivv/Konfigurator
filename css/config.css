@@ -2,7 +2,7 @@
   .mac_form, .iroN {
     display: none; }
 
-  .mac_form_mobile, .iroN_mobile {
+  .mac_form_mobile, .iroN_mobile, .Optional_iron_m {
     display: block !important; }
 
   button {
@@ -10,6 +10,12 @@
 
   .title {
     font-size: 3.5vw !important; }
+
+  .PM {
+    font-size: 1.8vw !important;
+    padding: 0% !important;
+    width: 45% !important;
+    margin: 0em !important; }
 
   label {
     font-size: 2vw !important;
@@ -26,11 +32,18 @@
     font-weight: bold !important; }
 
   h2 {
-    font-size: 2vw !important; } }
+    font-size: 2vw !important; }
+
+  .note {
+    text-align: center;
+    color: grey;
+    font-size: 1.8vw !important;
+    font-weight: bold;
+    margin-bottom: 0.5% !important; } }
 .note {
   text-align: center;
   color: grey;
-  font-size: 1.1vw;
+  font-size: 1.4vw;
   font-weight: bold;
   margin-bottom: 0.5%; }
 
@@ -122,23 +135,23 @@ h2, h3, label {
     .container .container_top .image {
       position: absolute; }
     .container .container_top #iroN_cube {
-      width: 30%;
-      height: 99%; }
+      width: 30%; }
+    .container .container_top #iroN_tower {
+      width: 35%; }
     .container .container_top #Mac_thumb {
       width: 20%;
-      height: 84%;
       z-index: 10; }
     .container .container_top #iMac_thumb {
       width: 66%;
-      height: 99%;
       z-index: 10; }
     .container .container_top #iMac_pro_thumb {
       width: 66%;
-      height: 99%;
+      z-index: 10; }
+    .container .container_top #iMac_pro_thumb {
+      width: 66%;
       z-index: 10; }
     .container .container_top #Mac-mini_thumb {
       width: 40%;
-      height: 100%;
       z-index: 10;
       margin-top: 15%; }
     .container .container_top .music_card {
@@ -282,6 +295,24 @@ h2, h3, label {
       border: 2px solid #8e95a0; }
     .container label:visited {
       border: 2px solid #5489dd; }
+  .container .Pamiec_M2 {
+    width: 25%;
+    letter-spacing: 1px;
+    float: left;
+    display: block;
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 1vw;
+    font-weight: bold;
+    text-align: left;
+    padding: 0em;
+    border: 0px solid #d7e0ef;
+    -webkit-border-radius: 20px;
+    border-radius: 20px; }
+    .container .Pamiec_M2:hover {
+      border: 0px solid #8e95a0; }
+    .container .Pamiec_M2:visited {
+      border: 0px solid #5489dd; }
   .container .placeholder {
     color: transparent;
     border: 2px solid transparent; }

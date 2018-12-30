@@ -1,8 +1,8 @@
 <!DOCTYPE html>
   <?php
   include ('php_files/db_conn.php');
-  $_GET['id']=1;
-  $query = "SELECT * FROM parts";
+  if(!isset($_GET['id'])){$_GET['id']=1;}
+  $query = "";
   $result = mysqli_query($conn,$query);
   $temp = array();
   while($row = mysqli_fetch_assoc($result)){
@@ -10,7 +10,7 @@
     $temp[$row['fieldset_id']][$row['type_id']][$row['id']]['price'] = $row['price'];
     $temp[$row['fieldset_id']][$row['type_id']][$row['id']]['score'] = $row['score'];
   }
-  $query = "SELECT * FROM forms";
+  $query = "";
   $result = mysqli_query($conn,$query);
   while($row = mysqli_fetch_assoc($result)){
     $temp2[$row['field']][$row['id']]['name'] = $row['name'];
@@ -21,17 +21,17 @@
 <html lang="pl" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>Konfigurator-test</title>
+    <title>Konfigurator</title>
     <link rel="stylesheet" href="css/config.css">
     <link href="css/roboto.css" rel="stylesheet">
   </head>
   <body>
     <div class="note">
-      <span>Poniższe ceny nie przedstawiają rzeczywistej oferty sklepu a jedynie szacunkowe wartości pozwalające porównać produkty.</span>
+      <span>Poniższe ceny nie przedstawiają rzeczywistej oferty sklepu, a jedynie szacunkowe wartości pozwalające porównać produkty.</span>
     </div>
     <section class="tabs">
-      <button id="btn_i" class="iroN_btn active_btn" type="button" name="i"><?php echo $temp2[1][1]['name']; ?></button>
-      <button id="btn_it" class="iroN_btn" type="button" name="it"><?php echo $temp2[1][6]['name']; ?></button>
+      <a href="?id=1"><button id="btn_i" class="iroN_btn <?php if($_GET['id']>=1){echo "active_btn";} ?>" type="button" name="i"><?php echo $temp2[1][1]['name']; ?></button></a>
+      <a href="?id=0"><button id="btn_it" class="iroN_btn <?php if($_GET['id']<1){echo "active_btn";} ?>" type="button" name="it"><?php echo $temp2[1][6]['name']; ?></button></a>
     </section>
     <section class="tabs">
       <button id="btn_M" class="mac_btn active_btn" type="button" name="M"><?php echo $temp2[2][2]['name']; ?></button>
@@ -176,10 +176,6 @@
                     <?php
                   }
                 }?>
-                <div>
-                  <input type="checkbox" value="0">
-                  <label class="placeholder">a</label>
-                </div>
                 <?php
               }
                 ?>
@@ -249,8 +245,14 @@
                 <fieldset id="Pamiec">
                   <div><legend><h2>Pamięc masowa</h2></legend></div>
                   <?php $i = 1;if(isset($temp[1][4])){ foreach ($temp[1][4] as $k => $v) {?>
+                    <?php if((!isset($jest)) && (strpos($v['name'],'M.2')!=0)){?>
+                      <div style="padding:1%;">
+                        <label class="Pamiec_M2" for="control">Dysk M.2</label>
+                        <input id="control" type="checkbox" style="display:block; font-size:0.8vw;" name="Pamiec_M2">
+                      </div>
+                    <?php $jest=1;  } ?>
                     <div>
-                      <input type="radio" id="<?php echo '4-'.$i.'i';?>" name="Pamiec" value="<?php echo $v['price']; ?>" <?php if($i == 1){echo 'checked';}?>>
+                      <input type="radio" id="<?php echo '4-'.$i.'i';?>" name="<?php if(strpos($v['name'],'M.2')!=0){echo "Pamiec2";}else{echo "Pamiec";}?>" value="<?php echo $v['price']; ?>" <?php if($i == 1){echo 'checked';}?>>
                       <label for="<?php echo '4-'.$i.'i';?>" data-score="<?php echo $v['score'];?>"><?php echo $v['name'];?></label>
                     </div>
                   <?php $i++;}?>
@@ -334,6 +336,18 @@
                     <input type="checkbox" id="5-5i" name="Optional" value="<?php echo $temp[1][5][62]['price']; ?>">
                     <label for="5-5i"><?php echo $temp[1][5][62]['name']; ?></label>
                   </div>
+                  <div>
+                    <input type="checkbox" id="5-6i" name="Optional" value="<?php echo $temp[1][5][123]['price']; ?>">
+                    <label for="5-6i"><?php echo $temp[1][5][123]['name']; ?></label>
+                  </div>
+                  <div>
+                    <input type="checkbox" id="5-7i" name="Optional" value="<?php echo $temp[1][5][124]['price']; ?>">
+                    <label for="5-7i"><?php echo $temp[1][5][124]['name']; ?></label>
+                  </div>
+                  <div>
+                    <input type="checkbox" id="5-8i" name="Optional" value="<?php echo $temp[1][5][127]['price']; ?>">
+                    <label for="5-8i"><?php echo $temp[1][5][127]['name']; ?></label>
+                  </div>
                   <!--<div>
                     <input type="checkbox" id="5-6i" name="Grafika" value="0">
                     <label for="5-6i">Wi-Fi + Bluetooth</label>
@@ -359,7 +373,6 @@
                     <?php }}?>
                   </select>
                 </fieldset>
-                <div id="separator_i_m_1" style="margin-top:31.4%;"></div>
                 <!-- RAM -->
                 <fieldset id="RAM">
                   <div><legend><h2>Pamięc RAM</h2></legend></div>
@@ -373,18 +386,31 @@
                 <fieldset id="Pamiec">
                   <div><legend><h2>Pamięc masowa</h2></legend></div>
                   <select class="select_mobile" name="Pamiec">
-                    <?php if(isset($temp[1][4])){foreach ($temp[1][4] as $k => $v) {?>
-                      <option data-score="<?php echo $v['score'];?>" value="<?php echo $v['price'];?>"><?php echo $v['name'];?></option>
-                    <?php }}?>
-                  </select>
-                  <div>
+                    <?php $countt=0; if(isset($temp[1][4])){foreach ($temp[1][4] as $k => $v) {?>
+                      <?php if(strpos($v['name'],'M.2')==0){?>
+                        <option data-score="<?php echo $v['score'];?>" value="<?php echo $v['price'];?>"><?php echo $v['name'];?></option>
+                      <?php }else{
+                        if(!isset($jest2)){ ?>
+                        </select>
+                      <?php $jest2=1; } if(!isset($jestt)){?>
+                        <div style="padding:2%; margin:8% 0%;">
+                          <label class="Pamiec_M2 PM" for="control">Dysk M.2</label>
+                          <input id="control_mobile" type="checkbox" style="margin:1.8% 0 0 0; display:none; font-size:0.8vw;" name="Pamiec_M2">
+                        </div>
+                      <?php $jestt=1;  } ?>
+                      <?php if(!isset($jest3)){?>
+                      <select class="select_mobile" name="Pamiec2">
+                      <?php $jest3=1;?><option value="0"> -- Wybierz Dysk M.2 -- </option> <?php } ?>
+                        <option data-score="<?php echo $v['score'];?>" value="<?php echo $v['price'];?>"><?php echo $v['name'];?></option>
+                      <?php if($countt==count($temp[1][4])){ ?>
+                      </select>
+                    <?php }} ?>
+                  <?php } $countt++; } ?>
                     <input class="mobile_check" type="checkbox" id="5-2i" name="Optional" value="<?php echo $temp[1][5][81]['price']; ?>">
                     <label class="mobile_label" for="5-2i"><?php echo $temp[1][5][81]['name']; ?></label>
-                  </div>
                 </fieldset>
-                <div id="separator_i_m_2" style="margin-top:26.8%;"></div>
                 <!-- Dodatki -->
-                <fieldset id="Optional">
+                <fieldset style="display:none;" class="Optional_iron_m" id="Optional">
                   <div><legend><h2>Dodatki</h2></legend></div>
                     <input class="mobile_check" type="checkbox" id="5-1i" name="Optional" value="<?php echo $temp[1][5][61]['price']; ?>">
                     <label class="mobile_label" for="5-1i"><?php echo $temp[1][5][61]['name']; ?></label>
@@ -398,6 +424,12 @@
                   </div>-->
                     <input class="mobile_check" type="checkbox" id="5-5i" name="Optional" value="<?php echo $temp[1][5][62]['price']; ?>">
                     <label class="mobile_label" for="5-5i"><?php echo $temp[1][5][62]['name']; ?></label>
+                    <input class="mobile_check" type="checkbox" id="5-6i" name="Optional" value="<?php echo $temp[1][5][123]['price']; ?>">
+                    <label class="mobile_label" for="5-6i"><?php echo $temp[1][5][123]['name']; ?></label>
+                    <input class="mobile_check" type="checkbox" id="5-7i" name="Optional" value="<?php echo $temp[1][5][124]['price']; ?>">
+                    <label class="mobile_label" for="5-7i"><?php echo $temp[1][5][124]['name']; ?></label>
+                    <input class="mobile_check" type="checkbox" id="5-8i" name="Optional" value="<?php echo $temp[1][5][127]['price']; ?>">
+                    <label class="mobile_label" for="5-8i"><?php echo $temp[1][5][127]['name']; ?></label>
                   <!--<div>
                     <input type="checkbox" id="5-6i" name="Grafika" value="0">
                     <label for="5-6i">Wi-Fi + Bluetooth</label>
@@ -407,15 +439,15 @@
           </div>
         </div>
         <!-- END iroN config -->
-      <?php}else{?>
+      <?php }else{?>
         <!-- START iroN Tower config -->
-        <div class="container hide" id="iroNt">
+        <div class="container" id="iroNt">
           <div class="title"><h2 class="title"><?php echo $temp2[1][6]['name']; ?></h2></div>
             <div class="container_top it" id="iroNt_thumb">
                 <div class="container_img img_i">
                   <img class="" id="iroN_tower" src="img/<?php echo $temp2[1][6]['image'];?>" alt="">
                 </div>
-              <h3 class="price" data-price="<?php echo $temp2[1][6]['org_price']; ?>" id="mac_priceiroNt"><?php echo $temp2[1][6]['org_price']; ?> zł</h3>
+              <h3 class="price" data-price="<?php echo $temp2[1][6]['org_price']; ?>" id="mac_priceiroN"><?php echo $temp2[1][6]['org_price']; ?> zł</h3>
             </div>
           <div class="container_form form_i it">
             <form class="iroN" method="post">
@@ -543,10 +575,6 @@
                     <?php
                   }
                 }?>
-                <div>
-                  <input type="checkbox" value="0">
-                  <label class="placeholder">a</label>
-                </div>
                 <?php
               }
                 ?>
@@ -616,8 +644,14 @@
                 <fieldset id="Pamiec">
                   <div><legend><h2>Pamięc masowa</h2></legend></div>
                   <?php $i = 1;if(isset($temp[6][4])){ foreach ($temp[6][4] as $k => $v) {?>
+                    <?php if((!isset($jest)) && (strpos($v['name'],'M.2')!=0)){?>
+                      <div style="padding:1%;">
+                        <label class="Pamiec_M2" for="control">Dysk M.2</label>
+                        <input id="control" type="checkbox" style="display:block; font-size:0.8vw;" name="Pamiec_M2">
+                      </div>
+                    <?php $jest=1;  } ?>
                     <div>
-                      <input type="radio" id="<?php echo '4-'.$i.'it';?>" name="Pamiec" value="<?php echo $v['price']; ?>" <?php if($i == 1){echo 'checked';}?>>
+                      <input type="radio" id="<?php echo '4-'.$i.'it';?>" name="<?php if(strpos($v['name'],'M.2')!=0){echo "Pamiec2";}else{echo "Pamiec";}?>" value="<?php echo $v['price']; ?>" <?php if($i == 1){echo 'checked';}?>>
                       <label for="<?php echo '4-'.$i.'it';?>" data-score="<?php echo $v['score'];?>"><?php echo $v['name'];?></label>
                     </div>
                   <?php $i++;}?>
@@ -626,13 +660,6 @@
                     <label class="mobile_label" for="5-2i"><?php echo $temp[6][5][82]['name']; ?></label>
                   </div>
                   <div>
-                    <input type="checkbox" value="0">
-                    <label class="placeholder">a</label>
-                  </div>
-                  <div>
-                    <input type="checkbox" value="0">
-                    <label class="placeholder">a</label>
-                  </div>
                   <?php
                   $m_p_t[3] = 0;
                   $im_t[3] = 0;
@@ -713,6 +740,18 @@
                     <input type="checkbox" id="5-6i" name="Grafika" value="0">
                     <label for="5-6i">Wi-Fi + Bluetooth</label>
                   </div>-->
+                  <div>
+                    <input type="checkbox" id="5-6it" name="Optional" value="<?php echo $temp[6][5][125]['price']; ?>">
+                    <label for="5-6it"><?php echo $temp[6][5][125]['name']; ?></label>
+                  </div>
+                  <div>
+                    <input type="checkbox" id="5-7it" name="Optional" value="<?php echo $temp[6][5][126]['price']; ?>">
+                    <label for="5-7it"><?php echo $temp[6][5][126]['name']; ?></label>
+                  </div>
+                  <div>
+                    <input type="checkbox" id="5-8it" name="Optional" value="<?php echo $temp[6][5][128]['price']; ?>">
+                    <label for="5-8it"><?php echo $temp[6][5][128]['name']; ?></label>
+                  </div>
               </fieldset>
             </form>
             <form class="iroN_mobile" action="index.html" method="post">
@@ -734,7 +773,6 @@
                     <?php }}?>
                   </select>
                 </fieldset>
-                <div id="separator_i_m_1" style="margin-top:31.4%;"></div>
                 <!-- RAM -->
                 <fieldset id="RAM">
                   <div><legend><h2>Pamięc RAM</h2></legend></div>
@@ -748,18 +786,31 @@
                 <fieldset id="Pamiec">
                   <div><legend><h2>Pamięc masowa</h2></legend></div>
                   <select class="select_mobile" name="Pamiec">
-                    <?php if(isset($temp[6][4])){foreach ($temp[6][4] as $k => $v) {?>
-                      <option data-score="<?php echo $v['score'];?>" value="<?php echo $v['price'];?>"><?php echo $v['name'];?></option>
-                    <?php }}?>
-                  </select>
-                  <div>
-                    <input class="mobile_check" type="checkbox" id="5-2it" name="Optional" value="<?php echo $temp[6][5][82]['price']; ?>">
-                    <label class="mobile_label" for="5-2it"><?php echo $temp[6][5][82]['name']; ?></label>
-                  </div>
+                    <?php $counttt=0; if(isset($temp[6][4])){foreach ($temp[6][4] as $k => $v) {?>
+                      <?php if(strpos($v['name'],'M.2')==0){?>
+                        <option data-score="<?php echo $v['score'];?>" value="<?php echo $v['price'];?>"><?php echo $v['name'];?></option>
+                      <?php }else{
+                        if(!isset($jestt2)){ ?>
+                        </select>
+                      <?php $jestt2=1; } if(!isset($jesttt)){?>
+                        <div style="padding:2%; margin:8% 0%;">
+                          <label class="Pamiec_M2 PM" for="control">Dysk M.2</label>
+                          <input id="control_mobile" type="checkbox" style="margin:1.8% 0 0 0; display:none; font-size:0.8vw;" name="Pamiec_M2">
+                        </div>
+                      <?php $jesttt=1;  } ?>
+                      <?php if(!isset($jestt3)){?>
+                      <select class="select_mobile" name="Pamiec2">
+                      <?php $jestt3=1;?> <option value="0"> -- Wybierz Dysk M.2 -- </option> <?php } ?>
+                        <option data-score="<?php echo $v['score'];?>" value="<?php echo $v['price'];?>"><?php echo $v['name'];?></option>
+                      <?php if($counttt==count($temp[6][4])){ ?>
+                      </select>
+                    <?php }} ?>
+                  <?php }$counttt++;}?>
+                  <input class="mobile_check" type="checkbox" id="5-2it" name="Optional" value="<?php echo $temp[6][5][82]['price']; ?>">
+                  <label class="mobile_label" for="5-2it"><?php echo $temp[6][5][82]['name']; ?></label>
                 </fieldset>
-                <div id="separator_i_m_2" style="margin-top:26.8%;"></div>
                 <!-- Dodatki -->
-                <fieldset id="Optional">
+                <fieldset class="Optional_iron_m" style="display:none;" id="Optional">
                   <div><legend><h2>Dodatki</h2></legend></div>
                     <input class="mobile_check" type="checkbox" id="5-1it" name="Optional" value="<?php echo $temp[6][5][79]['price']; ?>">
                     <label class="mobile_label" for="5-1it"><?php echo $temp[6][5][79]['name']; ?></label>
@@ -773,6 +824,12 @@
                   </div>-->
                     <input class="mobile_check" type="checkbox" id="5-5it" name="Optional" value="<?php echo $temp[6][5][80]['price']; ?>">
                     <label class="mobile_label" for="5-5it"><?php echo $temp[6][5][80]['name']; ?> </label>
+                    <input class="mobile_check" type="checkbox" id="5-6it" name="Optional" value="<?php echo $temp[6][5][125]['price']; ?>">
+                    <label class="mobile_label" for="5-6it"><?php echo $temp[6][5][125]['name']; ?></label>
+                    <input class="mobile_check" type="checkbox" id="5-7it" name="Optional" value="<?php echo $temp[6][5][126]['price']; ?>">
+                    <label class="mobile_label" for="5-7it"><?php echo $temp[6][5][126]['name']; ?></label>
+                    <input class="mobile_check" type="checkbox" id="5-8it" name="Optional" value="<?php echo $temp[6][5][128]['price']; ?>">
+                    <label class="mobile_label" for="5-8it"><?php echo $temp[6][5][128]['name']; ?></label>
                   <!--<div>
                     <input type="checkbox" id="5-6i" name="Grafika" value="0">
                     <label for="5-6i">Wi-Fi + Bluetooth</label>
@@ -789,15 +846,15 @@
           <div id="mac_cont" class="container_top M">
             <div class="container_img img_M">
               <img class="" id="Mac_thumb" src="img/<?php echo $temp2[2][2]['image']; ?>" alt="">
-              <img class="image hide music_card M" src="img/karta_muzyczna.png" alt="">
-              <img class="image hard_drive hide drive_1 M" src="img/dysk.png" alt="">
-              <img class="image hard_drive hide drive_2 M" src="img/dysk.png" alt="">
-              <img class="image hard_drive hide drive_3 M" src="img/dysk.png" alt="">
-              <img class="image hard_drive hide drive_4 M" src="img/dysk.png" alt="">
-              <img class="image hide g-drive M" src="img/G-drive.png" alt="">
-              <img class="image hide rx580 M" src="img/eGPU RX580.png" alt="">
-              <img class="image kable hide kable_1 M" src="img/kable.png" alt="">
-              <img class="image kable hide kable_2 M" src="img/Kable.png" alt="">
+              <img class="image hide music_card M" src="img/karta_muzyczna — Mac_Pro.png" alt="">
+              <img class="image hard_drive hide drive_1 M" src="img/dysk — Mac_Pro.png" alt="">
+              <img class="image hard_drive hide drive_2 M" src="img/dysk — Mac_Pro.png" alt="">
+              <img class="image hard_drive hide drive_3 M" src="img/dysk — Mac_Pro.png" alt="">
+              <img class="image hard_drive hide drive_4 M" src="img/dysk — Mac_Pro.png" alt="">
+              <img class="image hide g-drive M" src="img/G-drive — Mac_Pro.png" alt="">
+              <img class="image hide rx580 M" src="img/eGPU RX580 — Mac_Pro.png" alt="">
+              <img class="image kable hide kable_1 M" src="img/kable — Mac_Pro.png" alt="">
+              <img class="image kable hide kable_2 M" src="img/Kable — Mac_Pro.png" alt="">
             </div>
             <h3 class="price" data-price="<?php echo $temp2[2][2]['org_price']; ?>" id="mac_priceM"><?php echo $temp2[2][2]['org_price']; ?> zł</h3>
           </div>
@@ -819,7 +876,7 @@
                     if(count($temp[1][1]) > (count($temp[2][1]))){
                       $x = (count($temp[1][1]) - count($temp[2][1])) + $im[0] + $m_m[0]+$im_p[0];
                     }
-                    elseif(count($temp[1][1]) == (count($temp[2][1]))){
+                    elseif(count($temp[1][1]) <= (count($temp[2][1]))){
                       $x = $im[0] + $m_m[0]+$im_p[0];
                     }
                       for ($i=1; $i<=$x ; $i++) {?>
@@ -834,7 +891,7 @@
                       if(count($temp[6][1]) > (count($temp[2][1]))){
                         $x = (count($temp[6][1]) - count($temp[2][1])) + $im_t[0] + $m_m_t[0]+$im_p_t[0];
                       }
-                      elseif(count($temp[6][1]) == (count($temp[2][1]))){
+                      elseif(count($temp[6][1]) <= (count($temp[2][1]))){
                         $x = $im_t[0] + $m_m_t[0]+$im_p_t[0];
                       }
                         for ($i=1; $i<=$x ; $i++) {?>
@@ -851,21 +908,17 @@
                   <div><legend><h2>Karta Graficzna</h2></legend></div>
                   <?php $i = 1; if(isset($temp[2][2])){foreach ($temp[2][2] as $k => $v) {?>
                     <div>
-                      <input type="radio" id="<?php echo '2-'.$i;?>" name="Grafika" value="<?php echo $v['price']; ?>" <?php if($i == 1){echo 'checked';}?>>
+                      <input type="radio" data-name="<?php echo $v['name'];?>" id="<?php echo '2-'.$i;?>" name="Grafika" value="<?php echo $v['price']; ?>" <?php if($i == 1){echo 'checked';}?>>
                       <label for="<?php echo '2-'.$i;?>" data-score="<?php echo $v['score'];?>"><?php echo $v['name'];?></label>
                     </div>
                   <?php $i++;}?>
-                  <div>
-                    <input type="checkbox" id="5-4M" name="Optional_mac" value="<?php echo $temp[2][5][63]['price']; ?>">
-                    <label for="5-4M"><?php echo $temp[2][5][63]['name']; ?></label>
-                  </div>
                   <?php
                   if($_GET['id']>=1){
                     $x = 0;
                     if(count($temp[1][2]) > (count($temp[2][2]))){
                       $x = (count($temp[1][2]) - count($temp[2][2])) + $im[1] + $m_m[1]+$im_p[1];
                     }
-                    elseif(count($temp[1][2]) == (count($temp[2][2]))){
+                    elseif(count($temp[1][2]) <= (count($temp[2][2]))){
                       $x = $im[1] + $m_m[1]+$im_p[1];
                     }
                       for ($i=1; $i<=$x ; $i++) {?>
@@ -876,10 +929,10 @@
                         <?php
                       }}else{
                         $x = 0;
-                        if(count($temp[6][2]) > (count($temp[2][1]))){
-                          $x = (count($temp[6][2]) - count($temp[2][1])) + $im_t[1] + $m_m_t[1]+$im_p_t[1];
+                        if(count($temp[6][2]) > (count($temp[2][2]))){
+                          $x = (count($temp[6][2]) - count($temp[2][2])) + $im_t[1] + $m_m_t[1]+$im_p_t[1];
                         }
-                        elseif(count($temp[6][2]) == (count($temp[2][1]))){
+                        elseif(count($temp[6][2]) <= (count($temp[2][2]))){
                           $x = $im_t[1] + $m_m_t[1]+$im_p_t[1];
                         }
                           for ($i=1; $i<=$x ; $i++) {?>
@@ -907,7 +960,7 @@
                     if(count($temp[1][3]) > (count($temp[2][3]))){
                       $x = (count($temp[1][3]) - count($temp[2][3])) + $im[2] + $m_m[2]+$im_p[2];
                     }
-                    elseif(count($temp[1][3]) == (count($temp[2][3]))){
+                    elseif(count($temp[1][3]) <= (count($temp[2][3]))){
                       $x = $im[2] + $m_m[2]+$im_p[2];
                     }
                       for ($i=1; $i<=$x ; $i++) {?>
@@ -921,7 +974,7 @@
                         if(count($temp[6][3]) > (count($temp[2][3]))){
                           $x = (count($temp[6][3]) - count($temp[2][3])) + $im_t[2] + $m_m_t[2]+$im_p_t[2];
                         }
-                        elseif(count($temp[6][3]) == (count($temp[2][3]))){
+                        elseif(count($temp[6][3]) <= (count($temp[2][3]))){
                           $x = $im_t[2] + $m_m_t[2]+$im_p_t[2];
                         }
                           for ($i=1; $i<=$x ; $i++) {?>
@@ -959,13 +1012,14 @@
                     <input type="checkbox" id="5-3M" name="Optional_mac" value="<?php echo $temp[2][5][65]['price']; ?>">
                     <label for="5-3M"><?php echo $temp[2][5][65]['name']; ?></label>
                   </div>
+                  <div style="margin-bottom:17%;"></div>
                   <?php
                   if($_GET['id']>=1){
                     $x = 0;
                     if(count($temp[1][4]) > (count($temp[2][4]))){
                       $x = (count($temp[1][4]) - count($temp[2][4])) + $im[3] + $m_m[3]+$im_p[3];
                     }
-                    elseif(count($temp[1][4]) == (count($temp[2][4]))){
+                    elseif(count($temp[1][4]) <= (count($temp[2][4]))){
                       $x = $im[3] + $m_m[3]+$im_p[3];
                     }
                       for ($i=1; $i<=$x ; $i++) {?>
@@ -979,7 +1033,7 @@
                         if(count($temp[6][4]) > (count($temp[2][4]))){
                           $x = (count($temp[6][4]) - count($temp[2][4])) + $im_t[3] + $m_m_t[3]+$im_p_t[3];
                         }
-                        elseif(count($temp[6][4]) == (count($temp[2][4]))){
+                        elseif(count($temp[6][4]) <= (count($temp[2][4]))){
                           $x = $im_t[3] + $m_m_t[3]+$im_p_t[3];
                         }
                           for ($i=1; $i<=$x ; $i++) {?>
@@ -991,6 +1045,7 @@
                           }
                       }
                     }?>
+
                 </fieldset>
                 <!-- Dodatki -->
                 <fieldset id="Optional_mac">
@@ -1017,11 +1072,9 @@
                   <div><legend><h2>Karta Graficzna</h2></legend></div>
                   <select class="select_mobile" name="Grafika">
                     <?php if(isset($temp[2][2])){foreach ($temp[2][2] as $k => $v) {?>
-                      <option data-score="<?php echo $v['score'];?>" value="<?php echo $v['price'];?>"><?php echo $v['name'];?></option>
+                      <option data-name="<?php echo $v['name'];?>" data-score="<?php echo $v['score'];?>" value="<?php echo $v['price'];?>"><?php echo $v['name'];?></option>
                     <?php }}?>
                   </select>
-                  <input class="mobile_check" type="checkbox" id="5-4M_m" name="Optional_mac" value="<?php echo $temp[2][5][63]['price']; ?>">
-                  <label class="mobile_label hide" for="5-4M_m"><?php echo $temp[2][5][63]['name']; ?></label>
                 </fieldset>
                 <!-- RAM -->
                 <fieldset id="RAM_mobile">
@@ -1056,6 +1109,7 @@
                     <input type="checkbox" id="5-3M" name="Optional_mac" value="<?php echo $temp[2][5][65]['price']; ?>">
                     <label for="5-3M"><?php echo $temp[2][5][65]['name']; ?></label>
                   </div>
+                  <div style="margin-bottom:21%;"></div>
                 </fieldset>
                 <!-- Dodatki -->
                 <fieldset id="Optional">
@@ -1087,15 +1141,15 @@
             <div class="container_top">
               <div class="container_img">
                 <img class="" id="iMac_thumb" src="img/<?php echo $temp2[2][3]['image']; ?>" alt="">
-                <img class="image hide music_card MiM iM" src="img/karta_muzyczna.png" alt="">
-                <img class="image hard_drive hide drive_1 DiM iM" src="img/dysk.png" alt="">
-                <img class="image hard_drive hide drive_2 iM" src="img/dysk.png" alt="">
-                <img class="image hard_drive hide drive_3 iM" src="img/dysk.png" alt="">
-                <img class="image hard_drive hide drive_4 iM" src="img/dysk.png" alt="">
-                <img class="image hide g-drive giM iM" src="img/G-drive.png" alt="">
-                <img class="image hide rx580 iMrx iM" src="img/eGPU RX580.png" alt="">
-                <img class="image kable hide kable_1 kiM iM" src="img/kable.png" alt="">
-                <img class="image kable hide kable_2 k2iM iM" src="img/Kable.png" alt="">
+                <img class="image hide music_card MiM iM" src="img/karta_muzyczna — iMac.png" alt="">
+                <img class="image hard_drive hide drive_1 DiM iM" src="img/dysk — iMac.png" alt="">
+                <img class="image hard_drive hide drive_2 iM" src="img/dysk — iMac.png" alt="">
+                <img class="image hard_drive hide drive_3 iM" src="img/dysk — iMac.png" alt="">
+                <img class="image hard_drive hide drive_4 iM" src="img/dysk — iMac.png" alt="">
+                <img class="image hide g-drive giM iM" src="img/G-drive — iMac.png" alt="">
+                <img class="image hide rx580 iMrx iM" src="img/eGPU RX580 — iMac.png" alt="">
+                <img class="image kable hide kable_1 kiM iM" src="img/kable — iMac.png" alt="">
+                <img class="image kable hide kable_2 k2iM iM" src="img/Kable — iMac.png" alt="">
               </div>
               <h3 class="price" data-price="<?php echo $temp2[2][3]['org_price']; ?>" id="mac_priceiM"><?php echo $temp2[2][3]['org_price']; ?> zł</h3>
             </div>
@@ -1148,14 +1202,10 @@
                     <div><legend><h2>Karta Graficzna</h2></legend></div>
                     <?php $i = 1; if(isset($temp[3][2])){foreach ($temp[3][2] as $k => $v) {?>
                       <div>
-                        <input type="radio" id="<?php echo '2-'.$i.'iM';?>" name="Grafika" value="<?php echo $v['price']; ?>" <?php if($i == 1){echo 'checked';}?>>
+                        <input type="radio" data-name="<?php echo $v['name'];?>" id="<?php echo '2-'.$i.'iM';?>" name="Grafika" value="<?php echo $v['price']; ?>" <?php if($i == 1){echo 'checked';}?>>
                         <label for="<?php echo '2-'.$i.'iM';?>" data-score="<?php echo $v['score'];?>"><?php echo $v['name'];?></label>
                       </div>
                     <?php $i++;}?>
-                    <div>
-                      <input type="checkbox" id="5-4iM" name="Optional_mac" value="<?php echo $temp[3][5][67]['price']; ?>">
-                      <label for="5-4iM"><?php echo $temp[3][5][67]['name']; ?></label>
-                    </div>
                     <?php
                     if($_GET['id']>=1){
                       $x = 0;
@@ -1262,6 +1312,7 @@
                       <input type="checkbox" id="5-3iM" name="Optional_mac" value="<?php echo $temp[3][5][69]['price']; ?>">
                       <label for="5-3iM"><?php echo $temp[3][5][69]['name']; ?></label>
                     </div>
+                    <div style="margin-bottom:17%;"></div>
                     <?php
                     if($_GET['id']>=1){
                       $x = 0;
@@ -1322,8 +1373,6 @@
                         <option data-score="<?php echo $v['score'];?>" value="<?php echo $v['price'];?>"><?php echo $v['name'];?></option>
                       <?php }}?>
                     </select>
-                    <input class="mobile_check" type="checkbox" id="5-4iM" name="Optional_mac" value="<?php echo $temp[3][5][67]['price']; ?>">
-                    <label class="mobile_label" for="5-4iM"><?php echo $temp[3][5][67]['name']; ?></label>
                   </fieldset>
                   <!-- RAM -->
                   <fieldset id="RAM_mobile">
@@ -1358,6 +1407,7 @@
                       <input type="checkbox" id="5-3iM" name="Optional_mac" value="<?php echo $temp[3][5][69]['price']; ?>">
                       <label for="5-3iM"><?php echo $temp[3][5][69]['name']; ?></label>
                     </div>
+                    <div style="margin-bottom:21%;"></div>
                   </fieldset>
                   <!-- Dodatki -->
                   <fieldset id="Optional">
@@ -1390,15 +1440,15 @@
           <div class="container_top">
             <div class="container_img">
               <img class="" id="iMac_pro_thumb" src="img/<?php echo $temp2[2][5]['image']; ?>" alt="">
-              <img class="image hide music_card MiM iMP" src="img/karta_muzyczna.png" alt="">
-              <img class="image hard_drive hide drive_1 DiM iMP" src="img/dysk.png" alt="">
-              <img class="image hard_drive hide drive_2 iMP" src="img/dysk.png" alt="">
-              <img class="image hard_drive hide drive_3 iMP" src="img/dysk.png" alt="">
-              <img class="image hard_drive hide drive_4 iMP" src="img/dysk.png" alt="">
-              <img class="image hide g-drive giM iMP" src="img/G-drive.png" alt="">
-              <img class="image hide rx580 iMrx iMP" src="img/eGPU RX580.png" alt="">
-              <img class="image kable hide kable_1 kiM iMP" src="img/kable.png" alt="">
-              <img class="image kable hide kable_2 k2iM iMP" src="img/Kable.png" alt="">
+              <img class="image hide music_card MiM iMP" src="img/karta_muzyczna — iMac_Pro.png" alt="">
+              <img class="image hard_drive hide drive_1 DiM iMP" src="img/dysk — iMac_Pro.png" alt="">
+              <img class="image hard_drive hide drive_2 iMP" src="img/dysk — iMac_Pro.png" alt="">
+              <img class="image hard_drive hide drive_3 iMP" src="img/dysk — iMac_Pro.png" alt="">
+              <img class="image hard_drive hide drive_4 iMP" src="img/dysk — iMac_Pro.png" alt="">
+              <img class="image hide g-drive giM iMP" src="img/G-drive — iMac_Pro.png" alt="">
+              <img class="image hide rx580 iMrx iMP" src="img/eGPU RX580 — iMac_Pro.png" alt="">
+              <img class="image kable hide kable_1 kiM iMP" src="img/kable — iMac_Pro.png" alt="">
+              <img class="image kable hide kable_2 k2iM iMP" src="img/Kable — iMac_Pro.png" alt="">
             </div>
             <h3 class="price" data-price="<?php echo $temp2[2][5]['org_price']; ?>" id="mac_priceiMP"><?php echo $temp2[2][5]['org_price']; ?> zł</h3>
           </div>
@@ -1451,14 +1501,10 @@
                   <div><legend><h2>Karta Graficzna</h2></legend></div>
                   <?php $i = 1; if(isset($temp[5][2])){foreach ($temp[5][2] as $k => $v) {?>
                     <div>
-                      <input type="radio" id="<?php echo '2-'.$i.'iMP';?>" name="Grafika" value="<?php echo $v['price']; ?>" <?php if($i == 1){echo 'checked';}?>>
+                      <input type="radio" data-name="<?php echo $v['name'];?>" id="<?php echo '2-'.$i.'iMP';?>" name="Grafika" value="<?php echo $v['price']; ?>" <?php if($i == 1){echo 'checked';}?>>
                       <label for="<?php echo '2-'.$i.'iMP';?>" data-score="<?php echo $v['score'];?>"><?php echo $v['name'];?></label>
                     </div>
                   <?php $i++;}?>
-                  <div>
-                    <input type="checkbox" id="5-4iMP" name="Optional_mac" value="<?php echo $temp[5][5][75]['price']; ?>">
-                    <label for="5-4iMP"><?php echo $temp[5][5][75]['name']; ?></label>
-                  </div>
                   <?php
                   if($_GET['id']>=1){
                     $x = 0;
@@ -1565,6 +1611,7 @@
                     <input type="checkbox" id="5-3iMP" name="Optional_mac" value="<?php echo $temp[5][5][77]['price']; ?>">
                     <label for="5-3iMP"><?php echo $temp[5][5][77]['name']; ?></label>
                   </div>
+                  <div style="margin-bottom:17%;"></div>
                   <?php
                   if($_GET['id']>=1){
                     $x = 0;
@@ -1611,7 +1658,7 @@
               <!-- PROCESORY -->
                 <fieldset id="PROCESORY_mobile">
                   <div><legend><h2>Procesor</h2></legend></div>
-                  <select class="select_mobile" name="ProcesoriMP">
+                  <select class="select_mobile" name="Procesor">
                     <?php if(isset($temp[5][1])){foreach ($temp[5][1] as $k => $v) {?>
                       <option data-score="<?php echo $v['score'];?>" value="<?php echo $v['price'];?>"><?php echo $v['name'];?></option>
                     <?php }}?>
@@ -1625,8 +1672,6 @@
                       <option data-score="<?php echo $v['score'];?>" value="<?php echo $v['price'];?>"><?php echo $v['name'];?></option>
                     <?php }}?>
                   </select>
-                  <input class="mobile_check" type="checkbox" id="5-4iMP_m" name="Optional_mac" value="<?php echo $temp[5][5][75]['price']; ?>">
-                  <label class="mobile_label" for="5-4iMP_m"><?php echo $temp[5][5][75]['name']; ?></label>
                 </fieldset>
                 <!-- RAM -->
                 <fieldset id="RAM_mobile">
@@ -1661,6 +1706,7 @@
                     <input type="checkbox" id="5-3iMP_m" name="Optional_mac" value="<?php echo $temp[5][5][77]['price']; ?>">
                     <label for="5-3iMP_m"><?php echo $temp[5][5][77]['name']; ?></label>
                   </div>
+                  <div style="margin-bottom:21%;"></div>
                 </fieldset>
                 <!-- Dodatki -->
                 <fieldset id="Optional">
@@ -1693,15 +1739,15 @@
             <div class="container_top">
               <div class="container_img">
                 <img class="" id="Mac-mini_thumb" src="img/<?php echo $temp2[2][4]['image']; ?>" alt="">
-                <img class="image hide music_card MMm Mm" src="img/karta_muzyczna.png" alt="">
-                <img class="image hard_drive hide drive_1 DMm Mm" src="img/dysk.png" alt="">
-                <img class="image hard_drive hide drive_2 Mm" src="img/dysk.png" alt="">
-                <img class="image hard_drive hide drive_3 Mm" src="img/dysk.png" alt="">
-                <img class="image hard_drive hide drive_4 Mm" src="img/dysk.png" alt="">
-                <img class="image hide g-drive gMm Mm" src="img/G-drive.png" alt="">
-                <img class="image hide rx580 Mmrx Mm" src="img/eGPU RX580.png" alt="">
-                <img class="image kable hide kable_1 kMm Mm" src="img/kable.png" alt="">
-                <img class="image kable hide kable_2 k2Mm Mm" src="img/Kable.png" alt="">
+                <img class="image hide music_card MMm Mm" src="img/karta_muzyczna — Mac_mini.png" alt="">
+                <img class="image hard_drive hide drive_1 DMm Mm" src="img/dysk — Mac_mini.png" alt="">
+                <img class="image hard_drive hide drive_2 Mm" src="img/dysk — Mac_mini.png" alt="">
+                <img class="image hard_drive hide drive_3 Mm" src="img/dysk — Mac_mini.png" alt="">
+                <img class="image hard_drive hide drive_4 Mm" src="img/dysk — Mac_mini.png" alt="">
+                <img class="image hide g-drive gMm Mm" src="img/G-drive — Mac_mini.png" alt="">
+                <img class="image hide rx580 Mmrx Mm" src="img/eGPU RX580 — Mac_mini.png" alt="">
+                <img class="image kable hide kable_1 kMm Mm" src="img/kable — Mac_mini.png" alt="">
+                <img class="image kable hide kable_2 k2Mm Mm" src="img/Kable — Mac_mini.png" alt="">
               </div>
               <h3 class="price" data-price="<?php echo $temp2[2][4]['org_price']; ?>" id="mac_priceMm"><?php echo $temp2[2][4]['org_price']; ?> zł</h3>
             </div>
@@ -1754,14 +1800,10 @@
                   <div><legend><h2>Karta Graficzna</h2></legend></div>
                   <?php $i = 1; if(isset($temp[4][2])){foreach ($temp[4][2] as $k => $v) {?>
                     <div>
-                      <input type="radio" id="<?php echo '2-'.$i.'Mm';?>" name="Grafika" value="<?php echo $v['price']; ?>" <?php if($i == 1){echo 'checked';}?>>
+                      <input type="radio" data-name="<?php echo $v['name'];?>" id="<?php echo '2-'.$i.'Mm';?>" name="Grafika" value="<?php echo $v['price']; ?>" <?php if($i == 1){echo 'checked';}?>>
                       <label for="<?php echo '2-'.$i.'Mm';?>" data-score="<?php echo $v['score'];?>"><?php echo $v['name'];?></label>
                     </div>
                   <?php $i++;}?>
-                  <div>
-                    <input type="checkbox" id="5-4Mm" name="Optional_mac" value="<?php echo $temp[4][5][71]['price']; ?>">
-                    <label for="5-4Mm"><?php echo $temp[4][5][71]['name']; ?></label>
-                  </div>
                   <?php
                   if($_GET['id']>=1){
                     $x = 0;
@@ -1862,6 +1904,7 @@
                     <input type="checkbox" id="5-3Mm" name="Optional_mac" value="<?php echo $temp[4][5][73]['price']; ?>">
                     <label for="5-3Mm"><?php echo $temp[4][5][73]['name']; ?></label>
                   </div>
+                  <div style="margin-bottom:17%;"></div>
                   <?php
                   if($_GET['id']>=1){
                     $x = 0;
@@ -1923,8 +1966,6 @@
                           <option data-score="<?php echo $v['score'];?>" value="<?php echo $v['price'];?>"><?php echo $v['name'];?></option>
                         <?php }}?>
                       </select>
-                      <input class="mobile_check" type="checkbox" id="5-4Mm" name="Optional_mac" value="<?php echo $temp[4][5][71]['price']; ?>">
-                      <label class="mobile_label" for="5-4Mm"><?php echo $temp[4][5][71]['name']; ?></label>
                     </fieldset>
                     <!-- RAM -->
                     <fieldset id="RAM_mobile">
@@ -1961,6 +2002,7 @@
                         <input type="checkbox" id="5-3Mm" name="Optional_mac" value="<?php echo $temp[4][5][73]['price']; ?>">
                         <label for="5-3Mm"><?php echo $temp[4][5][73]['name']; ?></label>
                       </div>
+                      <div style="margin-bottom:21%;"></div>
                     </fieldset>
                     <!-- Dodatki -->
                     <fieldset id="Optional">
