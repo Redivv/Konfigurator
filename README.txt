@@ -1,6 +1,6 @@
 ﻿Instrukcja instalacji konfiguratora:
 
-1. Należy utworzyć nową bądź dołaczyć do już instniejącej bazy danych plik config.sql. Tutaj znajdują się wszystkie wprowadzone już zmiany oraz tabele
+1. Należy utworzyć nową bądź dołaczyć do już istniejącej bazy danych plik config.sql. Tutaj znajdują się wszystkie wprowadzone już zmiany oraz tabele
 pozwalające na dalszą edycję.
 
 2. Dane logowania do bazy należy uzupełnić w pliku db_conn znajdującym się w folderze php_files. Sam folder musi być na tym samym poziomie co index oraz admin.php
