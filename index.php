@@ -2,7 +2,7 @@
   <?php
   include ('php_files/db_conn.php');
   if(!isset($_GET['id'])){$_GET['id']=1;}
-  $query = "";
+  $query = "SELECT * FROM parts";
   $result = mysqli_query($conn,$query);
   $temp = array();
   while($row = mysqli_fetch_assoc($result)){
@@ -10,7 +10,7 @@
     $temp[$row['fieldset_id']][$row['type_id']][$row['id']]['price'] = $row['price'];
     $temp[$row['fieldset_id']][$row['type_id']][$row['id']]['score'] = $row['score'];
   }
-  $query = "";
+  $query = "SELECT * FROM forms";
   $result = mysqli_query($conn,$query);
   while($row = mysqli_fetch_assoc($result)){
     $temp2[$row['field']][$row['id']]['name'] = $row['name'];
