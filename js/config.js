@@ -16,6 +16,7 @@ var priceiMP = [0,0,0,0,0,0];
 var priceMm = [0,0,0,0,0,0];
 var org_priceiroN = $('#mac_priceiroN').data('price');
 var org_priceiroNt = $('#mac_priceiroNt').data('price');
+var org_priceiroNt = $('#mac_priceiroNm').data('price');
 var org_priceM = $('#mac_priceM').data('price');
 var org_priceiM = $('#mac_priceiM').data('price');
 var org_priceMm = $('#mac_priceMm').data('price');
@@ -57,6 +58,12 @@ function main() {
   $('#iroNt input[type=checkbox]').on('click',function(){
     calc_price('iroN',this);
   });
+  $('#iroNm input[type=radio]').on('click',function(){
+    calc_price('iroN',this);
+  });
+  $('#iroNm input[type=checkbox]').on('click',function(){
+    calc_price('iroN',this);
+  });
   $('.mac_form input[type=radio]').on('click',function(){
     calc_price(active_tab,this);
   });
@@ -95,6 +102,7 @@ function chart() {
       // draws it.
       var iroN_proc = [$('label[for=1-1i]').html(),$('label[for=1-1i]').data('score')];
       if(!iroN_proc[0]){iroN_proc = [$('label[for=1-1it]').html(),$('label[for=1-1it]').data('score')]}
+      if(!iroN_proc[0]){iroN_proc = [$('label[for=1-1im]').html(),$('label[for=1-1im]').data('score')]}
       $('.iroN input[name=Procesor] + label').on('click',function(){
          iroN_proc [0] = $(this).html();
          iroN_proc [1] = $(this).data('score');

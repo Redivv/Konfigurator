@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.3
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Mar 17, 2019 at 07:37 PM
--- Server version: 10.1.35-MariaDB
--- PHP Version: 7.2.9
+-- Host: localhost
+-- Czas generowania: 10 Paź 2019, 23:49
+-- Wersja serwera: 10.1.39-MariaDB
+-- Wersja PHP: 7.3.5
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,13 +19,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `config`
+-- Baza danych: `config`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `forms`
+-- Struktura tabeli dla tabeli `forms`
 --
 
 CREATE TABLE `forms` (
@@ -37,7 +37,7 @@ CREATE TABLE `forms` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
 
 --
--- Dumping data for table `forms`
+-- Zrzut danych tabeli `forms`
 --
 
 INSERT INTO `forms` (`id`, `name`, `field`, `org_price`, `image`) VALUES
@@ -46,12 +46,13 @@ INSERT INTO `forms` (`id`, `name`, `field`, `org_price`, `image`) VALUES
 (3, 'iMac', '2', '7460', 'imac.png'),
 (4, 'Mac Mini', '2', '5910', 'mac_mini.png'),
 (5, 'iMac Pro', '2', '23999', 'imac_pro.png'),
-(6, 'iroN Tower', '1', '8500', 'iron_tower.png');
+(6, 'iroN Tower', '1', '8500', 'iron_tower.png'),
+(7, 'iroN Mini', '1', '4000', 'iron_mini.png');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `parts`
+-- Struktura tabeli dla tabeli `parts`
 --
 
 CREATE TABLE `parts` (
@@ -65,7 +66,7 @@ CREATE TABLE `parts` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
 
 --
--- Dumping data for table `parts`
+-- Zrzut danych tabeli `parts`
 --
 
 INSERT INTO `parts` (`id`, `name`, `field_id`, `type_id`, `fieldset_id`, `price`, `score`) VALUES
@@ -80,9 +81,9 @@ INSERT INTO `parts` (`id`, `name`, `field_id`, `type_id`, `fieldset_id`, `price`
 (9, '16 GB', 1, 3, 1, '0', 'Wynik GeekBench'),
 (10, '32 GB', 1, 3, 1, '650', 'Wynik GeekBench'),
 (11, '64 GB', 1, 3, 1, '2050', 'Wynik GeekBench'),
-(13, '500 GB SSD', 1, 4, 1, '0', 'Wynik GeekBench'),
-(14, '1 TB SSD', 1, 4, 1, '700', 'Wynik GeekBench'),
-(15, '2 TB SSD', 1, 4, 1, '1600', 'Wynik GeekBench'),
+(13, '500 GB  M.2', 1, 4, 1, '0', 'Wynik GeekBench'),
+(14, '1 TB SSD M.2', 1, 4, 1, '700', 'Wynik GeekBench'),
+(15, '2 TB SSD M.2', 1, 4, 1, '1600', 'Wynik GeekBench'),
 (16, '6-core Xeon 3,5 GHz', 2, 1, 2, '0', '17874'),
 (17, '8-core Xeon 3,0 GHz', 2, 1, 2, '3740', '22833'),
 (18, '12-core Xeon 2,7 GHz', 2, 1, 2, '9500', '26261'),
@@ -118,7 +119,7 @@ INSERT INTO `parts` (`id`, `name`, `field_id`, `type_id`, `fieldset_id`, `price`
 (53, '8-core i9 3.6 GHz', 0, 1, 6, '0', '35000'),
 (54, 'RX 560', 0, 2, 6, '0', 'Wynik GeekBench'),
 (55, '32GB', 0, 3, 6, '0', 'Wynik GeekBench'),
-(56, 'SSD 500GB', 0, 4, 6, '0', 'Wynik GeekBench'),
+(56, 'SSD 500GB M.2', 0, 4, 6, '0', 'Wynik GeekBench'),
 (57, '8-core 3.2 GHz', 0, 1, 5, '0', '30527'),
 (58, 'Vega 56', 0, 2, 5, '0', 'Wynik GeekBench'),
 (59, '32GB', 0, 3, 5, '0', 'Wynik GeekBench'),
@@ -151,11 +152,11 @@ INSERT INTO `parts` (`id`, `name`, `field_id`, `type_id`, `fieldset_id`, `price`
 (86, 'Vega 56', 0, 2, 6, '1000', 'Wynik GeekBench'),
 (87, '64GB', 0, 3, 6, '1600', 'Wynik GeekBench'),
 (88, '128GB', 0, 3, 6, '4800', 'Wynik GeekBench'),
-(89, 'SSD 1TB', 0, 4, 6, '700', 'Wynik GeekBench'),
-(90, 'SSD 2TB', 0, 4, 6, '1600', 'Wynik GeekBench'),
+(89, 'SSD 1TB M.2', 0, 4, 6, '700', 'Wynik GeekBench'),
+(90, 'SSD 2TB M.2', 0, 4, 6, '1600', 'Wynik GeekBench'),
 (91, '10-core 3.0 GHz', 0, 1, 5, '3840', '35201'),
 (92, 'RX580', 0, 2, 1, '1200', 'Wynik GeekBench'),
-(93, '4 TB SSD', 0, 4, 1, '3400', 'Wynik GeekBench'),
+(93, '4 TB SSD M.2', 0, 4, 1, '3400', 'Wynik GeekBench'),
 (94, 'RX580', 0, 2, 2, '2890', 'Wynik GeekBench'),
 (95, 'RX Vega 56', 0, 2, 2, '5890', 'Wynik GeekBench'),
 (96, 'RX 580', 0, 2, 3, '2890', 'Wynik GeekBench'),
@@ -164,16 +165,16 @@ INSERT INTO `parts` (`id`, `name`, `field_id`, `type_id`, `fieldset_id`, `price`
 (99, 'RX Vega 56', 0, 2, 4, '4800', 'Wynik GeekBench'),
 (100, '14-core i9 3.1 GHz', 0, 1, 6, '2900', '48369'),
 (101, '16-core i9 2.8 GHz', 0, 1, 6, '3900', '50000'),
-(102, '500 GB SSD M.2', 0, 4, 1, '530', 'Wynik GeekBench'),
-(103, '1TB SSD M.2', 0, 4, 1, '1050', 'Wynik GeekBench'),
-(104, '2TB SSD M.2', 0, 4, 1, '2200', 'Wynik GeekBench'),
+(102, '500 GB SSD', 0, 4, 1, '530', 'Wynik GeekBench'),
+(103, '1TB SSD', 0, 4, 1, '1050', 'Wynik GeekBench'),
+(104, '2TB SSD', 0, 4, 1, '2200', 'Wynik GeekBench'),
 (106, '18-core i9 2.6 GHz', 0, 1, 6, '8000', '51319'),
 (108, 'Vega 64', 0, 2, 6, '1500', 'Wynik GeekBench'),
 (110, 'GTX 1080TI', 0, 2, 6, '3400', 'Wynik GeekBench'),
-(111, 'SSD 4TB', 0, 4, 6, '3400', 'Wynik GeekBench'),
-(112, 'SSD 500GB M.2', 0, 4, 6, '530', 'Wynik GeekBench'),
-(113, 'SSD 1TB M.2', 0, 4, 6, '1050', 'Wynik GeekBench'),
-(114, 'SSD 2TB M.2', 0, 4, 6, '2200', 'Wynik GeekBench'),
+(111, 'SSD 4TB M.2', 0, 4, 6, '3400', 'Wynik GeekBench'),
+(112, 'SSD 500GB', 0, 4, 6, '530', 'Wynik GeekBench'),
+(113, 'SSD 1TB', 0, 4, 6, '1050', 'Wynik GeekBench'),
+(114, 'SSD 2TB', 0, 4, 6, '2200', 'Wynik GeekBench'),
 (115, '14-core 2.5 GHz', 0, 1, 5, '7680', '40538'),
 (116, '18-core 2.3 GHz', 0, 1, 5, '11520', '46712'),
 (117, 'Vega 64', 0, 2, 5, '2880', 'Wynik GeekBench'),
@@ -186,20 +187,31 @@ INSERT INTO `parts` (`id`, `name`, `field_id`, `type_id`, `fieldset_id`, `price`
 (125, 'Monitor 4K', 1, 5, 6, '0', '-'),
 (126, 'Monitor 5K', 1, 5, 6, '0', '-'),
 (127, 'WiFi + Bluetooth', 1, 5, 1, '0', '-'),
-(128, 'WiFi + Bluetooth', 1, 5, 6, '0', '-');
+(128, 'WiFi + Bluetooth', 1, 5, 6, '0', '-'),
+(130, 'Grafika', 0, 2, 7, '0', 'Wynik GeekBench'),
+(131, 'Ram', 0, 3, 7, '0', 'Wynik GeekBench'),
+(132, 'PamiÄ™Ä‡ M.2', 0, 4, 7, '0', 'Wynik GeekBench'),
+(133, 'Procesor', 0, 1, 7, '0', '1000'),
+(134, 'Karta muzyczna PCIe', 0, 5, 7, '0', '-'),
+(135, 'Kontroler Thunderbolt 3', 0, 5, 7, '0', '-'),
+(136, 'Monitor 4K', 0, 5, 7, '0', '-'),
+(137, 'Monitor 5K', 0, 5, 7, '0', '-'),
+(138, 'WiFi + Bluetooth', 0, 5, 7, '0', '-'),
+(139, 'Dysk HDD 4TB', 0, 5, 7, '0', '-'),
+(144, 'PamiÄ™Ä‡', 0, 4, 7, '500', 'Wynik GeekBench');
 
 --
--- Indexes for dumped tables
+-- Indeksy dla zrzutów tabel
 --
 
 --
--- Indexes for table `forms`
+-- Indeksy dla tabeli `forms`
 --
 ALTER TABLE `forms`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `parts`
+-- Indeksy dla tabeli `parts`
 --
 ALTER TABLE `parts`
   ADD PRIMARY KEY (`id`);
@@ -209,16 +221,16 @@ ALTER TABLE `parts`
 --
 
 --
--- AUTO_INCREMENT for table `forms`
+-- AUTO_INCREMENT dla tabeli `forms`
 --
 ALTER TABLE `forms`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- AUTO_INCREMENT for table `parts`
+-- AUTO_INCREMENT dla tabeli `parts`
 --
 ALTER TABLE `parts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=129;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=145;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

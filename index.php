@@ -29,18 +29,21 @@
     <div class="note">
       <span>Poniższe ceny nie przedstawiają rzeczywistej oferty sklepu, a jedynie szacunkowe wartości pozwalające porównać produkty.</span>
     </div>
-    <section class="tabs">
-      <a href="?id=1"><button id="btn_i" class="iroN_btn <?php if($_GET['id']>=1){echo "active_btn";} ?>" type="button" name="i"><?php echo $temp2[1][1]['name']; ?></button></a>
+    <a href="admin.php">Kek</a>
+    <section class="tabs left">
+      <a href="?id=1"><button id="btn_i" class="iroN_btn <?php if($_GET['id']==1){echo "active_btn";} ?>" type="button" name="i"><?php echo $temp2[1][1]['name']; ?></button></a>
       <a href="?id=0"><button id="btn_it" class="iroN_btn <?php if($_GET['id']<1){echo "active_btn";} ?>" type="button" name="it"><?php echo $temp2[1][6]['name']; ?></button></a>
+      <a href="?id=2"><button id="btn_im" class="iroN_btn <?php if($_GET['id']>=2){echo "active_btn";} ?>" type="button" name="im"><?php echo $temp2[1][7]['name']; ?></button></a>
     </section>
-    <section class="tabs">
+    <section class="tabs right">
       <button id="btn_M" class="mac_btn active_btn" type="button" name="M"><?php echo $temp2[2][2]['name']; ?></button>
       <button id="btn_iM" class="mac_btn" type="button" name="iM"><?php echo $temp2[2][3]['name']; ?></button>
       <button id="btn_iMP" class="mac_btn" type="button" name="iMP"><?php echo $temp2[2][5]['name']; ?></button>
       <button id="btn_Mm" class="mac_btn" type="button" name="Mm"><?php echo $temp2[2][4]['name']; ?></button>
     </section>
+    <div class="clearfix"></div>
     <section class="config">
-    <?php if($_GET['id']>=1){?>
+    <?php if($_GET['id']==1){?>
       <!-- START iroN config -->
         <div class="container" id="iroN">
           <div class="title"><h2 class="title"><?php echo $temp2[1][1]['name']; ?></h2></div>
@@ -439,7 +442,7 @@
           </div>
         </div>
         <!-- END iroN config -->
-      <?php }else{?>
+      <?php }elseif($_GET['id'] <= 0 ){?>
         <!-- START iroN Tower config -->
         <div class="container" id="iroNt">
           <div class="title"><h2 class="title"><?php echo $temp2[1][6]['name']; ?></h2></div>
@@ -839,6 +842,406 @@
           </div>
         </div>
         <!-- END iroN Tower config -->
+      <?php }else{?>
+      <!-- START iroN Mini config -->
+      <div class="container" id="iroNm">
+          <div class="title"><h2 class="title"><?php echo $temp2[1][7]['name']; ?></h2></div>
+            <div class="container_top im" id="iroNm_thumb">
+                <div class="container_img img_i">
+                  <img class="" id="iroN_mini" src="img/<?php echo $temp2[1][7]['image'];?>" alt="">
+                </div>
+              <h3 class="price" data-price="<?php echo $temp2[1][7]['org_price']; ?>" id="mac_priceiroN"><?php echo $temp2[1][7]['org_price']; ?> zł</h3>
+            </div>
+          <div class="container_form form_i im">
+            <form class="iroN" method="post">
+              <!-- PROCESORY -->
+              <fieldset id="PROCESORY">
+                <div><legend><h2>Procesor</h2></legend></div>
+                <?php $i = 1; if(isset($temp[7][1])){ foreach ($temp[7][1] as $k => $v) {?>
+                  <div>
+                    <input type="radio" id="<?php echo '1-'.$i.'im';?>" name="Procesor" value="<?php echo $v['price']; ?>" <?php if($i == 1){echo 'checked';}?>>
+                    <label for="<?php echo '1-'.$i.'im';?>" data-score="<?php echo $v['score'];?>"><?php echo $v['name'];?></label>
+                  </div>
+                <?php $i++;}?>
+                <?php
+                $m_p_m = array();
+                $m_p_m[0] = 0;
+                $im_m = array();
+                $im_m[0] = 0;
+                $im_p_m = array();
+                $im_p_m[0] = 0;
+                $m_m_m = array();
+                $m_m_m[0] = 0;
+                $placeh_m = array();
+                if(count($temp[7][1]) < (count($temp[2][1]))){
+                  $x =count($temp[2][1]) - count($temp[7][1]);
+                  for ($i=1; $i<=$x ; $i++) {
+                    $m_p_m[0] = $i;?>
+                    <div>
+                      <input type="checkbox" value="0">
+                      <label class="placeholder">a</label>
+                    </div>
+                    <?php
+                  }
+                }
+                if(count($temp[7][1]) < (count($temp[3][1]))){
+                  $x =count($temp[3][1]) - count($temp[7][1]);
+                  for ($i=1; $i<=$x ; $i++) {
+                    $im_m[0] = $i;?>
+                    <div>
+                      <input type="checkbox" value="0">
+                      <label class="placeholder">a</label>
+                    </div>
+                    <?php
+                  }
+                }
+                if(count($temp[7][1]) < (count($temp[4][1]))){
+                  $x =count($temp[4][1]) - count($temp[7][1]);
+                  for ($i=1; $i<=$x ; $i++) {
+                    $m_m_m[0] = $i;?>
+                    <div>
+                      <input type="checkbox" value="0">
+                      <label class="placeholder">a</label>
+                    </div>
+                    <?php
+                  }
+                }
+                if(count($temp[7][1]) < (count($temp[5][1]))){
+                  $x =count($temp[5][1]) - count($temp[7][1]);
+                  for ($i=1; $i<=$x ; $i++) {
+                    $im_p_m[0] = $i;?>
+                    <div>
+                      <input type="checkbox" value="0">
+                      <label class="placeholder">a</label>
+                    </div>
+                    <?php
+                  }
+                }
+              }
+                ?>
+              </fieldset>
+              <!-- KARTY GRAFICZNE -->
+              <fieldset id="Grafika">
+                <div><legend><h2>Karta Graficzna</h2></legend></div>
+                <?php $i = 1; if(isset($temp[7][2])){foreach ($temp[7][2] as $k => $v) {?>
+                  <div>
+                    <input type="radio" id="<?php echo '2-'.$i.'im';?>" name="Grafika" value="<?php echo $v['price']; ?>" <?php if($i == 1){echo 'checked';}?>>
+                    <label for="<?php echo '2-'.$i.'im';?>" data-score="<?php echo $v['score'];?>"><?php echo $v['name'];?></label>
+                  </div>
+                <?php $i++;}?>
+                <?php
+                $m_p_m[1] = 0;
+                $im_m[1] = 0;
+                $m_m_m[1] = 0;
+                $im_p_m[1] = 0;
+                if(count($temp[7][2]) < (count($temp[2][2]))){
+                  $x =count($temp[2][2]) - count($temp[7][2]);
+                  for ($i=1; $i<=$x ; $i++) {
+                    $m_p_m[1] = $i;?>
+                    <div>
+                      <input type="checkbox" value="0">
+                      <label class="placeholder">a</label>
+                    </div>
+                    <?php
+                  }
+                }
+                if(count($temp[7][2]) < (count($temp[3][2]))){
+                  $x =count($temp[3][2]) - count($temp[7][2]);
+                  for ($i=1; $i<=$x ; $i++) {
+                    $im_m[1] = $i;?>
+                    <div>
+                      <input type="checkbox" value="0">
+                      <label class="placeholder">a</label>
+                    </div>
+                    <?php
+                  }
+                }
+                if(count($temp[7][2]) < (count($temp[4][2]))){
+                  $x =count($temp[4][2]) - count($temp[7][2]);
+                  for ($i=1; $i<=$x ; $i++) {
+                    $m_m_m[1] = $i;?>
+                    <div>
+                      <input type="checkbox" value="0">
+                      <label class="placeholder">a</label>
+                    </div>
+                    <?php
+                  }
+                }
+                if(count($temp[7][2]) < (count($temp[5][2]))){
+                  $x =count($temp[5][2]) - count($temp[7][2]);
+                  for ($i=1; $i<=$x ; $i++) {
+                    $im_p_m[1] = $i;?>
+                    <div>
+                      <input type="checkbox" value="0">
+                      <label class="placeholder">a</label>
+                    </div>
+                    <?php
+                  }
+                }?>
+                <?php
+              }
+                ?>
+              </fieldset>
+              <!-- RAM -->
+              <fieldset id="RAM">
+                <div><legend><h2>Pamięc RAM</h2></legend></div>
+                <?php $i = 1; if(isset($temp[7][3])){foreach ($temp[7][3] as $k => $v) {?>
+                  <div>
+                    <input type="radio" id="<?php echo '3-'.$i.'im';?>" name="RAM" value="<?php echo $v['price']; ?>" <?php if($i == 1){echo 'checked';}?>>
+                    <label for="<?php echo '3-'.$i.'im';?>" data-score="<?php echo $v['score'];?>"><?php echo $v['name'];?></label>
+                  </div>
+                <?php $i++;}?>
+                <?php
+                $m_p_m[2] = 0;
+                $im_m[2] = 0;
+                $m_m_m[2] = 0;
+                $im_p_m[2] = 0;
+                if(count($temp[7][3]) < (count($temp[2][3]))){
+                  $x =count($temp[2][3]) - count($temp[7][3]);
+                  for ($i=1; $i<=$x ; $i++) {
+                    $m_p_m[2] = $i;?>
+                    <div>
+                      <input type="checkbox" value="0">
+                      <label class="placeholder">a</label>
+                    </div>
+                    <?php
+                  }
+                }
+                if(count($temp[7][3]) < (count($temp[3][3]))){
+                  $x = count($temp[3][3]) - count($temp[7][3]);
+                  for ($i=1; $i<=$x ; $i++) {
+                    $im_m[2] = $i;?>
+                    <div>
+                      <input type="checkbox" value="0">
+                      <label class="placeholder">a</label>
+                    </div>
+                    <?php
+                  }
+                }
+                if(count($temp[7][3]) < (count($temp[4][3]))){
+                  $x = count($temp[4][3]) - count($temp[7][3]);
+                  for ($i=1; $i<=$x ; $i++) {
+                    $m_m_m[2] = $i;?>
+                    <div>
+                      <input type="checkbox" value="0">
+                      <label class="placeholder">a</label>
+                    </div>
+                    <?php
+                  }
+                }
+                if(count($temp[7][3]) < (count($temp[5][3]))){
+                  $x =count($temp[5][3]) - count($temp[7][3]);
+                  for ($i=1; $i<=$x ; $i++) {
+                    $im_p_m[2] = $i;?>
+                    <div>
+                      <input type="checkbox" value="0">
+                      <label class="placeholder">a</label>
+                    </div>
+                    <?php
+                  }
+                }
+              }
+                ?>
+              </fieldset>
+                <!-- Pamięc masowa -->
+                <fieldset id="Pamiec">
+                  <div><legend><h2>Pamięc masowa</h2></legend></div>
+                  <?php $i = 1;if(isset($temp[7][4])){ foreach ($temp[7][4] as $k => $v) {?>
+                    <?php if((!isset($jest)) && (strpos($v['name'],'M.2')!=0)){?>
+                      <div style="padding:1%;">
+                        <label class="Pamiec_M2" for="control">Dysk M.2</label>
+                        <input id="control" type="checkbox" style="display:block; font-size:0.8vw;" name="Pamiec_M2">
+                      </div>
+                    <?php $jest=1;  } ?>
+                    <div>
+                      <input type="radio" id="<?php echo '4-'.$i.'im';?>" name="<?php if(strpos($v['name'],'M.2')!=0){echo "Pamiec2";}else{echo "Pamiec";}?>" value="<?php echo $v['price']; ?>" <?php if($i == 1){echo 'checked';}?>>
+                      <label for="<?php echo '4-'.$i.'im';?>" data-score="<?php echo $v['score'];?>"><?php echo $v['name'];?></label>
+                    </div>
+                  <?php $i++;}?>
+                  <div>
+                    <input class="mobile_check" type="checkbox" id="5-2i" name="Optional" value="<?php echo $temp[7][5][139]['price']; ?>">
+                    <label class="mobile_label" for="5-2i"><?php echo $temp[7][5][139]['name']; ?></label>
+                  </div>
+                  <div>
+                  <?php
+                  $m_p_m[3] = 0;
+                  $im_m[3] = 0;
+                  $m_m_m[3] = 0;
+                  $im_p_m[3] = 0;
+                  if(count($temp[7][4]) < (count($temp[2][4]))){
+                    $x = count($temp[2][4]) - count($temp[7][4]);
+                    for ($i=1; $i<=$x ; $i++) {
+                      $m_p_m[3] = $i;?>
+                      <div>
+                        <input type="checkbox" value="0">
+                      </div>
+                      <label class="placeholder">a</label>
+                      <?php
+                    }
+                  }
+                  if(count($temp[7][4]) < (count($temp[3][4]))){
+                    $x = count($temp[3][4]) - count($temp[7][4]);
+                    for ($i=1; $i<=$x ; $i++) {
+                      $im_m[3] = $i;?>
+                      <div>
+                        <input type="checkbox" value="0">
+                        <label class="placeholder">a</label>
+                      </div>
+                      <?php
+                    }
+                  }
+                  if(count($temp[7][4]) < (count($temp[4][4]))){
+                    $x = count($temp[4][4]) - count($temp[7][4]);
+                    for ($i=1; $i<=$x ; $i++) {
+                      $m_m_m[3] = $i;?>
+                      <div>
+                        <input type="checkbox" value="0">
+                        <label class="placeholder">a</label>
+                      </div>
+                      <?php
+                    }
+                  }
+                  if(count($temp[7][4]) < (count($temp[5][4]))){
+                    $x =count($temp[5][4]) - count($temp[7][4]);
+                    for ($i=1; $i<=$x ; $i++) {
+                      $im_p_m[3] = $i;?>
+                      <div>
+                        <input type="checkbox" value="0">
+                        <label class="placeholder">a</label>
+                      </div>
+                      <?php
+                    }
+                  }?>
+                  <div>
+                    <input type="checkbox" value="0">
+                    <label class="placeholder">a</label>
+                  </div>
+                  <?php
+                }
+                  ?>
+                </fieldset>
+                <!-- Dodatki -->
+                <fieldset id="Optional">
+                  <div><legend><h2>Dodatki</h2></legend></div>
+                  <div>
+                    <input type="checkbox" id="5-1im" name="Optional" value="<?php echo $temp[7][5][134]['price']; ?>">
+                    <label for="5-1im"><?php echo $temp[7][5][134]['name']; ?></label>
+                  </div>
+                  <!--<div>
+                    <input type="checkbox" id="5-3i" name="Grafika" value="0">
+                    <label for="5-3i">Dodatkowy Dysk SSD 2.5'</label>
+                  </div>
+                  <div>
+                    <input type="checkbox" id="5-4i" name="Grafika" value="0">
+                    <label for="5-4i">Dodatkowy Dysk SSD M.2'</label>
+                  </div>-->
+                  <div>
+                    <input type="checkbox" id="5-5im" name="Optional" value="<?php echo $temp[7][5][135]['price']; ?>">
+                    <label for="5-5im"><?php echo $temp[7][5][135]['name']; ?></label>
+                  </div>
+                  <!--<div>
+                    <input type="checkbox" id="5-6i" name="Grafika" value="0">
+                    <label for="5-6i">Wi-Fi + Bluetooth</label>
+                  </div>-->
+                  <div>
+                    <input type="checkbox" id="5-6im" name="Optional" value="<?php echo $temp[7][5][136]['price']; ?>">
+                    <label for="5-6im"><?php echo $temp[7][5][136]['name']; ?></label>
+                  </div>
+                  <div>
+                    <input type="checkbox" id="5-7im" name="Optional" value="<?php echo $temp[7][5][137]['price']; ?>">
+                    <label for="5-7im"><?php echo $temp[7][5][137]['name']; ?></label>
+                  </div>
+                  <div>
+                    <input type="checkbox" id="5-8im" name="Optional" value="<?php echo $temp[7][5][138]['price']; ?>">
+                    <label for="5-8im"><?php echo $temp[7][5][138]['name']; ?></label>
+                  </div>
+              </fieldset>
+            </form>
+            <form class="iroN_mobile" action="index.html" method="post">
+              <!-- PROCESORY -->
+                <fieldset id="PROCESORY_mobile">
+                  <div><legend><h2>Procesor</h2></legend></div>
+                  <select class="select_mobile" name="Procesor">
+                    <?php if(isset($temp[7][1])){foreach ($temp[7][1] as $k => $v) {?>
+                      <option data-score="<?php echo $v['score'];?>" value="<?php echo $v['price'];?>"><?php echo $v['name'];?></option>
+                    <?php }}?>
+                  </select>
+                </fieldset>
+                <!-- KARTY GRAFICZNE -->
+                <fieldset id="Grafika">
+                  <div><legend><h2>Karta Graficzna</h2></legend></div>
+                  <select class="select_mobile" name="Grafika">
+                    <?php if(isset($temp[7][2])){foreach ($temp[7][2] as $k => $v) {?>
+                      <option data-score="<?php echo $v['score'];?>" value="<?php echo $v['price'];?>"><?php echo $v['name'];?></option>
+                    <?php }}?>
+                  </select>
+                </fieldset>
+                <!-- RAM -->
+                <fieldset id="RAM">
+                  <div><legend><h2>Pamięc RAM</h2></legend></div>
+                  <select class="select_mobile" name="RAM">
+                    <?php if(isset($temp[7][3])){foreach ($temp[7][3] as $k => $v) {?>
+                      <option data-score="<?php echo $v['score'];?>" value="<?php echo $v['price'];?>"><?php echo $v['name'];?></option>
+                    <?php }}?>
+                  </select>
+                </fieldset>
+                <!-- Pamięc masowa -->
+                <fieldset id="Pamiec">
+                  <div><legend><h2>Pamięc masowa</h2></legend></div>
+                  <select class="select_mobile" name="Pamiec">
+                    <?php $counttt=0; if(isset($temp[7][4])){foreach ($temp[7][4] as $k => $v) {?>
+                      <?php if(strpos($v['name'],'M.2')==0){?>
+                        <option data-score="<?php echo $v['score'];?>" value="<?php echo $v['price'];?>"><?php echo $v['name'];?></option>
+                      <?php }else{
+                        if(!isset($jestt2)){ ?>
+                        </select>
+                      <?php $jestt2=1; } if(!isset($jesttt)){?>
+                        <div style="padding:2%; margin:8% 0%;">
+                          <label class="Pamiec_M2 PM" for="control">Dysk M.2</label>
+                          <input id="control_mobile" type="checkbox" style="margin:1.8% 0 0 0; display:none; font-size:0.8vw;" name="Pamiec_M2">
+                        </div>
+                      <?php $jesttt=1;  } ?>
+                      <?php if(!isset($jestt3)){?>
+                      <select class="select_mobile" name="Pamiec2">
+                      <?php $jestt3=1;?> <option value="0"> -- Wybierz Dysk M.2 -- </option> <?php } ?>
+                        <option data-score="<?php echo $v['score'];?>" value="<?php echo $v['price'];?>"><?php echo $v['name'];?></option>
+                      <?php if($counttt==count($temp[7][4])){ ?>
+                      </select>
+                    <?php }} ?>
+                  <?php }$counttt++;}?>
+                  <input class="mobile_check" type="checkbox" id="5-2im" name="Optional" value="<?php echo $temp[7][5][139]['price']; ?>">
+                  <label class="mobile_label" for="5-2im"><?php echo $temp[7][5][139]['name']; ?></label>
+                </fieldset>
+                <!-- Dodatki -->
+                <fieldset class="Optional_iron_m" style="display:none;" id="Optional">
+                  <div><legend><h2>Dodatki</h2></legend></div>
+                    <input class="mobile_check" type="checkbox" id="5-1im" name="Optional" value="<?php echo $temp[7][5][134]['price']; ?>">
+                    <label class="mobile_label" for="5-1im"><?php echo $temp[7][5][134]['name']; ?></label>
+                  <!--<div>
+                    <input type="checkbox" id="5-3i" name="Grafika" value="0">
+                    <label for="5-3i">Dodatkowy Dysk SSD 2.5'</label>
+                  </div>
+                  <div>
+                    <input type="checkbox" id="5-4i" name="Grafika" value="0">
+                    <label for="5-4i">Dodatkowy Dysk SSD M.2'</label>
+                  </div>-->
+                    <input class="mobile_check" type="checkbox" id="5-5im" name="Optional" value="<?php echo $temp[7][5][135]['price']; ?>">
+                    <label class="mobile_label" for="5-5im"><?php echo $temp[7][5][135]['name']; ?> </label>
+                    <input class="mobile_check" type="checkbox" id="5-6im" name="Optional" value="<?php echo $temp[7][5][136]['price']; ?>">
+                    <label class="mobile_label" for="5-6im"><?php echo $temp[7][5][136]['name']; ?></label>
+                    <input class="mobile_check" type="checkbox" id="5-7im" name="Optional" value="<?php echo $temp[7][5][137]['price']; ?>">
+                    <label class="mobile_label" for="5-7mt"><?php echo $temp[7][5][137]['name']; ?></label>
+                    <input class="mobile_check" type="checkbox" id="5-8im" name="Optional" value="<?php echo $temp[7][5][138]['price']; ?>">
+                    <label class="mobile_label" for="5-8im"><?php echo $temp[7][5][138]['name']; ?></label>
+                  <!--<div>
+                    <input type="checkbox" id="5-6i" name="Grafika" value="0">
+                    <label for="5-6i">Wi-Fi + Bluetooth</label>
+                  </div>-->
+              </fieldset>
+            </form>
+          </div>
+        </div>
+        <!-- END iroN Mini config -->
       <?php }?>
       <!-- START Mac Pro config -->
         <div class="container" id="Mac_Pro">
@@ -871,7 +1274,7 @@
                     </div>
                   <?php $i++;}?>
                   <?php
-                  if($_GET['id']>=1){
+                  if($_GET['id'] == 1){
                     $x = 0;
                     if(count($temp[1][1]) > (count($temp[2][1]))){
                       $x = (count($temp[1][1]) - count($temp[2][1])) + $im[0] + $m_m[0]+$im_p[0];
@@ -885,8 +1288,7 @@
                           <label class="placeholder">a</label>
                         </div>
                         <?php
-                      }}
-                    else{
+                      }}elseif($_GET['id'] <= 0){
                       $x = 0;
                       if(count($temp[6][1]) > (count($temp[2][1]))){
                         $x = (count($temp[6][1]) - count($temp[2][1])) + $im_t[0] + $m_m_t[0]+$im_p_t[0];
@@ -900,7 +1302,21 @@
                             <label class="placeholder">a</label>
                           </div>
                           <?php
-                        }}
+                        }}else{
+                          $x = 0;
+                          if(count($temp[7][1]) > (count($temp[2][1]))){
+                            $x = (count($temp[7][1]) - count($temp[2][1])) + $im_m[0] + $m_m_m[0]+$im_p_m[0];
+                          }
+                          elseif(count($temp[7][1]) <= (count($temp[2][1]))){
+                            $x = $im_m[0] + $m_m_m[0]+$im_p_m[0];
+                          }
+                            for ($i=1; $i<=$x ; $i++) {?>
+                              <div>
+                                <input type="checkbox" value="0">
+                                <label class="placeholder">a</label>
+                              </div>
+                              <?php
+                            }}
                     }?>
                 </fieldset>
                 <!-- KARTY GRAFICZNE -->
@@ -913,7 +1329,7 @@
                     </div>
                   <?php $i++;}?>
                   <?php
-                  if($_GET['id']>=1){
+                  if($_GET['id'] == 1){
                     $x = 0;
                     if(count($temp[1][2]) > (count($temp[2][2]))){
                       $x = (count($temp[1][2]) - count($temp[2][2])) + $im[1] + $m_m[1]+$im_p[1];
@@ -927,7 +1343,7 @@
                           <label class="placeholder">a</label>
                         </div>
                         <?php
-                      }}else{
+                      }}elseif($_GET['id'] <= 0){
                         $x = 0;
                         if(count($temp[6][2]) > (count($temp[2][2]))){
                           $x = (count($temp[6][2]) - count($temp[2][2])) + $im_t[1] + $m_m_t[1]+$im_p_t[1];
@@ -941,9 +1357,24 @@
                               <label class="placeholder">a</label>
                             </div>
                             <?php
+                          }}else{
+                            $x = 0;
+                            if(count($temp[7][2]) > (count($temp[2][2]))){
+                              $x = (count($temp[7][2]) - count($temp[2][2])) + $im_m[1] + $m_m_m[1]+$im_p_m[1];
+                            }
+                            elseif(count($temp[7][2]) <= (count($temp[2][2]))){
+                              $x = $im_m[1] + $m_m_m[1]+$im_p_m[1];
+                            }
+                              for ($i=1; $i<=$x ; $i++) {?>
+                                <div>
+                                  <input type="checkbox" value="0">
+                                  <label class="placeholder">a</label>
+                                </div>
+                                <?php
+                                }
+                              }
                           }
-                      }
-                    }?>
+                      ?>
                 </fieldset>
                 <!-- RAM -->
                 <fieldset id="RAM_mac">
@@ -955,7 +1386,7 @@
                     </div>
                   <?php $i++;}?>
                   <?php
-                  if($_GET['id']>=1){
+                  if($_GET['id'] == 1){
                     $x = 0;
                     if(count($temp[1][3]) > (count($temp[2][3]))){
                       $x = (count($temp[1][3]) - count($temp[2][3])) + $im[2] + $m_m[2]+$im_p[2];
@@ -969,13 +1400,28 @@
                           <label class="placeholder">a</label>
                         </div>
                         <?php
-                      }}else{
+                      }}elseif($_GET['id'] <= 0){
                         $x = 0;
                         if(count($temp[6][3]) > (count($temp[2][3]))){
                           $x = (count($temp[6][3]) - count($temp[2][3])) + $im_t[2] + $m_m_t[2]+$im_p_t[2];
                         }
                         elseif(count($temp[6][3]) <= (count($temp[2][3]))){
                           $x = $im_t[2] + $m_m_t[2]+$im_p_t[2];
+                        }
+                          for ($i=1; $i<=$x ; $i++) {?>
+                            <div>
+                              <input type="checkbox" value="0">
+                              <label class="placeholder">a</label>
+                            </div>
+                            <?php
+                          }
+                      }else{
+                        $x = 0;
+                        if(count($temp[7][3]) > (count($temp[2][3]))){
+                          $x = (count($temp[7][3]) - count($temp[2][3])) + $im_m[2] + $m_m_m[2]+$im_p_m[2];
+                        }
+                        elseif(count($temp[7][3]) <= (count($temp[2][3]))){
+                          $x = $im_m[2] + $m_m_m[2]+$im_p_m[2];
                         }
                           for ($i=1; $i<=$x ; $i++) {?>
                             <div>
@@ -1014,7 +1460,7 @@
                   </div>
                   <div style="margin-bottom:17%;"></div>
                   <?php
-                  if($_GET['id']>=1){
+                  if($_GET['id'] == 1){
                     $x = 0;
                     if(count($temp[1][4]) > (count($temp[2][4]))){
                       $x = (count($temp[1][4]) - count($temp[2][4])) + $im[3] + $m_m[3]+$im_p[3];
@@ -1028,7 +1474,7 @@
                           <label class="placeholder">a</label>
                         </div>
                         <?php
-                      }}else{
+                      }}elseif($_GET['id'] <= 0){
                         $x = 0;
                         if(count($temp[6][4]) > (count($temp[2][4]))){
                           $x = (count($temp[6][4]) - count($temp[2][4])) + $im_t[3] + $m_m_t[3]+$im_p_t[3];
@@ -1043,6 +1489,21 @@
                             </div>
                             <?php
                           }
+                      }else{
+                        $x = 0;
+                        if(count($temp[7][4]) > (count($temp[2][4]))){
+                          $x = (count($temp[7][4]) - count($temp[2][4])) + $im_m[3] + $m_m_m[3]+$im_p_m[3];
+                        }
+                        elseif(count($temp[7][4]) <= (count($temp[2][4]))){
+                          $x = $im_m[3] + $m_m_m[3]+$im_p_m[3];
+                        }
+                          for ($i=1; $i<=$x ; $i++) {?>
+                            <div>
+                              <input type="checkbox" value="0">
+                              <label class="placeholder">a</label>
+                            </div>
+                            <?php
+                          } 
                       }
                     }?>
 
@@ -1165,12 +1626,12 @@
                       </div>
                     <?php $i++;}?>
                     <?php
-                    if($_GET['id']>=1){
+                    if($_GET['id'] == 1){
                       $x = 0;
                       if(count($temp[1][1]) > (count($temp[3][1]))){
                         $x = (count($temp[1][1]) - count($temp[3][1])) + $m_p[0] + $m_m[0]+$im_p[0];
                       }
-                      elseif(count($temp[1][1]) == (count($temp[3][1]))){
+                      elseif(count($temp[1][1]) <= (count($temp[3][1]))){
                         $x = $m_p[0] + $m_m[0]+$im_p[0];
                       }
                         for ($i=1; $i<=$x ; $i++) {?>
@@ -1179,13 +1640,28 @@
                             <label class="placeholder">a</label>
                           </div>
                           <?php
-                        }}else{
+                        }}elseif($_GET['id'] <= 0){
                           $x = 0;
                           if(count($temp[6][1]) > (count($temp[3][1]))){
                             $x = (count($temp[6][1]) - count($temp[3][1])) + $m_p_t[0] + $m_m_t[0]+$im_p_t[0];
                           }
-                          elseif(count($temp[6][1]) == (count($temp[3][1]))){
+                          elseif(count($temp[6][1]) <= (count($temp[3][1]))){
                             $x = $m_p_t[0] + $m_m_t[0]+$im_p_t[0];
+                          }
+                            for ($i=1; $i<=$x ; $i++) {?>
+                              <div>
+                                <input type="checkbox" value="0">
+                                <label class="placeholder">a</label>
+                              </div>
+                              <?php
+                            }
+                        }else{
+                          $x = 0;
+                          if(count($temp[7][1]) > (count($temp[3][1]))){
+                            $x = (count($temp[7][1]) - count($temp[3][1])) + $m_p_m[0] + $m_m_m[0]+$im_p_m[0];
+                          }
+                          elseif(count($temp[7][1]) <= (count($temp[3][1]))){
+                            $x = $m_p_m[0] + $m_m_m[0]+$im_p_m[0];
                           }
                             for ($i=1; $i<=$x ; $i++) {?>
                               <div>
@@ -1207,12 +1683,12 @@
                       </div>
                     <?php $i++;}?>
                     <?php
-                    if($_GET['id']>=1){
+                    if($_GET['id'] == 1){
                       $x = 0;
                       if(count($temp[1][2]) > (count($temp[3][2]))){
                         $x = (count($temp[1][2]) - count($temp[3][2])) + $m_p[1] + $m_m[1]+$im_p[1];
                       }
-                      elseif(count($temp[1][2]) == (count($temp[3][2]))){
+                      elseif(count($temp[1][2]) <= (count($temp[3][2]))){
                         $x = $m_p[1] + $m_m[1]+$im_p[1];
                       }
                         for ($i=1; $i<=$x ; $i++) {?>
@@ -1221,13 +1697,28 @@
                             <label class="placeholder">a</label>
                           </div>
                           <?php
-                        }}else{
+                        }}elseif($_GET['id'] <= 0){
                           $x = 0;
                           if(count($temp[6][2]) > (count($temp[3][2]))){
                             $x = (count($temp[6][2]) - count($temp[3][2])) + $m_p_t[1] + $m_m_t[1]+$im_p_t[1];
                           }
-                          elseif(count($temp[6][2]) == (count($temp[3][2]))){
+                          elseif(count($temp[6][2]) <= (count($temp[3][2]))){
                             $x = $m_p_t[1] + $m_m_t[1]+$im_p_t[1];
+                          }
+                            for ($i=1; $i<=$x ; $i++) {?>
+                              <div>
+                                <input type="checkbox" value="0">
+                                <label class="placeholder">a</label>
+                              </div>
+                              <?php
+                            }
+                        }else{
+                          $x = 0;
+                          if(count($temp[7][2]) > (count($temp[3][2]))){
+                            $x = (count($temp[7][2]) - count($temp[3][2])) + $m_p_m[1] + $m_m_m[1]+$im_p_m[1];
+                          }
+                          elseif(count($temp[7][2]) <= (count($temp[3][2]))){
+                            $x = $m_p_m[1] + $m_m_m[1]+$im_p_m[1];
                           }
                             for ($i=1; $i<=$x ; $i++) {?>
                               <div>
@@ -1249,12 +1740,12 @@
                       </div>
                     <?php $i++;}?>
                     <?php
-                    if($_GET['id']>=1){
+                    if($_GET['id'] == 1){
                       $x = 0;
                       if(count($temp[1][3]) > (count($temp[3][3]))){
                         $x = (count($temp[1][3]) - count($temp[3][3])) + $m_p[2] + $m_m[2]+$im_p[2];
                       }
-                      elseif(count($temp[1][3]) == (count($temp[3][3]))){
+                      elseif(count($temp[1][3]) <= (count($temp[3][3]))){
                         $x = $m_p[2] + $m_m[2]+$im_p[2];
                       }
                         for ($i=1; $i<=$x ; $i++) {?>
@@ -1263,13 +1754,28 @@
                             <label class="placeholder">a</label>
                           </div>
                           <?php
-                        }}else{
+                        }}elseif($_GET['id'] <= 0){
                           $x = 0;
                           if(count($temp[6][3]) > (count($temp[3][3]))){
                             $x = (count($temp[6][3]) - count($temp[3][3])) + $m_p_t[2] + $m_m_t[2]+$im_p_t[2];
                           }
-                          elseif(count($temp[6][3]) == (count($temp[3][3]))){
+                          elseif(count($temp[6][3]) <= (count($temp[3][3]))){
                             $x = $m_p_t[2] + $m_m_t[2]+$im_p_t[2];
+                          }
+                            for ($i=1; $i<=$x ; $i++) {?>
+                              <div>
+                                <input type="checkbox" value="0">
+                                <label class="placeholder">a</label>
+                              </div>
+                              <?php
+                            }
+                        }else{
+                          $x = 0;
+                          if(count($temp[7][3]) > (count($temp[3][3]))){
+                            $x = (count($temp[7][3]) - count($temp[3][3])) + $m_p_m[2] + $m_m_m[2]+$im_p_m[2];
+                          }
+                          elseif(count($temp[7][3]) <= (count($temp[3][3]))){
+                            $x = $m_p_m[2] + $m_m_m[2]+$im_p_m[2];
                           }
                             for ($i=1; $i<=$x ; $i++) {?>
                               <div>
@@ -1314,12 +1820,12 @@
                     </div>
                     <div style="margin-bottom:17%;"></div>
                     <?php
-                    if($_GET['id']>=1){
+                    if($_GET['id']==1){
                       $x = 0;
                       if(count($temp[1][4]) > (count($temp[3][4]))){
                         $x = (count($temp[1][4]) - count($temp[3][4])) + $m_p[3] + $m_m[3]+$im_p[3];
                       }
-                      elseif(count($temp[1][4]) == (count($temp[3][4]))){
+                      elseif(count($temp[1][4]) <= (count($temp[3][4]))){
                         $x = $m_p[3] + $m_m[3]+$im_p[3];
                       }
                         for ($i=1; $i<=$x ; $i++) {?>
@@ -1328,13 +1834,28 @@
                             <label class="placeholder">a</label>
                           </div>
                           <?php
-                        }}else{
+                        }}elseif($_GET['id'] <= 0){
                           $x = 0;
                           if(count($temp[6][4]) > (count($temp[3][4]))){
                             $x = (count($temp[6][4]) - count($temp[3][4])) + $m_p_t[3] + $m_m_t[3]+$im_p_t[3];
                           }
-                          elseif(count($temp[6][4]) == (count($temp[3][4]))){
+                          elseif(count($temp[6][4]) <= (count($temp[3][4]))){
                             $x = $m_p_t[3] + $m_m_t[3]+$im_p_t[3];
+                          }
+                            for ($i=1; $i<=$x ; $i++) {?>
+                              <div>
+                                <input type="checkbox" value="0">
+                                <label class="placeholder">a</label>
+                              </div>
+                              <?php
+                            }
+                        }else{
+                          $x = 0;
+                          if(count($temp[7][4]) > (count($temp[3][4]))){
+                            $x = (count($temp[7][4]) - count($temp[3][4])) + $m_p_m[3] + $m_m_m[3]+$im_p_m[3];
+                          }
+                          elseif(count($temp[7][4]) <= (count($temp[3][4]))){
+                            $x = $m_p_m[3] + $m_m_m[3]+$im_p_m[3];
                           }
                             for ($i=1; $i<=$x ; $i++) {?>
                               <div>
@@ -1464,12 +1985,12 @@
                     </div>
                   <?php $i++;}?>
                   <?php
-                  if($_GET['id']>=1){
+                  if($_GET['id']==1){
                     $x = 0;
                     if(count($temp[1][1]) > (count($temp[5][1]))){
                       $x = (count($temp[1][1]) - count($temp[5][1])) + $im[0] + $m_m[0]+$m_p[0];
                     }
-                    elseif(count($temp[1][1]) == (count($temp[5][1]))){
+                    elseif(count($temp[1][1]) <= (count($temp[5][1]))){
                       $x = $im[0] + $m_m[0]+$m_p[0];
                     }
                       for ($i=1; $i<=$x ; $i++) {?>
@@ -1478,13 +1999,28 @@
                           <label class="placeholder">a</label>
                         </div>
                         <?php
-                      }}else{
+                      }}elseif($_GET['id'] <= 0){
                         $x = 0;
                         if(count($temp[6][1]) > (count($temp[5][1]))){
                           $x = (count($temp[6][1]) - count($temp[5][1])) + $im_t[0] + $m_m_t[0]+$m_p_t[0];
                         }
-                        elseif(count($temp[6][1]) == (count($temp[5][1]))){
+                        elseif(count($temp[6][1]) <= (count($temp[5][1]))){
                           $x = $im_t[0] + $m_m_t[0]+$m_p_t[0];
+                        }
+                          for ($i=1; $i<=$x ; $i++) {?>
+                            <div>
+                              <input type="checkbox" value="0">
+                              <label class="placeholder">a</label>
+                            </div>
+                            <?php
+                          }
+                      }else{
+                        $x = 0;
+                        if(count($temp[7][1]) > (count($temp[5][1]))){
+                          $x = (count($temp[7][1]) - count($temp[5][1])) + $im_m[0] + $m_m_m[0]+$m_p_m[0];
+                        }
+                        elseif(count($temp[7][1]) <= (count($temp[5][1]))){
+                          $x = $im_m[0] + $m_m_m[0]+$m_p_m[0];
                         }
                           for ($i=1; $i<=$x ; $i++) {?>
                             <div>
@@ -1506,12 +2042,12 @@
                     </div>
                   <?php $i++;}?>
                   <?php
-                  if($_GET['id']>=1){
+                  if($_GET['id']==1){
                     $x = 0;
                     if(count($temp[1][2]) > (count($temp[5][2]))){
                       $x = (count($temp[1][2]) - count($temp[5][2])) + $im[1] + $m_m[1]+$m_p[1];
                     }
-                    elseif(count($temp[1][2]) == (count($temp[5][2]))){
+                    elseif(count($temp[1][2]) <= (count($temp[5][2]))){
                       $x = $im[1] + $m_m[1]+$m_p[1];
                     }
                       for ($i=1; $i<=$x ; $i++) {?>
@@ -1520,13 +2056,28 @@
                           <label class="placeholder">a</label>
                         </div>
                         <?php
-                      }}else{
+                      }}elseif($_GET['id'] <= 0){
                         $x = 0;
                         if(count($temp[6][2]) > (count($temp[5][2]))){
                           $x = (count($temp[6][2]) - count($temp[5][2])) + $im_t[1] + $m_m_t[1]+$m_p_t[1];
                         }
-                        elseif(count($temp[6][2]) == (count($temp[5][2]))){
+                        elseif(count($temp[6][2]) <= (count($temp[5][2]))){
                           $x = $im_t[1] + $m_m_t[1]+$m_p_t[1];
+                        }
+                          for ($i=1; $i<=$x ; $i++) {?>
+                            <div>
+                              <input type="checkbox" value="0">
+                              <label class="placeholder">a</label>
+                            </div>
+                            <?php
+                          }
+                      }else{
+                        $x = 0;
+                        if(count($temp[7][2]) > (count($temp[5][2]))){
+                          $x = (count($temp[7][2]) - count($temp[5][2])) + $im_m[1] + $m_m_m[1]+$m_p_m[1];
+                        }
+                        elseif(count($temp[7][2]) <= (count($temp[5][2]))){
+                          $x = $im_m[1] + $m_m_m[1]+$m_p_m[1];
                         }
                           for ($i=1; $i<=$x ; $i++) {?>
                             <div>
@@ -1548,12 +2099,12 @@
                     </div>
                   <?php $i++;}?>
                   <?php
-                  if($_GET['id']>=1){
+                  if($_GET['id']==1){
                     $x = 0;
                     if(count($temp[1][3]) > (count($temp[5][3]))){
                       $x = (count($temp[1][3]) - count($temp[5][3])) + $im[2] + $m_m[2]+$m_p[2];
                     }
-                    elseif(count($temp[1][3]) == (count($temp[5][3]))){
+                    elseif(count($temp[1][3]) <= (count($temp[5][3]))){
                       $x = $im[2] + $m_m[2]+$m_p[2];
                     }
                       for ($i=1; $i<=$x ; $i++) {?>
@@ -1562,13 +2113,28 @@
                           <label class="placeholder">a</label>
                         </div>
                         <?php
-                      }}else{
+                      }}elseif($_GET['id'] <= 0){
                         $x = 0;
                         if(count($temp[6][3]) > (count($temp[5][3]))){
                           $x = (count($temp[6][3]) - count($temp[5][3])) + $im_t[2] + $m_m_t[2]+$m_p_t[2];
                         }
-                        elseif(count($temp[6][3]) == (count($temp[5][3]))){
+                        elseif(count($temp[6][3]) <= (count($temp[5][3]))){
                           $x = $im_t[2] + $m_m_t[2]+$m_p_t[2];
+                        }
+                          for ($i=1; $i<=$x ; $i++) {?>
+                            <div>
+                              <input type="checkbox" value="0">
+                              <label class="placeholder">a</label>
+                            </div>
+                            <?php
+                          }
+                      }else{
+                        $x = 0;
+                        if(count($temp[7][3]) > (count($temp[5][3]))){
+                          $x = (count($temp[7][3]) - count($temp[5][3])) + $im_m[2] + $m_m_m[2]+$m_p_m[2];
+                        }
+                        elseif(count($temp[7][3]) <= (count($temp[5][3]))){
+                          $x = $im_m[2] + $m_m_m[2]+$m_p_m[2];
                         }
                           for ($i=1; $i<=$x ; $i++) {?>
                             <div>
@@ -1613,12 +2179,12 @@
                   </div>
                   <div style="margin-bottom:17%;"></div>
                   <?php
-                  if($_GET['id']>=1){
+                  if($_GET['id']==1){
                     $x = 0;
                     if(count($temp[1][4]) > (count($temp[5][4]))){
                       $x = (count($temp[1][4]) - count($temp[5][4])) + $im[3] + $m_m[3]+$m_p[3];
                     }
-                    elseif(count($temp[1][4]) == (count($temp[5][4]))){
+                    elseif(count($temp[1][4]) <= (count($temp[5][4]))){
                       $x = $im[3] + $m_m[3]+$m_p[3];
                     }
                       for ($i=1; $i<=$x ; $i++) {?>
@@ -1627,13 +2193,28 @@
                           <label class="placeholder">a</label>
                         </div>
                         <?php
-                      }}else{
+                      }}elseif($_GET['id'] <= 0){
                         $x = 0;
                         if(count($temp[6][4]) > (count($temp[5][4]))){
                           $x = (count($temp[6][4]) - count($temp[5][4])) + $im_t[3] + $m_m_t[3]+$m_p_t[3];
                         }
-                        elseif(count($temp[6][4]) == (count($temp[5][4]))){
+                        elseif(count($temp[6][4]) <= (count($temp[5][4]))){
                           $x = $im_t[3] + $m_m_t[3]+$m_p_t[3];
+                        }
+                          for ($i=1; $i<=$x ; $i++) {?>
+                            <div>
+                              <input type="checkbox" value="0">
+                              <label class="placeholder">a</label>
+                            </div>
+                            <?php
+                          }
+                      }else{
+                        $x = 0;
+                        if(count($temp[7][4]) > (count($temp[5][4]))){
+                          $x = (count($temp[7][4]) - count($temp[5][4])) + $im_m[3] + $m_m_m[3]+$m_p_m[3];
+                        }
+                        elseif(count($temp[7][4]) <= (count($temp[5][4]))){
+                          $x = $im_m[3] + $m_m_m[3]+$m_p_m[3];
                         }
                           for ($i=1; $i<=$x ; $i++) {?>
                             <div>
@@ -1763,12 +2344,12 @@
                     </div>
                   <?php $i++;}?>
                   <?php
-                  if($_GET['id']>=1){
+                  if($_GET['id']==1){
                     $x = 0;
                     if(count($temp[1][1]) > (count($temp[4][1]))){
                       $x = (count($temp[1][1]) - count($temp[4][1])) + $im[0] + $im_p[0]+$m_p[0];
                     }
-                    elseif(count($temp[1][1]) == (count($temp[4][1]))){
+                    elseif(count($temp[1][1]) <= (count($temp[4][1]))){
                       $x = $im[0] + $im_p[0]+$m_p[0];
                     }
                       for ($i=1; $i<=$x ; $i++) {?>
@@ -1777,13 +2358,28 @@
                           <label class="placeholder">a</label>
                         </div>
                         <?php
-                      }}else{
+                      }}elseif($_GET['id'] <= 0){
                         $x = 0;
                         if(count($temp[6][1]) > (count($temp[4][1]))){
                           $x = (count($temp[6][1]) - count($temp[4][1])) + $im_t[0] + $im_p_t[0]+$m_p_t[0];
                         }
-                        elseif(count($temp[6][1]) == (count($temp[4][1]))){
+                        elseif(count($temp[6][1]) <= (count($temp[4][1]))){
                           $x = $im_t[0] + $im_p_t[0]+$m_p_t[0];
+                        }
+                          for ($i=1; $i<=$x ; $i++) {?>
+                            <div>
+                              <input type="checkbox" value="0">
+                              <label class="placeholder">a</label>
+                            </div>
+                            <?php
+                          }
+                      }else{
+                        $x = 0;
+                        if(count($temp[7][1]) > (count($temp[4][1]))){
+                          $x = (count($temp[7][1]) - count($temp[4][1])) + $im_m[0] + $im_p_m[0]+$m_p_m[0];
+                        }
+                        elseif(count($temp[7][1]) <= (count($temp[4][1]))){
+                          $x = $im_m[0] + $im_p_m[0]+$m_p_m[0];
                         }
                           for ($i=1; $i<=$x ; $i++) {?>
                             <div>
@@ -1805,12 +2401,12 @@
                     </div>
                   <?php $i++;}?>
                   <?php
-                  if($_GET['id']>=1){
+                  if($_GET['id']==1){
                     $x = 0;
                     if(count($temp[1][2]) > (count($temp[4][2]))){
                       $x = (count($temp[1][2]) - count($temp[4][2])) + $im[1] + $im_p[1]+$m_p[1];
                     }
-                    elseif(count($temp[1][2]) == (count($temp[4][2]))){
+                    elseif(count($temp[1][2]) <= (count($temp[4][2]))){
                       $x = $im[1] + $im_p[1]+$m_p[1];
                     }
                       for ($i=1; $i<=$x ; $i++) {?>
@@ -1819,13 +2415,28 @@
                           <label class="placeholder">a</label>
                         </div>
                         <?php
-                      }}else{
+                      }}elseif($_GET['id'] <= 0){
                         $x = 0;
                         if(count($temp[6][2]) > (count($temp[4][2]))){
                           $x = (count($temp[6][2]) - count($temp[4][2])) + $im_t[1] + $im_p_t[1]+$m_p_t[1];
                         }
-                        elseif(count($temp[6][2]) == (count($temp[4][2]))){
+                        elseif(count($temp[6][2]) <= (count($temp[4][2]))){
                           $x = $im_t[1] + $im_p_t[1]+$m_p_t[1];
+                        }
+                          for ($i=1; $i<=$x ; $i++) {?>
+                            <div>
+                              <input type="checkbox" value="0">
+                              <label class="placeholder">a</label>
+                            </div>
+                            <?php
+                          }
+                      }else{
+                        $x = 0;
+                        if(count($temp[7][2]) > (count($temp[4][2]))){
+                          $x = (count($temp[7][2]) - count($temp[4][2])) + $im_m[1] + $im_p_m[1]+$m_p_m[1];
+                        }
+                        elseif(count($temp[7][2]) <= (count($temp[4][2]))){
+                          $x = $im_m[1] + $im_p_m[1]+$m_p_m[1];
                         }
                           for ($i=1; $i<=$x ; $i++) {?>
                             <div>
@@ -1847,12 +2458,12 @@
                     </div>
                   <?php $i++;}?>
                   <?php
-                  if($_GET['id']>=1){
+                  if($_GET['id']==1){
                     $x = 0;
                     if(count($temp[1][3]) > (count($temp[4][3]))){
                       $x = (count($temp[1][3]) - count($temp[4][3])) + $im[2] + $im_p[2]+$m_p[2];
                     }
-                    elseif(count($temp[1][3]) == (count($temp[4][3]))){
+                    elseif(count($temp[1][3]) <= (count($temp[4][3]))){
                       $x = $im[2] + $im_p[2]+$m_p[2];
                     }
                       for ($i=1; $i<=$x ; $i++) {?>
@@ -1861,13 +2472,28 @@
                           <label class="placeholder">a</label>
                         </div>
                         <?php
-                      }}else{
+                      }}elseif($_GET['id'] <= 0){
                         $x = 0;
                         if(count($temp[6][3]) > (count($temp[4][3]))){
                           $x = (count($temp[6][3]) - count($temp[4][3])) + $im_t[2] + $im_p_t[2]+$m_p_t[2];
                         }
-                        elseif(count($temp[6][3]) == (count($temp[4][3]))){
+                        elseif(count($temp[6][3]) <= (count($temp[4][3]))){
                           $x = $im_t[2] + $im_p_t[2]+$m_p_t[2];
+                        }
+                          for ($i=1; $i<=$x ; $i++) {?>
+                            <div>
+                              <input type="checkbox" value="0">
+                              <label class="placeholder">a</label>
+                            </div>
+                            <?php
+                          }
+                      }else{
+                        $x = 0;
+                        if(count($temp[7][3]) > (count($temp[4][3]))){
+                          $x = (count($temp[7][3]) - count($temp[4][3])) + $im_m[2] + $im_p_m[2]+$m_p_m[2];
+                        }
+                        elseif(count($temp[7][3]) <= (count($temp[4][3]))){
+                          $x = $im_m[2] + $im_p_m[2]+$m_p_m[2];
                         }
                           for ($i=1; $i<=$x ; $i++) {?>
                             <div>
@@ -1906,12 +2532,12 @@
                   </div>
                   <div style="margin-bottom:17%;"></div>
                   <?php
-                  if($_GET['id']>=1){
+                  if($_GET['id']==1){
                     $x = 0;
                     if(count($temp[1][4]) > (count($temp[4][4]))){
                       $x = (count($temp[1][4]) - count($temp[4][4])) + $im[3] + $im_p[3]+$m_p[3];
                     }
-                    elseif(count($temp[1][4]) == (count($temp[4][4]))){
+                    elseif(count($temp[1][4]) <= (count($temp[4][4]))){
                       $x = $im[3] + $im_p[3]+$m_p[3];
                     }
                       for ($i=1; $i<=$x ; $i++) {?>
@@ -1920,13 +2546,28 @@
                           <label class="placeholder">a</label>
                         </div>
                         <?php
-                      }}else{
+                      }}elseif($_GET['id'] <= 0){
                         $x = 0;
                         if(count($temp[6][4]) > (count($temp[4][4]))){
                           $x = (count($temp[6][4]) - count($temp[4][4])) + $im_t[3] + $im_p_t[3]+$m_p_t[3];
                         }
-                        elseif(count($temp[6][4]) == (count($temp[4][4]))){
+                        elseif(count($temp[6][4]) <= (count($temp[4][4]))){
                           $x = $im_t[3] + $im_p_t[3]+$m_p_t[3];
+                        }
+                          for ($i=1; $i<=$x ; $i++) {?>
+                            <div>
+                              <input type="checkbox" value="0">
+                              <label class="placeholder">a</label>
+                            </div>
+                            <?php
+                          }
+                      }else{
+                        $x = 0;
+                        if(count($temp[7][4]) > (count($temp[4][4]))){
+                          $x = (count($temp[7][4]) - count($temp[4][4])) + $im_m[3] + $im_p_m[3]+$m_p_m[3];
+                        }
+                        elseif(count($temp[7][4]) <= (count($temp[4][4]))){
+                          $x = $im_m[3] + $im_p_m[3]+$m_p_m[3];
                         }
                           for ($i=1; $i<=$x ; $i++) {?>
                             <div>
