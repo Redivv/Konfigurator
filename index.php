@@ -54,7 +54,7 @@
               <h3 class="price" data-price="<?php echo $temp2[1][1]['org_price']; ?>" id="mac_priceiroN"><?php echo $temp2[1][1]['org_price']; ?> zł</h3>
             </div>
           <div class="container_form form_i i">
-            <form class="iroN" method="post">
+            <form id="iroN-form" class="iroN" method="post">
               <!-- PROCESORY -->
               <fieldset id="PROCESORY">
                 <div><legend><h2>Procesor</h2></legend></div>
@@ -357,6 +357,7 @@
                   </div>-->
               </fieldset>
             </form>
+            <button form="iroN-form" type="reset">Kurururur</button>
             <form class="iroN_mobile" action="index.html" method="post">
               <!-- PROCESORY -->
                 <fieldset id="PROCESORY_mobile">
@@ -453,7 +454,7 @@
               <h3 class="price" data-price="<?php echo $temp2[1][6]['org_price']; ?>" id="mac_priceiroN"><?php echo $temp2[1][6]['org_price']; ?> zł</h3>
             </div>
           <div class="container_form form_i it">
-            <form class="iroN" method="post">
+            <form id="iroNt-form" class="iroN" method="post">
               <!-- PROCESORY -->
               <fieldset id="PROCESORY">
                 <div><legend><h2>Procesor</h2></legend></div>
@@ -757,6 +758,7 @@
                   </div>
               </fieldset>
             </form>
+            <button form="iroNt-form" type="reset">Restesds</button>
             <form class="iroN_mobile" action="index.html" method="post">
               <!-- PROCESORY -->
                 <fieldset id="PROCESORY_mobile">
@@ -853,7 +855,7 @@
               <h3 class="price" data-price="<?php echo $temp2[1][7]['org_price']; ?>" id="mac_priceiroN"><?php echo $temp2[1][7]['org_price']; ?> zł</h3>
             </div>
           <div class="container_form form_i im">
-            <form class="iroN" method="post">
+            <form id="iroNm-form" class="iroN" method="post">
               <!-- PROCESORY -->
               <fieldset id="PROCESORY">
                 <div><legend><h2>Procesor</h2></legend></div>
@@ -1157,6 +1159,7 @@
                   </div>
               </fieldset>
             </form>
+            <button form="iroNm-form" type="reset">Restet</button>
             <form class="iroN_mobile" action="index.html" method="post">
               <!-- PROCESORY -->
                 <fieldset id="PROCESORY_mobile">

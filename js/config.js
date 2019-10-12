@@ -16,7 +16,7 @@ var priceiMP = [0,0,0,0,0,0];
 var priceMm = [0,0,0,0,0,0];
 var org_priceiroN = $('#mac_priceiroN').data('price');
 var org_priceiroNt = $('#mac_priceiroNt').data('price');
-var org_priceiroNt = $('#mac_priceiroNm').data('price');
+var org_priceiroNm = $('#mac_priceiroNm').data('price');
 var org_priceM = $('#mac_priceM').data('price');
 var org_priceiM = $('#mac_priceiM').data('price');
 var org_priceMm = $('#mac_priceMm').data('price');
@@ -27,7 +27,8 @@ $(document).ready(function(){
 
 function main() {
   $('label[for=1-1]').click();
-  var active_tab = "M";
+  chart();
+  var active_tab = "Mm";
   $('.mac_btn').on('click',function(){
     if(active_tab != tabs(this)){
       check_counter = 0;
@@ -50,18 +51,6 @@ function main() {
     calc_price('iroN',this);
   });
   $('.iroN_mobile input[type=checkbox]').on('click',function(){
-    calc_price('iroN',this);
-  });
-  $('#iroNt input[type=radio]').on('click',function(){
-    calc_price('iroN',this);
-  });
-  $('#iroNt input[type=checkbox]').on('click',function(){
-    calc_price('iroN',this);
-  });
-  $('#iroNm input[type=radio]').on('click',function(){
-    calc_price('iroN',this);
-  });
-  $('#iroNm input[type=checkbox]').on('click',function(){
     calc_price('iroN',this);
   });
   $('.mac_form input[type=radio]').on('click',function(){
@@ -87,7 +76,10 @@ function main() {
           $('.container_top').css('margin-top', scrollpos-imageoffset+15);
       }
   });
-  chart();
+
+  $('button[type=reset]').on('click',function(){
+    $('#mac_priceiroN').html(org_priceiroN + ' ZŁ');
+  });
 }
 
 function chart() {
@@ -129,15 +121,22 @@ function chart() {
         var data = new google.visualization.DataTable();
         data.addColumn('string', 'Konfiguracja');
         data.addColumn('number', 'Wynik');
-        data.addRows([
-          [iroN_proc[0], iroN_proc[1]],
-          [mac_proc[0], mac_proc[1]],
-        ]);
+        data.addColumn({ type: 'string', role: 'style' });
+        data.addRows(2);
+        data.setValue(0,0,iroN_proc[0]);
+        data.setValue(0,1,iroN_proc[1]);
+        data.setValue(0,2,'#2992e6');
+        data.setValue(1,0,mac_proc[0]);
+        data.setValue(1,1,mac_proc[1]);
+        data.setValue(1,2,'#e62929');
+        // data.addRows([
+        //   [iroN_proc[0], iroN_proc[1], 'silver'],
+        //   [mac_proc[0], mac_proc[1], 'red'],
+        // ]);
 
         // Set chart options
         var options = {'title':"Porównanie wydajności iroN'ów z Makami (GeekBench)",
                         'legend':"none",
-                        color:['#00f'],
                         fontName:'Roboto',
                         fontSize:'15',
                         hAxis:{
