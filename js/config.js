@@ -135,7 +135,7 @@ function chart() {
         // ]);
 
         // Set chart options
-        var options = {'title':"Porównanie wydajności iroN'ów z Makami (GeekBench)",
+        var options = {'title':"PorĂłwnanie wydajnoĹci iroN'Ăłw z Makami (GeekBench)",
                         'legend':"none",
                         fontName:'Roboto',
                         fontSize:'15',
@@ -283,7 +283,7 @@ function calc_price(form_name,selected) {
       break;
   }
   eval('var new_price = org_price'+form_name+'+price'+form_name+'[0]+price'+form_name+'[1]+price'+form_name+'[2]+price'+form_name+'[3]+price'+form_name+'[4]+price'+form_name+'[5]');
-  eval('$(mac_price'+form_name+').html('+new_price+'+" zł")');
+  eval('$(mac_price'+form_name+').html('+new_price+'+" ZŁ")');
 }
 
 function draw_mac(form_name, changed) {

@@ -151,7 +151,7 @@ h2, h3, label {
     .container .container_top #iroN_tower {
       width: 35%; }
     .container .container_top #iroN_mini {
-      width: 30%; }
+      width: 20%; }
     .container .container_top #Mac_thumb {
       width: 20%;
       z-index: 10; }
@@ -310,9 +310,7 @@ h2, h3, label {
     .container label:visited {
       border: 2px solid #5489dd; }
   .container .Pamiec_M2 {
-    width: 25%;
     letter-spacing: 1px;
-    float: left;
     display: block;
     margin-top: 0;
     margin-bottom: 0;
