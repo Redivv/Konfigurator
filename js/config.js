@@ -26,6 +26,96 @@ $(document).ready(function(){
 })
 
 function main() {
+  $('#iroN-form').on('submit',function(e) {
+    e.preventDefault();
+    let selectedParts = $(this).find('input:checked');
+
+    var partsArray = {};
+    $(selectedParts).each(function(partIndex){
+      let partName    = $(this).siblings('label').html();
+      partsArray[partIndex] = partName;
+    });
+
+
+    console.log(partsArray);
+    var request = $.ajax({
+      type : 'post',
+      url: 'export.php',
+      data: {partsArray}
+    });
+    
+    
+    request.done(function(response){
+      if (response.status === 'success') {
+        alert('kek');
+      }
+    });
+    
+    request.fail(function (xhr){
+      alert(xhr.responseJson.message);
+    });
+  });
+
+  $('#iroNt-form').on('submit',function(e) {
+    e.preventDefault();
+    let selectedParts = $(this).find('input:checked');
+
+    var partsArray = {};
+    $(selectedParts).each(function(partIndex){
+      let partName    = $(this).siblings('label').html();
+      partsArray[partIndex] = partName;
+    });
+
+
+    console.log(partsArray);
+    var request = $.ajax({
+      type : 'post',
+      url: 'export.php',
+      data: {partsArray}
+    });
+    
+    
+    request.done(function(response){
+      if (response.status === 'success') {
+        alert('kek');
+      }
+    });
+    
+    request.fail(function (xhr){
+      alert(xhr.responseJson.message);
+    });
+  });
+
+  $('#iroNm-form').on('submit',function(e) {
+    e.preventDefault();
+    let selectedParts = $(this).find('input:checked');
+
+    var partsArray = {};
+    $(selectedParts).each(function(partIndex){
+      let partName    = $(this).siblings('label').html();
+      partsArray[partIndex] = partName;
+    });
+
+
+    console.log(partsArray);
+    var request = $.ajax({
+      type : 'post',
+      url: 'export.php',
+      data: {partsArray}
+    });
+    
+    
+    request.done(function(response){
+      if (response.status === 'success') {
+        alert('kek');
+      }
+    });
+    
+    request.fail(function (xhr){
+      alert(xhr.responseJson.message);
+    });
+  });
+
   $('label[for=1-1]').click();
   chart();
   var active_tab = "Mm";
@@ -135,7 +225,7 @@ function chart() {
         // ]);
 
         // Set chart options
-        var options = {'title':"PorĂłwnanie wydajnoĹci iroN'Ăłw z Makami (GeekBench)",
+        var options = {'title':"Porównanie wydajności Ironów z Macami",
                         'legend':"none",
                         fontName:'Roboto',
                         fontSize:'15',

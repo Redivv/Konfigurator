@@ -40,9 +40,12 @@
     font-size: 1.8vw !important;
     font-weight: bold;
     margin-bottom: 0.5% !important; } }
+body {
+  background-color: #1f1d1d; }
+
 .note {
   text-align: center;
-  color: grey;
+  color: lightgray;
   font-size: 1.4vw;
   font-weight: bold;
   margin-bottom: 0.5%; }
@@ -54,6 +57,7 @@ input {
   display: none; }
 
 #chart_div {
+  margin-top: 2%;
   display: block;
   width: 100vw; }
 
@@ -105,13 +109,16 @@ fieldset {
     box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.65); }
 
 h2 {
-  font-size: 1.4vw; }
+  font-size: 1.4vw;
+  color: white; }
 
 .title {
   text-align: center;
-  font-size: 2vw; }
+  font-size: 2vw;
+  color: white; }
 
 .price {
+  color: white;
   font-size: 1.40vw;
   width: 100%;
   text-align: center;
@@ -293,6 +300,7 @@ h2, h3, label {
       height: 100%;
       clear: both; }
   .container label {
+    color: white;
     letter-spacing: 1.5px;
     display: block;
     margin-top: 0.6em;
