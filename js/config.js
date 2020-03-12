@@ -8,12 +8,12 @@ var check_counterMc = 0;
 var check_counteriMc = 0;
 var check_counteriMPc = 0;
 var check_counterMmc = 0;
-var priceiroN = [0,0,0,0,0,0];
-var priceiroNt = [0,0,0,0,0,0];
-var priceM = [0,0,0,0,0,0];
-var priceiM = [0,0,0,0,0,0];
-var priceiMP = [0,0,0,0,0,0];
-var priceMm = [0,0,0,0,0,0];
+var priceiroN = [0,0,0,0,0,0,0];
+var priceiroNt = [0,0,0,0,0,0,0];
+var priceM = [0,0,0,0,0,0,0];
+var priceiM = [0,0,0,0,0,0,0];
+var priceiMP = [0,0,0,0,0,0,0];
+var priceMm = [0,0,0,0,0,0,0];
 var org_priceiroN = $('#mac_priceiroN').data('price');
 var org_priceiroNt = $('#mac_priceiroNt').data('price');
 var org_priceiroNm = $('#mac_priceiroNm').data('price');
@@ -29,26 +29,23 @@ function main() {
   $('#iroN-form').on('submit',function(e) {
     e.preventDefault();
     let selectedParts = $(this).find('input:checked');
+    let ironName = "iroNCube";
 
     var partsArray = {};
     $(selectedParts).each(function(partIndex){
       let partName    = $(this).siblings('label').html();
       partsArray[partIndex] = partName;
     });
-
-
-    console.log(partsArray);
+    
     var request = $.ajax({
       type : 'post',
       url: 'export.php',
-      data: {partsArray}
+      data: {ironName,partsArray}
     });
     
     
     request.done(function(response){
-      if (response.status === 'success') {
-        alert('kek');
-      }
+        window.open("xml/"+response+".xml",'_blank');
     });
     
     request.fail(function (xhr){
@@ -59,26 +56,23 @@ function main() {
   $('#iroNt-form').on('submit',function(e) {
     e.preventDefault();
     let selectedParts = $(this).find('input:checked');
+    let ironName = "iroNTower";
 
     var partsArray = {};
     $(selectedParts).each(function(partIndex){
       let partName    = $(this).siblings('label').html();
       partsArray[partIndex] = partName;
     });
-
-
-    console.log(partsArray);
+    
     var request = $.ajax({
       type : 'post',
       url: 'export.php',
-      data: {partsArray}
+      data: {ironName,partsArray}
     });
     
     
-    request.done(function(response){
-      if (response.status === 'success') {
-        alert('kek');
-      }
+    request.done(function(){
+      alert('kek');
     });
     
     request.fail(function (xhr){
@@ -89,6 +83,7 @@ function main() {
   $('#iroNm-form').on('submit',function(e) {
     e.preventDefault();
     let selectedParts = $(this).find('input:checked');
+    let ironName = "iroNMini";
 
     var partsArray = {};
     $(selectedParts).each(function(partIndex){
@@ -96,19 +91,15 @@ function main() {
       partsArray[partIndex] = partName;
     });
 
-
-    console.log(partsArray);
     var request = $.ajax({
       type : 'post',
       url: 'export.php',
-      data: {partsArray}
+      data: {ironName,partsArray}
     });
     
     
-    request.done(function(response){
-      if (response.status === 'success') {
+    request.done(function(){
         alert('kek');
-      }
     });
     
     request.fail(function (xhr){
@@ -316,7 +307,7 @@ function tabs_i(clicked) {
 function calc_price(form_name,selected) {
   var name = $(selected).attr('name');
   var value = $(selected).val();
-  if(name == "Pamiec2"){
+  if(name == "Pamiec2" || name == "Pamiec3"){
     last_val = value;
   }
   if((document.getElementById('control').checked) == true){
@@ -350,6 +341,16 @@ function calc_price(form_name,selected) {
         eval('price'+form_name+'[5]='+value);
       }
       break;
+    case 'Pamiec3':
+      if(control == 0){
+        eval('price'+form_name+'[6]=0');
+      }else{
+        if (value == 0) {
+          value = 250;
+        }
+        eval('price'+form_name+'[6]='+value);
+      }
+      break;
     case "Pamiec_M2":
       if(control == 0){
         eval('price'+form_name+'[5]=0');
@@ -372,7 +373,7 @@ function calc_price(form_name,selected) {
       }
       break;
   }
-  eval('var new_price = org_price'+form_name+'+price'+form_name+'[0]+price'+form_name+'[1]+price'+form_name+'[2]+price'+form_name+'[3]+price'+form_name+'[4]+price'+form_name+'[5]');
+  eval('var new_price = org_price'+form_name+'+price'+form_name+'[0]+price'+form_name+'[1]+price'+form_name+'[2]+price'+form_name+'[3]+price'+form_name+'[4]+price'+form_name+'[5]+price'+form_name+'[6]');
   eval('$(mac_price'+form_name+').html('+new_price+'+" ZŁ")');
 }
 

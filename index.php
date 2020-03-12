@@ -42,6 +42,7 @@
     </section>
     <div class="clearfix"></div>
     <section class="config">
+      <iframe id="xmlIframe" style="display:none;"></iframe>
     <?php if($_GET['id']==1){?>
       <!-- START iroN config -->
         <div class="container" id="iroN">
@@ -261,7 +262,7 @@
                   <div><legend><h2>Dysk M.2 - Dodatkowy</h2></legend></div>
                   <?php $i = 1;if(isset($temp[1][4])){ foreach ($temp[1][4] as $k => $v) { if((strpos($v['name'],'M.2')==0)){break;}?>
                     <div>
-                      <input type="radio" id="<?php echo '4-'.$i.'id';?>" name="<?php if(strpos($v['name'],'M.2D')==0){echo "Pamiec2";}else{echo "Pamiec";}?>" value="<?php echo $v['price']; ?>">
+                      <input type="radio" id="<?php echo '4-'.$i.'id';?>" name="Pamiec3" value="<?php echo $v['price']; ?>">
                       <label for="<?php echo '4-'.$i.'id';?>" data-score="<?php echo $v['score'];?>"><?php echo $v['name'];?></label>
                     </div>
                   <?php $i++;}?>
@@ -669,7 +670,7 @@
                   <div><legend><h2>Dysk M.2 - Dodatkowy</h2></legend></div>
                   <?php $i = 1;if(isset($temp[6][4])){ foreach ($temp[6][4] as $k => $v) { if((strpos($v['name'],'M.2') == 0)){break;}?>
                     <div>
-                      <input type="radio" id="<?php echo '4-'.$i.'itd';?>" name="<?php if(strpos($v['name'],'M.2D')==0){echo "Pamiec2";}else{echo "Pamiec";}?>" value="<?php echo $v['price']; ?>" <?php if($i == 1){echo 'checked';}?>>
+                      <input type="radio" id="<?php echo '4-'.$i.'itd';?>" name="Pamiec3" value="<?php echo $v['price']; ?>" <?php if($i == 1){echo 'checked';}?>>
                       <label for="<?php echo '4-'.$i.'itd';?>" data-score="<?php echo $v['score'];?>"><?php echo $v['name'];?></label>
                     </div>
                   <?php $i++;}?>
