@@ -72,7 +72,7 @@ function main() {
     
     
     request.done(function(){
-      alert('kek');
+      window.open("xml/"+response+".xml",'_blank');
     });
     
     request.fail(function (xhr){
@@ -99,7 +99,7 @@ function main() {
     
     
     request.done(function(){
-        alert('kek');
+      window.open("xml/"+response+".xml",'_blank');
     });
     
     request.fail(function (xhr){
