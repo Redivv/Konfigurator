@@ -71,7 +71,7 @@ function main() {
     });
     
     
-    request.done(function(){
+    request.done(function(response){
       window.open("xml/"+response+".xml",'_blank');
     });
     
@@ -98,7 +98,7 @@ function main() {
     });
     
     
-    request.done(function(){
+    request.done(function(response){
       window.open("xml/"+response+".xml",'_blank');
     });
     
