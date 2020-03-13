@@ -407,7 +407,7 @@ function draw_mac(form_name, changed) {
         case '5-1'+form_name:
           $('.music_card.'+form_name).show();
           break;
-        case '5-1'+form_name+'_m':
+        case '5-1'+form_name+'_m':z
           $('.music_card.'+form_name).show();
           break;
         case '5-2'+form_name:
