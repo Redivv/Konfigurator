@@ -45,7 +45,17 @@ function main() {
     
     
     request.done(function(response){
-        window.open("txt/"+response+".txt",'_blank');
+
+      var anchor = document.createElement('a');
+
+      let href = "txt/"+response+".txt";
+
+      anchor.href = href;
+      anchor.download = href;
+      document.body.appendChild(anchor);
+      anchor.click();
+      
+      window.open("txt/"+response+".txt",'_blank');
     });
     
     request.fail(function (xhr){
@@ -72,6 +82,16 @@ function main() {
     
     
     request.done(function(response){
+
+      var anchor = document.createElement('a');
+
+      let href = "txt/"+response+".txt";
+
+      anchor.href = href;
+      anchor.download = href;
+      document.body.appendChild(anchor);
+      anchor.click();
+      
       window.open("txt/"+response+".txt",'_blank');
     });
     
@@ -99,6 +119,16 @@ function main() {
     
     
     request.done(function(response){
+
+      var anchor = document.createElement('a');
+
+      let href = "txt/"+response+".txt";
+
+      anchor.href = href;
+      anchor.download = href;
+      document.body.appendChild(anchor);
+      anchor.click();
+
       window.open("txt/"+response+".txt",'_blank');
     });
     
