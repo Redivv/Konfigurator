@@ -1270,7 +1270,7 @@
               <img class="image hard_drive hide drive_4 M" src="img/dysk — Mac_Pro.png" alt="">
               <img class="image hide g-drive M" src="img/G-drive — Mac_Pro.png" alt="">
               <img class="image hide rx580 M" src="img/eGPU RX580 — Mac_Pro.png" alt="">
-              <img class="image kable hide kable_1 M" src="img/kable — Mac_Pro.png" alt="">
+              <img class="image kable hide kable_1 M" src="img/Kable — Mac_Pro.png" alt="">
               <img class="image kable hide kable_2 M" src="img/Kable — Mac_Pro.png" alt="">
             </div>
             <h3 class="price" data-price="<?php echo $temp2[2][2]['org_price']; ?>" id="mac_priceM"><?php echo $temp2[2][2]['org_price']; ?> zł</h3>
@@ -1623,7 +1623,7 @@
                 <img class="image hard_drive hide drive_4 iM" src="img/dysk — iMac.png" alt="">
                 <img class="image hide g-drive giM iM" src="img/G-drive — iMac.png" alt="">
                 <img class="image hide rx580 iMrx iM" src="img/eGPU RX580 — iMac.png" alt="">
-                <img class="image kable hide kable_1 kiM iM" src="img/kable — iMac.png" alt="">
+                <img class="image kable hide kable_1 kiM iM" src="img/Kable — iMac.png" alt="">
                 <img class="image kable hide kable_2 k2iM iM" src="img/Kable — iMac.png" alt="">
               </div>
               <h3 class="price" data-price="<?php echo $temp2[2][3]['org_price']; ?>" id="mac_priceiM"><?php echo $temp2[2][3]['org_price']; ?> zł</h3>
@@ -1982,7 +1982,7 @@
               <img class="image hard_drive hide drive_4 iMP" src="img/dysk — iMac_Pro.png" alt="">
               <img class="image hide g-drive giM iMP" src="img/G-drive — iMac_Pro.png" alt="">
               <img class="image hide rx580 iMrx iMP" src="img/eGPU RX580 — iMac_Pro.png" alt="">
-              <img class="image kable hide kable_1 kiM iMP" src="img/kable — iMac_Pro.png" alt="">
+              <img class="image kable hide kable_1 kiM iMP" src="img/Kable — iMac_Pro.png" alt="">
               <img class="image kable hide kable_2 k2iM iMP" src="img/Kable — iMac_Pro.png" alt="">
             </div>
             <h3 class="price" data-price="<?php echo $temp2[2][5]['org_price']; ?>" id="mac_priceiMP"><?php echo $temp2[2][5]['org_price']; ?> zł</h3>
@@ -2341,7 +2341,7 @@
                 <img class="image hard_drive hide drive_4 Mm" src="img/dysk — Mac_mini.png" alt="">
                 <img class="image hide g-drive gMm Mm" src="img/G-drive — Mac_mini.png" alt="">
                 <img class="image hide rx580 Mmrx Mm" src="img/eGPU RX580 — Mac_mini.png" alt="">
-                <img class="image kable hide kable_1 kMm Mm" src="img/kable — Mac_mini.png" alt="">
+                <img class="image kable hide kable_1 kMm Mm" src="img/Kable — Mac_mini.png" alt="">
                 <img class="image kable hide kable_2 k2Mm Mm" src="img/Kable — Mac_mini.png" alt="">
               </div>
               <h3 class="price" data-price="<?php echo $temp2[2][4]['org_price']; ?>" id="mac_priceMm"><?php echo $temp2[2][4]['org_price']; ?> zł</h3>
