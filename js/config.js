@@ -45,7 +45,7 @@ function main() {
     
     
     request.done(function(response){
-        window.open("xml/"+response+".xml",'_blank');
+        window.open("txt/"+response+".txt",'_blank');
     });
     
     request.fail(function (xhr){
@@ -72,7 +72,7 @@ function main() {
     
     
     request.done(function(response){
-      window.open("xml/"+response+".xml",'_blank');
+      window.open("txt/"+response+".txt",'_blank');
     });
     
     request.fail(function (xhr){
@@ -99,7 +99,7 @@ function main() {
     
     
     request.done(function(response){
-      window.open("xml/"+response+".xml",'_blank');
+      window.open("txt/"+response+".txt",'_blank');
     });
     
     request.fail(function (xhr){
