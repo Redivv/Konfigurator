@@ -42,7 +42,6 @@
     </section>
     <div class="clearfix"></div>
     <section class="config">
-      <iframe id="xmlIframe" style="display:none;"></iframe>
     <?php if($_GET['id']==1){?>
       <!-- START iroN config -->
         <div class="container" id="iroN">
@@ -364,7 +363,7 @@
                   </div>-->
               </fieldset>
             <button type="reset" form="iroN-form">Zresetuj Konfigurację</button>
-            <button type="submit" form="iroN-form">Wyeksportuj Do XML</button>
+            <button type="submit" form="iroN-form">Wyeksportuj</button>
             </form>
             <form class="iroN_mobile" action="index.html" method="post">
               <!-- PROCESORY -->
@@ -773,7 +772,7 @@
                   </div>
               </fieldset>
             <button form="iroNt-form" type="reset">Zresetuj Konfigurację</button>
-            <button type="submit" form="iroNt-form">Wyeksportuj Do XML</button>
+            <button type="submit" form="iroNt-form">Wyeksportuj</button>
             </form>
             <form class="iroN_mobile" action="index.html" method="post">
               <!-- PROCESORY -->
@@ -1171,7 +1170,7 @@
                   </div>
               </fieldset>
             <button form="iroNm-form" type="reset">Zresetuj Konfigurację</button>
-            <button type="submit" form="iroNm-form">Wyeksportuj Do XML</button>
+            <button type="submit" form="iroNm-form">Wyeksportuj</button>
             </form>
             <form class="iroN_mobile" action="index.html" method="post">
               <!-- PROCESORY -->
