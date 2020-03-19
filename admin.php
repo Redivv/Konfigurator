@@ -101,6 +101,7 @@ if(isset($_POST['password'])){
 <body>
   <div style="height:10px;" id="top"></div>
   <div class="anchor_box">
+    <div><a href="#<?php echo str_replace(' ', '_', $temp2[1][1]['name']); ?>"><?php echo $temp2[1][1]['name']; ?></a></div><br>
     <div><a href="#<?php echo str_replace(' ', '_', $temp2[1][6]['name']); ?>"><?php echo $temp2[1][6]['name']; ?></a></div><br>
     <div><a href="#<?php echo str_replace(' ', '_', $temp2[1][7]['name']); ?>"><?php echo $temp2[1][7]['name']; ?></a></div><br>
     <div><a href="#<?php echo str_replace(' ', '_', $temp2[2][2]['name']); ?>"><?php echo $temp2[2][2]['name']; ?></a></div><br>
@@ -108,8 +109,8 @@ if(isset($_POST['password'])){
     <div><a href="#<?php echo str_replace(' ', '_', $temp2[2][5]['name']); ?>"><?php echo $temp2[2][5]['name']; ?></a></div><br>
     <div><a href="#<?php echo str_replace(' ', '_', $temp2[2][4]['name']); ?>"><?php echo $temp2[2][4]['name']; ?></a></div><br>
   </div>
-  <form class="iroN" method="post">
-    <h3>Tytuł:</h3>
+  <form id="<?php echo str_replace(' ', '_', $temp2[1][1]['name']); ?>" class="iroN" method="post">
+    <h3>Tytul:</h3>
     <input type="text" name="title" value="<?php echo $temp2[1][1]['name']; ?>">
     <h3>Oryginalna cena (cena przy wybraniu podstawowych elementow z cena 0):</h3>
     <input type="text" name="org_price" value="<?php echo $temp2[1][1]['org_price']; ?>">
@@ -208,7 +209,7 @@ if(isset($_POST['password'])){
   </form>
 
   <form id="<?php echo str_replace(' ', '_', $temp2[1][6]['name']); ?>" class="iroN_Tower" method="post">
-    <h3>Tytuł:</h3>
+    <h3>Tytul:</h3>
     <input type="text" name="title" value="<?php echo $temp2[1][6]['name']; ?>">
     <h3>Oryginalna cena (cena przy wybraniu podstawowych elementow z cena 0):</h3>
     <input type="text" name="org_price" value="<?php echo $temp2[1][6]['org_price']; ?>">
@@ -307,7 +308,7 @@ if(isset($_POST['password'])){
   </form>
 
   <form id="<?php echo str_replace(' ', '_', $temp2[1][7]['name']); ?>" class="iroN_Mini" method="post">
-    <h3>Tytuł:</h3>
+    <h3>Tytul:</h3>
     <input type="text" name="title" value="<?php echo $temp2[1][7]['name']; ?>">
     <h3>Oryginalna cena (cena przy wybraniu podstawowych elementow z cena 0):</h3>
     <input type="text" name="org_price" value="<?php echo $temp2[1][7]['org_price']; ?>">
@@ -391,7 +392,7 @@ if(isset($_POST['password'])){
   </form>
 
   <form id="<?php echo str_replace(' ', '_', $temp2[2][2]['name']); ?>" class="Mac_Pro" method="post">
-    <h3>Tytuł:</h3>
+    <h3>Tytul:</h3>
     <input type="text" name="title" value="<?php echo $temp2[2][2]['name']; ?>">
     <h3>Oryginalna cena (cena przy wybraniu podstawowych elementow z cena 0):</h3>
     <input type="text" name="org_price" value="<?php echo $temp2[2][2]['org_price']; ?>">
@@ -474,7 +475,7 @@ if(isset($_POST['password'])){
     <br><div><a href="#top">Powrot do poczatku strony</a></div>
   </form>
   <form id="<?php echo str_replace(' ', '_', $temp2[2][3]['name']); ?>" class="iMac" method="post">
-    <h3>Tytuł:</h3>
+    <h3>Tytul:</h3>
     <input type="text" name="title" value="<?php echo $temp2[2][3]['name']; ?>">
     <h3>Oryginalna cena (cena przy wybraniu podstawowych elementow z cena 0):</h3>
     <input type="text" name="org_price" value="<?php echo $temp2[2][3]['org_price']; ?>">
@@ -557,7 +558,7 @@ if(isset($_POST['password'])){
     <br><div><a href="#top">Powrot do poczatku strony</a></div>
   </form>
   <form id="<?php echo str_replace(' ', '_', $temp2[2][5]['name']); ?>" class="iMac_pro" method="post">
-    <h3>Tytuł:</h3>
+    <h3>Tytul:</h3>
     <input type="text" name="title" value="<?php echo $temp2[2][5]['name']; ?>">
     <h3>Oryginalna cena (cena przy wybraniu podstawowych elementow z cena 0):</h3>
     <input type="text" name="org_price" value="<?php echo $temp2[2][5]['org_price']; ?>">
@@ -640,7 +641,7 @@ if(isset($_POST['password'])){
     <br><div><a href="#top">Powrot do poczatku strony</a></div>
   </form>
   <form id="<?php echo str_replace(' ', '_', $temp2[2][4]['name']); ?>" class="Mac_mini" method="post">
-    <h3>Tytuł:</h3>
+    <h3>Tytul:</h3>
     <input type="text" name="title" value="<?php echo $temp2[2][4]['name']; ?>">
     <h3>Oryginalna cena (cena przy wybraniu podstawowych elementow z cena 0):</h3>
     <input type="text" name="org_price" value="<?php echo $temp2[2][4]['org_price']; ?>">
@@ -727,7 +728,7 @@ if(isset($_POST['password'])){
 <script type="text/javascript">
   $(document).ready(function(){
     if(!window.sessionStorage) {  // if sessionStorage not supported
-        var password = prompt('Podaj Hasło'); // perform other action
+        var password = prompt('Podaj Haslo'); // perform other action
         $.ajax({
           type:'post',
           data: {password:password},
@@ -739,7 +740,7 @@ if(isset($_POST['password'])){
       }
     var password = window.sessionStorage.getItem('password');
     if (!password) {
-        var password = prompt('Podaj Hasło',);
+        var password = prompt('Podaj Haslo',);
         window.sessionStorage.setItem('password',password);
     }
     $.ajax({

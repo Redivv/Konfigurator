@@ -213,7 +213,7 @@ function chart() {
          iroN_proc [1] = $(this).data('score');
          drawChart();
       });
-      var mac_proc = [$('label[for=1-1]').html(),$('label[for=1-1]').data('score')];
+      var mac_proc = [$('label[for=1-1Mm]').html(),$('label[for=1-1]').data('score')];
       $('.mac_form input[name=Procesor] + label').on('click',function(){
          mac_proc [0] = $(this).html();
          mac_proc [1] = $(this).data('score');
