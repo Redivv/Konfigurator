@@ -45,6 +45,9 @@ if(isset($_POST['password'])){
         case 'Dodatkowe':
           $type = 5;
           break;
+        case 'PamiecDod':
+          $type = 6;
+          break;
         default:
           $type = 0;
           break;
@@ -160,7 +163,7 @@ if(isset($_POST['password'])){
     </fieldset>
     <br><div><a href="#top">Powrót do początku strony</a></div>
     <fieldset>
-      <legend><h2>Pamięć</h2></legend>
+      <legend><h2>Dyski M.2</h2></legend>
       <?php if(isset($temp[1][4])){foreach ($temp[1][4] as $k => $v){?>
         <div style="float:left; margin-right:8%;">
           <input id='4-1' type="text" name="Pamiec[]" value="<?php echo $v['name']?>">
@@ -171,6 +174,21 @@ if(isset($_POST['password'])){
         </div>
       <?php }}?>
       <button type="submit" name="AddNew" value="1-4">Dodaj Nowy</button>
+      <input class="form_boi" type="submit" name="iroN_form" value="Zapisz">
+    </fieldset>
+    <br><div><a href="#top">Powrót do początku strony</a></div>
+    <fieldset>
+      <legend><h2>Dyski Dodatkowe</h2></legend>
+      <?php if(isset($temp[1][6])){foreach ($temp[1][6] as $k => $v){?>
+        <div style="float:left; margin-right:8%;">
+          <input id='6-1' type="text" name="PamiecDod[]" value="<?php echo $v['name']?>">
+          <input type="hidden" name="PamiecDod[]" value="<?php echo $k; ?>">
+          <label for="6-1-1"><h4>Cena:</h4></label>
+          <input id="6-1-1" type="text" name="PamiecDod[]" value="<?php echo $v['price']?>"><br><br>
+          <div><button type="submit" name="Delete" value="<?php echo $k; ?>">Usuń</button></div>
+        </div>
+      <?php }}?>
+      <button type="submit" name="AddNew" value="1-6">Dodaj Nowy</button>
       <input class="form_boi" type="submit" name="iroN_form" value="Zapisz">
     </fieldset>
     <br><div><a href="#top">Powrót do początku strony</a></div>
@@ -244,7 +262,7 @@ if(isset($_POST['password'])){
     </fieldset>
     <br><div><a href="#top">Powrót do początku strony</a></div>
     <fieldset>
-      <legend><h2>Pamięć</h2></legend>
+      <legend><h2>Dyski M.2</h2></legend>
       <?php if(isset($temp[6][4])){foreach ($temp[6][4] as $k => $v){?>
         <div style="float:left; margin-right:8%;">
           <input id='4-1-t' type="text" name="Pamiec[]" value="<?php echo $v['name']?>">
@@ -255,6 +273,21 @@ if(isset($_POST['password'])){
         </div>
       <?php }}?>
       <button type="submit" name="AddNew" value="6-4">Dodaj Nowy</button>
+      <input class="form_boi" type="submit" name="iroNt_form" value="Zapisz">
+    </fieldset>
+    <br><div><a href="#top">Powrót do początku strony</a></div>
+    <fieldset>
+      <legend><h2>Dyski Dodatkowe</h2></legend>
+      <?php if(isset($temp[6][6])){foreach ($temp[6][6] as $k => $v){?>
+        <div style="float:left; margin-right:8%;">
+          <input id='6-1-t' type="text" name="PamiecDod[]" value="<?php echo $v['name']?>">
+          <input type="hidden" name="PamiecDod[]" value="<?php echo $k; ?>">
+          <label for="6-1-1-t"><h4>Cena:</h4></label>
+          <input id="6-1-1-t" type="text" name="PamiecDod[]" value="<?php echo $v['price']?>"><br><br>
+          <div><button type="submit" name="Delete" value="<?php echo $k; ?>">Usuń</button></div>
+        </div>
+      <?php }}?>
+      <button type="submit" name="AddNew" value="6-6">Dodaj Nowy</button>
       <input class="form_boi" type="submit" name="iroNt_form" value="Zapisz">
     </fieldset>
     <br><div><a href="#top">Powrót do początku strony</a></div>

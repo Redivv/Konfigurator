@@ -21,6 +21,8 @@ var org_priceM = $('#mac_priceM').data('price');
 var org_priceiM = $('#mac_priceiM').data('price');
 var org_priceMm = $('#mac_priceMm').data('price');
 var org_priceiMP = $('#mac_priceiMP').data('price');
+var control_m = 1;
+var control = 1;
 $(document).ready(function(){
   main();
 })
@@ -340,16 +342,6 @@ function calc_price(form_name,selected) {
   if(name == "Pamiec2" || name == "Pamiec3"){
     last_val = value;
   }
-  if((document.getElementById('control').checked) == true){
-    var control = 1;
-  }else{
-    var control = 0;
-  };
-  if((document.getElementById('control_mobile').checked) == true){
-    var control_m = 1;
-  }else{
-    var control_m = 0;
-  };
   if($(window).width()<=1054){control = 1;}
   switch (name) {
     case 'Procesor':

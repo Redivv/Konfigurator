@@ -22,8 +22,7 @@
   <head>
     <meta charset="utf-8">
     <title>Konfigurator</title>
-    <link rel="stylesheet" href="css/config.css">
-    <link href="css/roboto.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/config.css"> 
   </head>
   <body>
     <div class="note">
@@ -247,22 +246,23 @@
                 <fieldset id="Pamiec">
                   <div><legend><h2>Dysk M.2</h2></legend></div>
                   <?php $i = 1;if(isset($temp[1][4])){ foreach ($temp[1][4] as $k => $v) {?>
-                    <?php if((!isset($jest)) && (strpos($v['name'],'M.2')==0)){?>
-                      <div>
-                        <legend><label class="Pamiec_M2" for="control"><h2>Dysk SATA</h2></label></legend>
-                        <input id="control" type="checkbox" style="font-size:0.8vw;" checked name="Pamiec_M2">
-                      </div>
-                    <?php $jest=1;  } ?>
                     <div>
-                      <input type="radio" id="<?php echo '4-'.$i.'i';?>" name="<?php if(strpos($v['name'],'M.2')==0){echo "Pamiec2";}else{echo "Pamiec";}?>" value="<?php echo $v['price']; ?>" <?php if($i == 1){echo 'checked';}?>>
+                      <input type="radio" id="<?php echo '4-'.$i.'i';?>" name="Pamiec" value="<?php echo $v['price']; ?>" <?php if($i == 1){echo 'checked';}?>>
                       <label for="<?php echo '4-'.$i.'i';?>" data-score="<?php echo $v['score'];?>"><?php echo $v['name'];?></label>
                     </div>
                   <?php $i++;}}?>
-                  <div><legend><h2>Dysk M.2 - Dodatkowy</h2></legend></div>
-                  <?php $i = 1;if(isset($temp[1][4])){ foreach ($temp[1][4] as $k => $v) { if((strpos($v['name'],'M.2')==0)){break;}?>
+                  <div>
+                    <legend><h2>Dysk Dodatkowy</h2></legend>
+                    <legend class="optionalDiscLegend"><h3>Dysk M.2</h3></legend>
+                  </div>
+                  <?php $i = 1;$jest10 = false;if(isset($temp[1][6])){ foreach ($temp[1][6] as $k => $v) { ?>
                     <div>
-                      <input type="radio" id="<?php echo '4-'.$i.'id';?>" name="Pamiec3" value="<?php echo $v['price']; ?>">
-                      <label for="<?php echo '4-'.$i.'id';?>" data-score="<?php echo $v['score'];?>"><?php echo $v['name'];?></label>
+                      <?php if( strpos($v['name'],'M.2')==0 && !$jest10 ){
+                        echo "<legend class='optionalDiscLegend'><h3>Dysk SATA</h3></legend>";
+                        $jest10 = true;
+                      }?>
+                      <input type="radio" id="<?php echo '6-'.$i.'i';?>" name="<?php if(strpos($v['name'],'M.2')==0){echo "Pamiec2";}else{echo "Pamiec3";}?>" value="<?php echo $v['price']; ?>">
+                      <label for="<?php echo '6-'.$i.'i';?>" data-score="<?php echo $v['score'];?>"><?php echo $v['name'];?></label>
                     </div>
                   <?php $i++;}?>
                   <div>
@@ -397,23 +397,34 @@
                 <fieldset id="Pamiec">
                   <div><legend><h2>Dysk M.2</h2></legend></div>
                   <select class="select_mobile" name="Pamiec">
-                    <?php $countt=0; if(isset($temp[1][4])){foreach ($temp[1][4] as $k => $v) {?>
+                    <?php if(isset($temp[1][4])){foreach ($temp[1][4] as $k => $v) {?>
+                        <option data-score="<?php echo $v['score'];?>" value="<?php echo $v['price'];?>"><?php echo $v['name'];?></option>
+                    <?php }} ?>
+                  </select>
+
+                  <div>
+                    <legend><h2>Dysk Dodatkowy</h2></legend>
+                    <legend><h3 class="optionalDiscLegend">Dysk M.2</h3></legend>
+                  </div>
+                  <select class="select_mobile" name="Pamiec2">
+                      <option value="0"> -- Wybierz Dysk M.2 -- </option>
+                    <?php $countt=0; if(isset($temp[1][6])){foreach ($temp[1][6] as $k => $v) {?>
                       <?php if(strpos($v['name'],'M.2')!=0){?>
                         <option data-score="<?php echo $v['score'];?>" value="<?php echo $v['price'];?>"><?php echo $v['name'];?></option>
                       <?php }else{
                         if(!isset($jest2)){ ?>
                         </select>
                       <?php $jest2=1; } if(!isset($jestt)){?>
-                        <div style="padding:2%; margin:8% 0%;">
-                          <label class="Pamiec_M2 PM" for="control">Dysk SATA</label>
+                        <div>
+                          <legend><h3 class="optionalDiscLegend">Dysk SATA</h3></label>
                           <input id="control_mobile" type="checkbox" style="margin:1.8% 0 0 0; display:none; font-size:0.8vw;" name="Pamiec_M2">
                         </div>
                       <?php $jestt=1;  } ?>
                       <?php if(!isset($jest3)){?>
-                      <select class="select_mobile" name="Pamiec2">
+                      <select class="select_mobile" name="Pamiec3">
                       <?php $jest3=1;?><option value="0"> -- Wybierz Dysk SATA -- </option> <?php } ?>
                         <option data-score="<?php echo $v['score'];?>" value="<?php echo $v['price'];?>"><?php echo $v['name'];?></option>
-                      <?php if($countt==count($temp[1][4])){ ?>
+                      <?php if($countt==count($temp[1][6])){ ?>
                       </select>
                     <?php }} ?>
                   <?php } $countt++; } ?>
@@ -655,24 +666,25 @@
                 <fieldset id="Pamiec">
                   <div><legend><h2>Dysk M.2</h2></legend></div>
                   <?php $i = 1;if(isset($temp[6][4])){ foreach ($temp[6][4] as $k => $v) {?>
-                    <?php if((!isset($jest)) && (strpos($v['name'],'M.2') == 0)){?>
-                      <div>
-                        <legend><label class="Pamiec_M2" for="control"><h2>Dysk SATA</h2></label></legend>
-                        <input id="control" class="hide" type="checkbox" style="font-size:0.8vw;" checked name="Pamiec_M2">
-                      </div>
-                    <?php $jest=1;  } ?>
                     <div>
-                      <input type="radio" id="<?php echo '4-'.$i.'it';?>" name="<?php if(strpos($v['name'],'M.2')==0){echo "Pamiec2";}else{echo "Pamiec";}?>" value="<?php echo $v['price']; ?>" <?php if($i == 1){echo 'checked';}?>>
+                      <input type="radio" id="<?php echo '4-'.$i.'it';?>" name="Pamiec" value="<?php echo $v['price']; ?>" <?php if($i == 1){echo 'checked';}?>>
                       <label for="<?php echo '4-'.$i.'it';?>" data-score="<?php echo $v['score'];?>"><?php echo $v['name'];?></label>
                     </div>
                   <?php $i++;}}?>
-                  <div><legend><h2>Dysk M.2 - Dodatkowy</h2></legend></div>
-                  <?php $i = 1;if(isset($temp[6][4])){ foreach ($temp[6][4] as $k => $v) { if((strpos($v['name'],'M.2') == 0)){break;}?>
+                  <div>
+                    <legend><h2>Dysk Dodatkowy</h2></legend>
+                    <legend class="optionalDiscLegend"><h3>Dysk M.2</h3></legend>
+                  </div>
+                  <?php $i = 1;$jest11 = false;if(isset($temp[6][6])){ foreach ($temp[6][6] as $k => $v) { ?>
                     <div>
-                      <input type="radio" id="<?php echo '4-'.$i.'itd';?>" name="Pamiec3" value="<?php echo $v['price']; ?>" <?php if($i == 1){echo 'checked';}?>>
-                      <label for="<?php echo '4-'.$i.'itd';?>" data-score="<?php echo $v['score'];?>"><?php echo $v['name'];?></label>
+                      <?php if( strpos($v['name'],'M.2')==0 && !$jest11 ){
+                        echo "<legend class='optionalDiscLegend'><h3>Dysk SATA</h3></legend>";
+                        $jest11 = true;
+                      }?>
+                      <input type="radio" id="<?php echo '6-'.$i.'it';?>" name="<?php if(strpos($v['name'],'M.2')==0){echo "Pamiec2";}else{echo "Pamiec3";}?>" value="<?php echo $v['price']; ?>">
+                      <label for="<?php echo '6-'.$i.'it';?>" data-score="<?php echo $v['score'];?>"><?php echo $v['name'];?></label>
                     </div>
-                  <?php $i++;}?>
+                  <?php $i++;}}?>
                   <div>
                     <input class="mobile_check" type="checkbox" id="5-2i" name="Optional" value="<?php echo $temp[6][5][82]['price']; ?>">
                     <label class="mobile_label" for="5-2i"><?php echo $temp[6][5][82]['name']; ?></label>
@@ -731,9 +743,6 @@
                     <input type="checkbox" value="0">
                     <label class="placeholder">a</label>
                   </div>
-                  <?php
-                }
-                  ?>
                 </fieldset>
                 <!-- Dodatki -->
                 <fieldset id="Optional">
@@ -806,26 +815,37 @@
                 <fieldset id="Pamiec">
                   <div><legend><h2>Dysk M.2</h2></legend></div>
                   <select class="select_mobile" name="Pamiec">
-                    <?php $counttt=0; if(isset($temp[6][4])){foreach ($temp[6][4] as $k => $v) {?>
+                    <?php if(isset($temp[6][4])){foreach ($temp[6][4] as $k => $v) {?>
+                        <option data-score="<?php echo $v['score'];?>" value="<?php echo $v['price'];?>"><?php echo $v['name'];?></option>
+                    <?php }} ?>
+                  </select>
+
+                  <div>
+                    <legend><h2>Dysk Dodatkowy</h2></legend>
+                    <legend><h3 class="optionalDiscLegend">Dysk M.2</h3></legend>
+                  </div>
+                  <select class="select_mobile" name="Pamiec2">
+                      <option value="0"> -- Wybierz Dysk M.2 -- </option>
+                    <?php $countt=0; if(isset($temp[6][6])){foreach ($temp[6][6] as $k => $v) {?>
                       <?php if(strpos($v['name'],'M.2')!=0){?>
                         <option data-score="<?php echo $v['score'];?>" value="<?php echo $v['price'];?>"><?php echo $v['name'];?></option>
                       <?php }else{
-                        if(!isset($jestt2)){ ?>
+                        if(!isset($jest12)){ ?>
                         </select>
-                      <?php $jestt2=1; } if(!isset($jesttt)){?>
-                        <div style="padding:2%; margin:8% 0%;">
-                          <label class="Pamiec_M2 PM" for="control">Dysk SATA</label>
+                      <?php $jest12=1; } if(!isset($jesttt)){?>
+                        <div>
+                          <legend><h3 class="optionalDiscLegend">Dysk SATA</h3></label>
                           <input id="control_mobile" type="checkbox" style="margin:1.8% 0 0 0; display:none; font-size:0.8vw;" name="Pamiec_M2">
                         </div>
-                      <?php $jesttt=1;  } ?>
-                      <?php if(!isset($jestt3)){?>
-                      <select class="select_mobile" name="Pamiec2">
-                      <?php $jestt3=1;?> <option value="0"> -- Wybierz Dysk SATA -- </option> <?php } ?>
+                      <?php $jesttt = true;  } ?>
+                      <?php if(!isset($jest3)){?>
+                      <select class="select_mobile" name="Pamiec3">
+                      <?php $jest3=1;?><option value="0"> -- Wybierz Dysk SATA -- </option> <?php } ?>
                         <option data-score="<?php echo $v['score'];?>" value="<?php echo $v['price'];?>"><?php echo $v['name'];?></option>
-                      <?php if($counttt==count($temp[6][4])){ ?>
+                      <?php if($countt==count($temp[6][6])){ ?>
                       </select>
                     <?php }} ?>
-                  <?php }$counttt++;}?>
+                  <?php } $counttt++; } ?>
                   <input class="mobile_check" type="checkbox" id="5-2it" name="Optional" value="<?php echo $temp[6][5][82]['price']; ?>">
                   <label class="mobile_label" for="5-2it"><?php echo $temp[6][5][82]['name']; ?></label>
                 </fieldset>
@@ -1257,7 +1277,7 @@
         <!-- END iroN Mini config -->
       <?php }?>
       <!-- START Mac Pro config -->
-        <div class="container hide" id="Mac_Pro">
+        <div class="container hide macFormBox" id="Mac_Pro">
           <div class="title"><h2 class="title"><?php echo $temp2[2][2]['name']; ?></h2></div>
           <div id="mac_cont" class="container_top M">
             <div class="container_img img_M">
@@ -1610,7 +1630,7 @@
       </div>
         <!-- END Mac Pro config -->
         <!-- START iMac config -->
-          <div class="container hide" id="iMac">
+          <div class="container hide macFormBox" id="iMac">
             <div class="title"><h2 class="title"><?php echo $temp2[2][3]['name']; ?></h2></div>
             <div class="container_top">
               <div class="container_img">
@@ -1969,7 +1989,7 @@
         </div>
         <!-- END iMac config -->
         <!-- START iMac Pro config -->
-        <div class="container hide" id="iMac_Pro">
+        <div class="container hide macFormBox" id="iMac_Pro">
           <div class="title"><h2 class="title"><?php echo $temp2[2][5]['name']; ?></h2></div>
           <div class="container_top">
             <div class="container_img">
@@ -2328,7 +2348,7 @@
       </div>
       <!-- END iMac Pro config -->
         <!-- START Mac mini config -->
-          <div class="container" id="Mac_mini">
+          <div class="container macFormBox" id="Mac_mini">
             <div class="title"><h2 class="title"><?php echo $temp2[2][4]['name']; ?></h2></div>
             <div class="container_top">
               <div class="container_img">
