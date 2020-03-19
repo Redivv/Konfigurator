@@ -1,9 +1,0 @@
-﻿iroNCube
-	Procesor:			4-core i3 3.6 GHz
-	Karta Graficzna:		Intel UHD630
-	Pamięć Ram:			16 GB
-
-	Pamięć i Dodatki:		500 GB  M.2
-					1 TB M.2
-					1 TB SSD
-					
