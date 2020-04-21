@@ -342,8 +342,6 @@ h2, h3, label {
     border: 2px solid transparent; }
     .container .placeholder:hover {
       border: 2px solid transparent; }
-  .container input[type=radio]:checked + label, .container input[type=checkbox]:checked + label {
-    border: 2px solid #5489dd; }
   .container .thumbnail_box {
     position: absolute;
     margin-left: 22%;
@@ -371,5 +369,8 @@ h2, h3, label {
   padding-left: 5%;
   display: block;
   width: 100%; }
+
+input[type=radio]:checked + label, input[type=checkbox]:checked + label {
+  border: 2px solid #5489dd; }
 
 /*# sourceMappingURL=config.css.map */

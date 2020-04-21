@@ -365,7 +365,7 @@
             <button type="reset" form="iroN-form">Zresetuj Konfigurację</button>
             <button type="submit" form="iroN-form">Wyeksportuj</button>
             </form>
-            <form class="iroN_mobile" action="index.html" method="post">
+            <form id="iroN-form_mobile"class="iroN_mobile" action="index.html" method="post">
               <!-- PROCESORY -->
                 <fieldset id="PROCESORY_mobile">
                   <div><legend><h2>Procesor</h2></legend></div>
@@ -457,6 +457,8 @@
                     <label for="5-6i">Wi-Fi + Bluetooth</label>
                   </div>-->
               </fieldset>
+              <button type="reset" form="iroN-form_mobile">Zresetuj Konfigurację</button>
+              <button type="submit" form="iroN-form_mobile">Wyeksportuj</button>
             </form>
           </div>
         </div>
@@ -783,7 +785,7 @@
             <button form="iroNt-form" type="reset">Zresetuj Konfigurację</button>
             <button type="submit" form="iroNt-form">Wyeksportuj</button>
             </form>
-            <form class="iroN_mobile" action="index.html" method="post">
+            <form id="iroNt-form_mobile" class="iroN_mobile" action="index.html" method="post">
               <!-- PROCESORY -->
                 <fieldset id="PROCESORY_mobile">
                   <div><legend><h2>Procesor</h2></legend></div>
@@ -875,6 +877,8 @@
                     <label for="5-6i">Wi-Fi + Bluetooth</label>
                   </div>-->
               </fieldset>
+              <button form="iroNt-form_mobile" type="reset">Zresetuj Konfigurację</button>
+              <button type="submit" form="iroNt-form_mobile">Wyeksportuj</button>
             </form>
           </div>
         </div>
@@ -1192,7 +1196,7 @@
             <button form="iroNm-form" type="reset">Zresetuj Konfigurację</button>
             <button type="submit" form="iroNm-form">Wyeksportuj</button>
             </form>
-            <form class="iroN_mobile" action="index.html" method="post">
+            <form id="iroNm-form_mobile" class="iroN_mobile" action="index.html" method="post">
               <!-- PROCESORY -->
                 <fieldset id="PROCESORY_mobile">
                   <div><legend><h2>Procesor</h2></legend></div>
@@ -1271,6 +1275,8 @@
                     <label for="5-6i">Wi-Fi + Bluetooth</label>
                   </div>-->
               </fieldset>
+              <button form="iroNm-form_mobile" type="reset">Zresetuj Konfigurację</button>
+              <button type="submit" form="iroNm-form_mobile">Wyeksportuj</button>
             </form>
           </div>
         </div>

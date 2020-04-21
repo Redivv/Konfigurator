@@ -401,9 +401,6 @@ h2,h3,label{
       border:2px solid transparent;
     }
   }
-  input[type=radio]:checked + label, input[type=checkbox]:checked + label{
-      border: 2px solid rgb(84, 137, 221)
-  }
 
   .thumbnail_box{
     position: absolute;
@@ -440,4 +437,8 @@ h2,h3,label{
   padding-left: 5%;
   display: block;
   width: 100%;
+}
+
+input[type=radio]:checked + label, input[type=checkbox]:checked + label{
+    border: 2px solid rgb(84, 137, 221)
 }
