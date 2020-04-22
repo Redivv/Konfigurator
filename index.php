@@ -428,14 +428,14 @@
                       </select>
                     <?php }} ?>
                   <?php } $countt++; } ?>
-                    <input class="mobile_check" type="checkbox" id="5-2i" name="Optional" value="<?php echo $temp[1][5][81]['price']; ?>">
-                    <label class="mobile_label" for="5-2i"><?php echo $temp[1][5][81]['name']; ?></label>
+                    <input class="mobile_check" type="checkbox" id="5-2im" name="Optional" value="<?php echo $temp[1][5][81]['price']; ?>">
+                    <label class="mobile_label" for="5-2im"><?php echo $temp[1][5][81]['name']; ?></label>
                 </fieldset>
                 <!-- Dodatki -->
                 <fieldset style="display:none;" class="Optional_iron_m" id="Optional">
                   <div><legend><h2>Dodatki</h2></legend></div>
-                    <input class="mobile_check" type="checkbox" id="5-1i" name="Optional" value="<?php echo $temp[1][5][61]['price']; ?>">
-                    <label class="mobile_label" for="5-1i"><?php echo $temp[1][5][61]['name']; ?></label>
+                    <input class="mobile_check" type="checkbox" id="5-1im" name="Optional" value="<?php echo $temp[1][5][61]['price']; ?>">
+                    <label class="mobile_label" for="5-1im"><?php echo $temp[1][5][61]['name']; ?></label>
                   <!--<div>
                     <input type="checkbox" id="5-3i" name="Grafika" value="0">
                     <label for="5-3i">Dodatkowy Dysk SSD 2.5'</label>
@@ -444,14 +444,14 @@
                     <input type="checkbox" id="5-4i" name="Grafika" value="0">
                     <label for="5-4i">Dodatkowy Dysk SSD M.2'</label>
                   </div>-->
-                    <input class="mobile_check" type="checkbox" id="5-5i" name="Optional" value="<?php echo $temp[1][5][62]['price']; ?>">
-                    <label class="mobile_label" for="5-5i"><?php echo $temp[1][5][62]['name']; ?></label>
-                    <input class="mobile_check" type="checkbox" id="5-6i" name="Optional" value="<?php echo $temp[1][5][123]['price']; ?>">
-                    <label class="mobile_label" for="5-6i"><?php echo $temp[1][5][123]['name']; ?></label>
-                    <input class="mobile_check" type="checkbox" id="5-7i" name="Optional" value="<?php echo $temp[1][5][124]['price']; ?>">
-                    <label class="mobile_label" for="5-7i"><?php echo $temp[1][5][124]['name']; ?></label>
-                    <input class="mobile_check" type="checkbox" id="5-8i" name="Optional" value="<?php echo $temp[1][5][127]['price']; ?>">
-                    <label class="mobile_label" for="5-8i"><?php echo $temp[1][5][127]['name']; ?></label>
+                    <input class="mobile_check" type="checkbox" id="5-5im" name="Optional" value="<?php echo $temp[1][5][62]['price']; ?>">
+                    <label class="mobile_label" for="5-5im"><?php echo $temp[1][5][62]['name']; ?></label>
+                    <input class="mobile_check" type="checkbox" id="5-6im" name="Optional" value="<?php echo $temp[1][5][123]['price']; ?>">
+                    <label class="mobile_label" for="5-6im"><?php echo $temp[1][5][123]['name']; ?></label>
+                    <input class="mobile_check" type="checkbox" id="5-7im" name="Optional" value="<?php echo $temp[1][5][124]['price']; ?>">
+                    <label class="mobile_label" for="5-7im"><?php echo $temp[1][5][124]['name']; ?></label>
+                    <input class="mobile_check" type="checkbox" id="5-8im" name="Optional" value="<?php echo $temp[1][5][127]['price']; ?>">
+                    <label class="mobile_label" for="5-8im"><?php echo $temp[1][5][127]['name']; ?></label>
                   <!--<div>
                     <input type="checkbox" id="5-6i" name="Grafika" value="0">
                     <label for="5-6i">Wi-Fi + Bluetooth</label>
@@ -854,8 +854,8 @@
                 <!-- Dodatki -->
                 <fieldset class="Optional_iron_m" style="display:none;" id="Optional">
                   <div><legend><h2>Dodatki</h2></legend></div>
-                    <input class="mobile_check" type="checkbox" id="5-1it" name="Optional" value="<?php echo $temp[6][5][79]['price']; ?>">
-                    <label class="mobile_label" for="5-1it"><?php echo $temp[6][5][79]['name']; ?></label>
+                    <input class="mobile_check" type="checkbox" id="5-1i" name="Optional" value="<?php echo $temp[6][5][79]['price']; ?>">
+                    <label class="mobile_label" for="5-1i"><?php echo $temp[6][5][79]['name']; ?></label>
                   <!--<div>
                     <input type="checkbox" id="5-3i" name="Grafika" value="0">
                     <label for="5-3i">Dodatkowy Dysk SSD 2.5'</label>
@@ -864,14 +864,14 @@
                     <input type="checkbox" id="5-4i" name="Grafika" value="0">
                     <label for="5-4i">Dodatkowy Dysk SSD M.2'</label>
                   </div>-->
-                    <input class="mobile_check" type="checkbox" id="5-5it" name="Optional" value="<?php echo $temp[6][5][80]['price']; ?>">
-                    <label class="mobile_label" for="5-5it"><?php echo $temp[6][5][80]['name']; ?> </label>
-                    <input class="mobile_check" type="checkbox" id="5-6it" name="Optional" value="<?php echo $temp[6][5][125]['price']; ?>">
-                    <label class="mobile_label" for="5-6it"><?php echo $temp[6][5][125]['name']; ?></label>
-                    <input class="mobile_check" type="checkbox" id="5-7it" name="Optional" value="<?php echo $temp[6][5][126]['price']; ?>">
-                    <label class="mobile_label" for="5-7it"><?php echo $temp[6][5][126]['name']; ?></label>
-                    <input class="mobile_check" type="checkbox" id="5-8it" name="Optional" value="<?php echo $temp[6][5][128]['price']; ?>">
-                    <label class="mobile_label" for="5-8it"><?php echo $temp[6][5][128]['name']; ?></label>
+                    <input class="mobile_check" type="checkbox" id="5-5i" name="Optional" value="<?php echo $temp[6][5][80]['price']; ?>">
+                    <label class="mobile_label" for="5-5i"><?php echo $temp[6][5][80]['name']; ?> </label>
+                    <input class="mobile_check" type="checkbox" id="5-6i" name="Optional" value="<?php echo $temp[6][5][125]['price']; ?>">
+                    <label class="mobile_label" for="5-6i"><?php echo $temp[6][5][125]['name']; ?></label>
+                    <input class="mobile_check" type="checkbox" id="5-7i" name="Optional" value="<?php echo $temp[6][5][126]['price']; ?>">
+                    <label class="mobile_label" for="5-7i"><?php echo $temp[6][5][126]['name']; ?></label>
+                    <input class="mobile_check" type="checkbox" id="5-8i" name="Optional" value="<?php echo $temp[6][5][128]['price']; ?>">
+                    <label class="mobile_label" for="5-8i"><?php echo $temp[6][5][128]['name']; ?></label>
                   <!--<div>
                     <input type="checkbox" id="5-6i" name="Grafika" value="0">
                     <label for="5-6i">Wi-Fi + Bluetooth</label>
@@ -1100,8 +1100,8 @@
                     </div>
                   <?php $i++;}?>
                   <div>
-                    <input class="mobile_check" type="checkbox" id="5-2i" name="Optional" value="<?php echo $temp[7][5][139]['price']; ?>">
-                    <label class="mobile_label" for="5-2i"><?php echo $temp[7][5][139]['name']; ?></label>
+                    <input class="mobile_check" type="checkbox" id="5-2im" name="Optional" value="<?php echo $temp[7][5][139]['price']; ?>">
+                    <label class="mobile_label" for="5-2im"><?php echo $temp[7][5][139]['name']; ?></label>
                   </div>
                   <div>
                   <?php
@@ -1248,14 +1248,14 @@
                       </select>
                     <?php }} ?>
                   <?php }$counttt++;}?>
-                  <input class="mobile_check" type="checkbox" id="5-2im" name="Optional" value="<?php echo $temp[7][5][139]['price']; ?>">
-                  <label class="mobile_label" for="5-2im"><?php echo $temp[7][5][139]['name']; ?></label>
+                  <input class="mobile_check" type="checkbox" id="5-2i" name="Optional" value="<?php echo $temp[7][5][139]['price']; ?>">
+                  <label class="mobile_label" for="5-2i"><?php echo $temp[7][5][139]['name']; ?></label>
                 </fieldset>
                 <!-- Dodatki -->
                 <fieldset class="Optional_iron_m" style="display:none;" id="Optional">
                   <div><legend><h2>Dodatki</h2></legend></div>
-                    <input class="mobile_check" type="checkbox" id="5-1im" name="Optional" value="<?php echo $temp[7][5][134]['price']; ?>">
-                    <label class="mobile_label" for="5-1im"><?php echo $temp[7][5][134]['name']; ?></label>
+                    <input class="mobile_check" type="checkbox" id="5-1i" name="Optional" value="<?php echo $temp[7][5][134]['price']; ?>">
+                    <label class="mobile_label" for="5-1i"><?php echo $temp[7][5][134]['name']; ?></label>
                   <!--<div>
                     <input type="checkbox" id="5-3i" name="Grafika" value="0">
                     <label for="5-3i">Dodatkowy Dysk SSD 2.5'</label>
@@ -1264,12 +1264,12 @@
                     <input type="checkbox" id="5-4i" name="Grafika" value="0">
                     <label for="5-4i">Dodatkowy Dysk SSD M.2'</label>
                   </div>-->
-                    <input class="mobile_check" type="checkbox" id="5-5im" name="Optional" value="<?php echo $temp[7][5][135]['price']; ?>">
-                    <label class="mobile_label" for="5-5im"><?php echo $temp[7][5][135]['name']; ?> </label>
-                    <input class="mobile_check" type="checkbox" id="5-6im" name="Optional" value="<?php echo $temp[7][5][136]['price']; ?>">
-                    <label class="mobile_label" for="5-6im"><?php echo $temp[7][5][136]['name']; ?></label>
-                    <input class="mobile_check" type="checkbox" id="5-7im" name="Optional" value="<?php echo $temp[7][5][137]['price']; ?>">
-                    <label class="mobile_label" for="5-7mt"><?php echo $temp[7][5][137]['name']; ?></label>
+                    <input class="mobile_check" type="checkbox" id="5-5i" name="Optional" value="<?php echo $temp[7][5][135]['price']; ?>">
+                    <label class="mobile_label" for="5-5i"><?php echo $temp[7][5][135]['name']; ?> </label>
+                    <input class="mobile_check" type="checkbox" id="5-6i" name="Optional" value="<?php echo $temp[7][5][136]['price']; ?>">
+                    <label class="mobile_label" for="5-6i"><?php echo $temp[7][5][136]['name']; ?></label>
+                    <input class="mobile_check" type="checkbox" id="5-7i" name="Optional" value="<?php echo $temp[7][5][137]['price']; ?>">
+                    <label class="mobile_label" for="5-7i"><?php echo $temp[7][5][137]['name']; ?></label>
                   <!--<div>
                     <input type="checkbox" id="5-6i" name="Grafika" value="0">
                     <label for="5-6i">Wi-Fi + Bluetooth</label>

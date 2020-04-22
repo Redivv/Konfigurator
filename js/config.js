@@ -28,6 +28,145 @@ $(document).ready(function(){
 })
 
 function main() {
+  
+  $('#iroN-form_mobile').on('submit',function(e) {
+    e.preventDefault();
+    let selectedParts = $(this).find('option:selected');
+    let ironName = "iroNCube";
+
+    var partsArray = new Array();
+
+    $(selectedParts).each(function(partIndex){
+      let partName = $(this).text();
+      if (partName.indexOf('--') == -1) {
+        partsArray[partIndex] = $(this).text();
+      }
+    });
+
+    selectedParts = $(this).find('input:checked');
+    $(selectedParts).each(function(partIndex){
+      partName    = $(this).next('label').html();
+      partsArray.push(partName);
+    });
+
+    var request = $.ajax({
+      type : 'post',
+      url: 'export.php',
+      data: {ironName,partsArray}
+    });
+    
+    
+    request.done(function(response){
+
+      var anchor = document.createElement('a');
+
+      let href = "txt/"+response+".txt";
+
+      anchor.href = href;
+      anchor.download = href;
+      document.body.appendChild(anchor);
+      anchor.click();
+
+      window.open("txt/"+response+".txt",'_blank');
+    });
+    
+    request.fail(function (xhr){
+      alert(xhr.responseJson.message);
+    });
+  });
+
+  $('#iroNt-form_mobile').on('submit',function(e) {
+    e.preventDefault();
+    let selectedParts = $(this).find('option:selected');
+    let ironName = "iroNTower";
+
+    var partsArray = new Array();
+
+    $(selectedParts).each(function(partIndex){
+      let partName = $(this).text();
+      if (partName.indexOf('--') == -1) {
+        partsArray[partIndex] = $(this).text();
+      }
+    });
+
+    selectedParts = $(this).find('input:checked');
+    $(selectedParts).each(function(partIndex){
+      partName    = $(this).next('label').html();
+      partsArray.push(partName);
+    });
+
+    var request = $.ajax({
+      type : 'post',
+      url: 'export.php',
+      data: {ironName,partsArray}
+    });
+    
+    
+    request.done(function(response){
+
+      var anchor = document.createElement('a');
+
+      let href = "txt/"+response+".txt";
+
+      anchor.href = href;
+      anchor.download = href;
+      document.body.appendChild(anchor);
+      anchor.click();
+
+      window.open("txt/"+response+".txt",'_blank');
+    });
+    
+    request.fail(function (xhr){
+      alert(xhr.responseJson.message);
+    });
+  });
+
+  $('#iroNm-form_mobile').on('submit',function(e) {
+    e.preventDefault();
+    let selectedParts = $(this).find('option:selected');
+    let ironName = "iroNMini";
+
+    var partsArray = new Array();
+
+    $(selectedParts).each(function(partIndex){
+      let partName = $(this).text();
+      if (partName.indexOf('--') == -1) {
+        partsArray[partIndex] = $(this).text();
+      }
+    });
+
+    selectedParts = $(this).find('input:checked');
+    $(selectedParts).each(function(partIndex){
+      partName    = $(this).next('label').html();
+      partsArray.push(partName);
+    });
+
+    var request = $.ajax({
+      type : 'post',
+      url: 'export.php',
+      data: {ironName,partsArray}
+    });
+    
+    
+    request.done(function(response){
+
+      var anchor = document.createElement('a');
+
+      let href = "txt/"+response+".txt";
+
+      anchor.href = href;
+      anchor.download = href;
+      document.body.appendChild(anchor);
+      anchor.click();
+
+      window.open("txt/"+response+".txt",'_blank');
+    });
+    
+    request.fail(function (xhr){
+      alert(xhr.responseJson.message);
+    });
+  });
+
   $('#iroN-form').on('submit',function(e) {
     e.preventDefault();
     let selectedParts = $(this).find('input:checked');
